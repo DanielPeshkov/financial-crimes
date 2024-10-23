@@ -5,8 +5,8 @@ CREATE TABLE user (
     role varchar(5)
 );
 
-DROP TABLE IF EXISTS subject;
-CREATE TABLE subject (
+DROP TABLE IF EXISTS individual;
+CREATE TABLE individual (
     id serial primary key,
     firstName varchar(20),
     middleName varchar(20),
@@ -14,16 +14,16 @@ CREATE TABLE subject (
     birth date,
     approx boolean,
     age int,
-    contactId int,
-    addressId int
+    contactId int references contact(id),
+    addressId int references address(id)
 );
 
 DROP TABLE IF EXISTS business;
 CREATE TABLE business (
     id serial primary key,
     name varchar(45),
-    contactId int,
-    addressId int
+    contactId int references contact(id),
+    addressId int references address(id)
 );
 
 DROP TABLE IF EXISTS contact;
@@ -52,26 +52,28 @@ CREATE TABLE otherReport (
     type varchar(20), <-- Type of crime -->
     source varchar(200), <-- How do you know -->
     incidentDate date, <-- When it happened -->
-    approx boolean,
+    approx boolean, <-- Is the date exact --> 
     location varchar(100), <-- Where it happened -->
     documentation boolean, <-- Do you have documentation? -->
     description varchar(200),
+    contactId int references contact(id), <-- Optional contact info -->
     status int, <-- Report Status -->
-    created timestamp
+    created timestamp,
+    updated timestamp
 );
 
-DROP TABLE IF EXISTS other_subject;
-CREATE TABLE other_subject (
+DROP TABLE IF EXISTS other_individual;
+CREATE TABLE other_individual (
     id serial primary key,
     reportId int references otherReport(id),
-    subjectId int references subject(id)
+    individualId int references individual(id)
 );
 
 DROP TABLE IF EXISTS other_business;
 CREATE TABLE other_business (
     id serial primary key,
     reportId int references otherReport(id),
-    subjectId int references business(id)
+    businessId int references business(id)
 );
 
 DROP TABLE IF EXISTS launderingReport;
@@ -87,22 +89,23 @@ CREATE TABLE launderingReport (
     organized varchar(5), <-- Is money from organized crime? (mafia, cartel, etc) -->
     documentation boolean, <-- Do you have documentation? -->
     description varchar(200),
+    contactId int references contact(id), <-- Optional contact info -->
     status int, <-- Report Status -->
     created timestamp
 );
 
-DROP TABLE IF EXISTS laundering_subject;
-CREATE TABLE laundering_subject (
+DROP TABLE IF EXISTS laundering_individual;
+CREATE TABLE laundering_individual (
     id serial primary key,
     reportId int references launderingReport(id),
-    subjectId int references subject(id)
+    individualId int references individual(id)
 );
 
 DROP TABLE IF EXISTS laundering_business;
 CREATE TABLE laundering_business (
     id serial primary key,
     reportId int references launderingReport(id),
-    subjectId int references business(id)
+    businessId int references business(id)
 );
 
 DROP TABLE IF EXISTS institutionReport;
@@ -113,24 +116,26 @@ CREATE TABLE institutionReport (
     incidentDate date, <-- When it happened -->
     approx boolean,
     method varchar(200), <-- How the fraud was perpetrated -->
-    employee boolean,  <-- Was the subject employed by the institution? -->
+    employee boolean,  <-- Was the individual employed by the institution? -->
     source varchar(200), <-- How do you know about it? -->
     documentation boolean, <-- Do you have documentation? -->
     description varchar(200),
+    contactId int references contact(id), <-- Optional contact info -->
     status int, <-- Report Status -->
-    created timestamp
+    created timestamp,
+    updated timestamp
 );
 
-DROP TABLE IF EXISTS institution_subject;
-CREATE TABLE institution_subject (
+DROP TABLE IF EXISTS institution_individual;
+CREATE TABLE institution_individual (
     id serial primary key,
     reportId int references institutionReport(id),
-    subjectId int references subject(id)
+    individualId int references individual(id)
 );
 
 DROP TABLE IF EXISTS institution_business;
 CREATE TABLE institution_business (
     id serial primary key,
     reportId int references institutionReport(id),
-    subjectId int references business(id)
+    businessId int references business(id)
 );
