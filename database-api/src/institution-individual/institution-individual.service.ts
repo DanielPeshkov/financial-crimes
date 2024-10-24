@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InstitutionIndividual } from './institution-individual';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class InstitutionIndividualService {
 
   constructor(@InjectRepository(InstitutionIndividual) private repo: Repository<InstitutionIndividual>) {}
 
-  create() {
-    return 'This action adds a new institutionIndividual';
+  async create(institutionIndividual: InstitutionIndividual): Promise<InstitutionIndividual> {
+    return await this.repo.save(institutionIndividual);
   }
 
-  findAll(): Promise<InstitutionIndividual[]> {
-    return this.repo.find({
+  async findAll(): Promise<InstitutionIndividual[]> {
+    return await this.repo.find({
       relations: {
         report: {
           contact: true,
@@ -26,15 +26,51 @@ export class InstitutionIndividualService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} institutionIndividual`;
+  async findOne(id: number): Promise<InstitutionIndividual> {
+    return await this.repo.findOneOrFail({
+      where: {
+        id: id
+      },
+      relations: {
+        report: {
+          contact: true,
+        }, 
+        individual: {
+          contact: true, 
+          address: true,
+        }
+      }
+    }).catch(err => {
+      throw new HttpException(`InstitutionIndividual with ID ${id} does not exist`, HttpStatus.NOT_FOUND)
+    });
   }
 
-  update(id: number) {
-    return `This action updates a #${id} institutionIndividual`;
+  async update(id: number, data: InstitutionIndividual): Promise<InstitutionIndividual> {
+    let institutionIndividual = await this.repo.findOneBy({id: id});
+    if (!institutionIndividual) {
+      throw new HttpException(`InstitutionIndividual with ID ${id} does not exist`, HttpStatus.NOT_FOUND);
+    }
+    this.repo.merge(institutionIndividual, data);
+    await this.repo.update({id: id}, institutionIndividual).catch(err => {
+      throw new HttpException(`Update institutionIndividual ${id} failed: ${err}`, HttpStatus.INTERNAL_SERVER_ERROR);
+    });
+    return await this.repo.findOne({
+      where: {
+        id: id
+      }, 
+      relations: {
+        report: {
+          contact: true,
+        }, 
+        individual: {
+          contact: true,
+          address: true,
+        }
+      }
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} institutionIndividual`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.repo.delete(id);
   }
 }

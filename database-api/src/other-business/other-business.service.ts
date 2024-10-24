@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { OtherBusiness } from './other-business';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class OtherBusinessService {
 
   constructor(@InjectRepository(OtherBusiness) private repo: Repository<OtherBusiness>) {}
 
-  create() {
-    return 'This action adds a new otherBusiness';
+  async create(otherBusiness: OtherBusiness): Promise<OtherBusiness> {
+    return await this.repo.save(otherBusiness);
   }
 
-  findAll(): Promise<OtherBusiness[]> {
-    return this.repo.find({
+  async findAll(): Promise<OtherBusiness[]> {
+    return await this.repo.find({
       relations: {
         report: {
           contact: true,
@@ -26,15 +26,51 @@ export class OtherBusinessService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} otherBusiness`;
+  async findOne(id: number): Promise<OtherBusiness> {
+    return await this.repo.findOneOrFail({
+      where: {
+        id: id
+      },
+      relations: {
+        report: {
+          contact: true,
+        },
+        business: {
+          contact: true,
+          address: true,
+        },
+      }
+    }).catch(err => {
+      throw new HttpException(`OtherBusiness with ID ${id} does not exist`, HttpStatus.NOT_FOUND)
+    });
   }
 
-  update(id: number) {
-    return `This action updates a #${id} otherBusiness`;
+  async update(id: number, data: OtherBusiness): Promise<OtherBusiness> {
+    let otherBusiness = await this.repo.findOneBy({id: id});
+    if (!otherBusiness) {
+      throw new HttpException(`OtherBusiness with ID ${id} does not exist`, HttpStatus.NOT_FOUND);
+    }
+    this.repo.merge(otherBusiness, data);
+    await this.repo.update({id: id}, otherBusiness).catch(err => {
+      throw new HttpException(`Update otherBusiness ${id} failed: ${err}`, HttpStatus.INTERNAL_SERVER_ERROR);
+    });
+    return await this.repo.findOne({
+      where: {
+        id: id
+      }, 
+      relations: {
+        report: {
+          contact: true,
+        }, 
+        business: {
+          contact: true,
+          address: true,
+        }
+      }
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} otherBusiness`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.repo.delete(id);
   }
 }

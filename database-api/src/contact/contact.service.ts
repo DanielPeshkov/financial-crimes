@@ -1,30 +1,45 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Contact } from 'src/contact/contact';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class ContactService {
 
-  constructor(@InjectRepository(Contact) private contactRepository: Repository<Contact>) {}
+  constructor(@InjectRepository(Contact) private repo: Repository<Contact>) {}
 
-  create() {
-    return 'This action adds a new contact';
+  async create(contact: Contact): Promise<Contact> {
+    return await this.repo.save(contact);
   }
 
-  findAll(): Promise<Contact[]> {
-    return this.contactRepository.find();
+  async findAll(): Promise<Contact[]> {
+    return await this.repo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} contact`;
+  async findOne(id: number): Promise<Contact> {
+    return await this.repo.findOneOrFail({
+      where: {
+        id: id
+      }
+    }).catch(() => {
+      throw new HttpException(`Address with ID ${id} does not exist`, HttpStatus.NOT_FOUND)
+    });
   }
 
-  update(id: number) {
-    return `This action updates a #${id} contact`;
+  async update(id: number, data: Contact): Promise<Contact> {
+    const contact = await this.repo.findOneBy({id: id});
+    if (!contact) {
+      throw new HttpException(`Contact with ID ${id} does not exist`, HttpStatus.NOT_FOUND);
+    }
+    
+    await this.repo.update({id: id}, data).catch(err => {
+      throw new HttpException(`Update contact ${id} failed: ${err}`, HttpStatus.INTERNAL_SERVER_ERROR);
+    });
+
+    return await this.repo.findOneBy({id: id});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} contact`;
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.repo.delete(id);
   }
 }
