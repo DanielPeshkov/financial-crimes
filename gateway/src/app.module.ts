@@ -6,11 +6,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 @Module({
   imports: [
     ClientsModule.register([{
-      name: 'DB_SERVICE', 
+      name: 'SERVICE', 
       transport: Transport.TCP,
       options: {
         host: 'localhost', 
-        port: 8000,
+        port: parseInt(process.env['PORT']),
       }
     }])
   ],
