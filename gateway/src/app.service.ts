@@ -4,11 +4,7 @@ import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class AppService {
 
-  constructor(@Inject('SERVICE') private client: ClientProxy) {}//
-
-  getHello(): string {
-    return 'Hello World!';
-  }
+  constructor(@Inject('SERVICE') private client: ClientProxy) {}
 
   getDB(path: string) {
     const vars = path.split('/')
@@ -30,14 +26,4 @@ export class AppService {
   deleteDB(path: string, id: string) {
     return this.client.send({time: Date.now(), path: 'delete' + path}, id)
   }
-
-  // JS Proxy version
-  // getDB(path: string) {
-  //   const vars = path.split('/')
-  //   const last = +vars.splice(vars.length-1, 1)[0]
-  //   if (!isNaN(last)) {
-  //     return this.client.send({path: 'getById' + vars.join('/')}, {time: Date.now(), id: last})
-  //   }
-  //   return this.client.send({path: 'get' + path}, {time: Date.now(), data: ''});
-  // }
 }
