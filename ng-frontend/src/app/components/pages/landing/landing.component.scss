@@ -1,3 +1,4 @@
+// Styling for content of the page
 .content {
     display: flex;
     flex-direction: column;
@@ -9,6 +10,7 @@
     position: relative;
 }
 
+// Styling for the grid of cards
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -16,11 +18,13 @@
     margin-bottom: 100px;
 }
 
+// Card styling
 app-card {
     cursor: pointer;
     transition: transform 0.1s ease;
 }
 
+// Card on hover styling
 app-card:hover {
     transform: scale(1.05);
 }
