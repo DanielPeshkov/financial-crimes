@@ -1,0 +1,25 @@
+/* 
+GLOBAL STYLES 
+
+These determine the styles we will use globally for html components.
+For example, we want a <p> html element to always look the same across our website.
+*/
+
+body {
+    background-color: rgba(255, 255, 255, 1.0);
+    background: linear-gradient(
+        90deg,
+        rgb(47, 47, 47) 0%,
+        rgb(35, 35, 35) 25%,
+        rgb(35, 35, 35) 50%,
+        rgb(35, 35, 35) 75%,
+        rgb(47, 47, 47) 100%
+    );
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+p {
+    font-size: 50px;
+}
