@@ -1,0 +1,10 @@
+<nav>
+    <div>
+        <button *ngIf="!isAuthenticated"><p>Make a Report</p></button>
+        <button *ngIf="isAuthenticated"><p>View Reports</p></button>
+    </div>
+    <div>
+        <button (click)="login()" *ngIf="!isAuthenticated"><p>Admin Login</p></button>
+        <button (click)="logout()" *ngIf="isAuthenticated"><p>Logout</p></button>
+    </div>
+</nav>

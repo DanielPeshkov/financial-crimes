@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 /* 
 GLOBAL STYLES 
 
@@ -6,6 +8,8 @@ For example, we want a <p> html element to always look the same across our websi
 */
 
 body {
+    margin: 0;
+    padding: 0;
     background-color: rgba(255, 255, 255, 1.0);
     background: linear-gradient(
         90deg,
@@ -15,11 +19,46 @@ body {
         rgb(35, 35, 35) 75%,
         rgb(47, 47, 47) 100%
     );
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+}
+
+h1, h2, p, label {
+    font-family: 'Inter', sans-serif;
+    margin: 0px;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 48px;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 36px;
 }
 
 p {
-    font-size: 50px;
+    font-size: 24px;
+}
+
+label {
+    font-size: 16px;
+}
+
+button {
+    padding: 15px 32px;
+    background-color: #324c6e;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #365174;
+}
+
+button:active {
+    transform: scale(0.95);
+    background-color: #2a405d;
 }
