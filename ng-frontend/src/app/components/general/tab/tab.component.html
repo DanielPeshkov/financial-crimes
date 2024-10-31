@@ -1,0 +1,13 @@
+<div class="tab">
+    <div class="tabHeader">
+        <h2>{{ tabHeader }}</h2>
+        <div class="collapseInputs">
+            <p *ngIf="!shown" (click)="setShown(true)">SHOW</p>
+            <p *ngIf="shown"(click)="setShown(false)">HIDE</p>
+        </div>
+    </div>
+    <div *ngIf="shown == true" class="tabBody">
+        <ng-content select=".form"></ng-content>
+        <button (click)="next()"><p>Next Section</p></button>
+    </div>
+</div>
