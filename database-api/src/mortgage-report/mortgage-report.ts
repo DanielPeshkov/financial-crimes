@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsNumber, IsString, IsDate, IsBoolean } from "class-validator";
 import { Contact } from "src/contact/contact";
-import { LaunderingBusiness } from "src/laundering-business/laundering-business";
-import { LaunderingIndividual } from "src/laundering-individual/laundering-individual";
+import { MortgageBusiness } from "src/mortgage-business/mortgage-business";
+import { MortgageIndividual } from "src/mortgage-individual/mortgage-individual";
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({'name':'launderingreport'})
-export class LaunderingReport {
+@Entity({'name':'mortgagereport'})
+export class MortgageReport {
 
     @PrimaryGeneratedColumn()
     @IsNumber()
@@ -17,44 +17,52 @@ export class LaunderingReport {
     amount: number;
 
     @Column()
-    @IsString()
-    source: string;
-
-    @Column()
-    @IsString()
-    method: string;
-
-    @Column()
-    @IsString()
-    processing: string;
-
-    @Column()
-    @IsString()
-    location: string;
-
-    @Column()
-    @IsDate()
-    incidentdate: Date;
+    @IsNumber()
+	loan: number;
 
     @Column()
     @IsBoolean()
-    approx: boolean;
+	payments: boolean;
 
     @Column()
     @IsString()
-    organized: string;
-
-    @Column()
-    @IsBoolean()
-    documentation: boolean;
-
-    @Column()
-    @IsString()
-    description: string;
+	owner: string;
 
     @Column()
     @IsNumber()
-    contactid: number;
+	addressId: number;
+
+    @Column()
+    @IsString()
+	mortgage: string;
+
+    @Column()
+    @IsString()
+	title: string;
+
+    @Column()
+    @IsString()
+	agent: string;
+
+    @Column()
+    @IsString()
+	type: string;
+
+    @Column()
+    @IsString()
+	source: string;
+
+    @Column()
+    @IsBoolean()
+	documentation: boolean;
+
+    @Column()
+    @IsString()
+	description: string;
+
+    @Column()
+    @IsNumber()
+    contactId: number;
 
     @Column()
     @IsNumber()
@@ -72,9 +80,9 @@ export class LaunderingReport {
     @JoinColumn({'name':'contactid'})
     contact: Contact;
 
-    @OneToMany(() => LaunderingBusiness, bus => bus.report)
-    launderingbusiness: LaunderingBusiness[];
+    @OneToMany(() => MortgageBusiness, bus => bus.report)
+    mortgagebusiness: MortgageBusiness[];
 
-    @OneToMany(() => LaunderingIndividual, ind => ind.report)
-    launderingindividual: LaunderingIndividual[];
+    @OneToMany(() => MortgageIndividual, ind => ind.report)
+    mortgageindividual: MortgageIndividual[];
 }

@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsNumber, IsString, IsDate, IsBoolean } from "class-validator";
 import { Contact } from "src/contact/contact";
-import { LaunderingBusiness } from "src/laundering-business/laundering-business";
-import { LaunderingIndividual } from "src/laundering-individual/laundering-individual";
+import { EmbezzlementBusiness } from "src/embezzlement-business/embezzlement-business";
+import { EmbezzlementIndividual } from "src/embezzlement-individual/embezzlement-individual";
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({'name':'launderingreport'})
-export class LaunderingReport {
+@Entity({'name':'embezzlementreport'})
+export class EmbezzlementReport {
 
     @PrimaryGeneratedColumn()
     @IsNumber()
@@ -17,44 +17,32 @@ export class LaunderingReport {
     amount: number;
 
     @Column()
-    @IsString()
-    source: string;
+    @IsBoolean()
+	employee: boolean;
 
     @Column()
     @IsString()
-    method: string;
+	type: string;
 
     @Column()
     @IsString()
-    processing: string;
+	location: string;
 
     @Column()
     @IsString()
-    location: string;
-
-    @Column()
-    @IsDate()
-    incidentdate: Date;
+	source: string;
 
     @Column()
     @IsBoolean()
-    approx: boolean;
+	documentation: boolean;
 
     @Column()
     @IsString()
-    organized: string;
-
-    @Column()
-    @IsBoolean()
-    documentation: boolean;
-
-    @Column()
-    @IsString()
-    description: string;
+	description: string;
 
     @Column()
     @IsNumber()
-    contactid: number;
+    contactId: number;
 
     @Column()
     @IsNumber()
@@ -72,9 +60,9 @@ export class LaunderingReport {
     @JoinColumn({'name':'contactid'})
     contact: Contact;
 
-    @OneToMany(() => LaunderingBusiness, bus => bus.report)
-    launderingbusiness: LaunderingBusiness[];
+    @OneToMany(() => EmbezzlementBusiness, bus => bus.report)
+    embezzlementbusiness: EmbezzlementBusiness[];
 
-    @OneToMany(() => LaunderingIndividual, ind => ind.report)
-    launderingindividual: LaunderingIndividual[];
+    @OneToMany(() => EmbezzlementIndividual, ind => ind.report)
+    embezzlementindividual: EmbezzlementIndividual[];
 }

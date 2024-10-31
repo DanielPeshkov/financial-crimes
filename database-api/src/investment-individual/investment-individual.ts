@@ -1,10 +1,10 @@
 import { IsNotEmpty, IsNumber } from "class-validator";
 import { Individual } from "src/individual/individual";
-import { LaunderingReport } from "src/laundering-report/laundering-report";
+import { InvestmentReport } from "src/investment-report/investment-report";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class LaunderingIndividual {
+export class InvestmentIndividual {
 
     @PrimaryGeneratedColumn()
     @IsNumber()
@@ -19,9 +19,9 @@ export class LaunderingIndividual {
     @IsNumber()
     individualid: number;
 
-    @ManyToOne(() => LaunderingReport, report => report.id)
+    @ManyToOne(() => InvestmentReport, report => report.id)
     @JoinColumn({'name':'reportid'})
-    report: LaunderingReport;
+    report: InvestmentReport;
 
     @ManyToOne(() => Individual, ind => ind.id)
     @JoinColumn({'name':'individualid'})
