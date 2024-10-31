@@ -1,0 +1,12 @@
+<div>
+    <!-- 
+        Cards take in content from the parent.
+        
+        You can pass in headers, and raw text will be put
+        into the paragraph.
+    -->
+    <ng-content select="h1"></ng-content>
+    <ng-content select="h2"></ng-content>
+    <ng-content select="h3"></ng-content>
+    <p><ng-content></ng-content></p>
+</div>
