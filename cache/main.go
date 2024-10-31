@@ -26,7 +26,20 @@ func NewServer(listenAddr string) *Server {
 		listenAddr: listenAddr,
 		quit:       make(chan struct{}),
 		cache: cache.Cache{
-			Users: make(map[int64]cache.User),
+			Users:                  make(map[int64]cache.User),
+			Contacts:               make(map[int64]cache.Contact),
+			Addresses:              make(map[int64]cache.Address),
+			Individuals:            make(map[int64]cache.Individual),
+			Businesses:             make(map[int64]cache.Business),
+			OtherReports:           make(map[int64]cache.OtherReport),
+			OtherIndividuals:       make(map[int64]cache.OtherIndividual),
+			OtherBusinesses:        make(map[int64]cache.OtherBusiness),
+			LaunderingReports:      make(map[int64]cache.LaunderingReport),
+			LaunderingIndividuals:  make(map[int64]cache.LaunderingIndividual),
+			LaunderingBusinesses:   make(map[int64]cache.LaunderingBusiness),
+			InstitutionReports:     make(map[int64]cache.InstitutionReport),
+			InstitutionIndividuals: make(map[int64]cache.InstitutionIndividual),
+			InstitutionBusinesses:  make(map[int64]cache.InstitutionBusiness),
 		},
 	}
 }
@@ -92,7 +105,7 @@ func (s *Server) readLoop(conn net.Conn) {
 	// Communication loop
 	defer conn.Close()
 	buf1 := make([]byte, 2048)
-	buf2 := make([]byte, 2048)
+	buf2 := make([]byte, 262144)
 	for {
 		// Read gateway request
 		n, err := conn.Read(buf1)
@@ -118,10 +131,17 @@ func (s *Server) readLoop(conn net.Conn) {
 		elapsed := time.Since(start)
 		conn.Write(msg2)
 
+		// Log cache hit or miss
+		hit := 1
+		if string(req[:3]) == "pos" {
+			hit = 0
+		}
+
 		// Log response time
 		gateLat := start.UnixMilli() - ts
 		reqLat := elapsed
-		out := fmt.Sprintf("%d, gateway latency: %dms, request latency: %dus", start.Unix(), gateLat, reqLat.Microseconds())
+		// timestamp, gateway latency: ms, request latency: us, cache hit
+		out := fmt.Sprintf("%d,%d,%d,%d", start.Unix(), gateLat, reqLat.Microseconds(), hit)
 
 		err = s.queue.Publish("", "logs", false, false, amqp.Publishing{
 			ContentType: "text/plain",

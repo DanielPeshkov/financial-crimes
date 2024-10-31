@@ -134,8 +134,8 @@ CREATE TABLE individual (
     birth date,
     approx boolean,
     age int,
-    contactId int references contact(id),
-    addressId int references address(id)
+    contactId int,
+    addressId int
 );
 
 INSERT INTO individual (firstName, middleName, lastName, birth, approx, age, contactId, addressId) VALUES
@@ -164,8 +164,8 @@ DROP TABLE IF EXISTS business;
 CREATE TABLE business (
     id serial primary key,
     name varchar(45),
-    contactId int references contact(id),
-    addressId int references address(id)
+    contactId int,
+    addressId int
 );
 
 INSERT INTO business (name, contactId, addressId) VALUES
@@ -191,7 +191,7 @@ CREATE TABLE otherReport (
     location varchar(100), -- Where it happened
     documentation boolean, -- Do you have documentation?
     description varchar(200),
-    contactId int references contact(id), -- Optional contact info
+    contactId int, -- Optional contact info
     status int, -- Report Status
     created timestamp,
     updated timestamp
@@ -212,8 +212,8 @@ INSERT INTO otherReport (amount, type, source, incidentDate, approx, location, d
 DROP TABLE IF EXISTS other_individual;
 CREATE TABLE other_individual (
     id serial primary key,
-    reportId int references otherReport(id),
-    individualId int references individual(id)
+    reportId int,
+    individualId int
 );
 
 INSERT INTO other_individual (reportId, individualId) VALUES
@@ -232,8 +232,8 @@ INSERT INTO other_individual (reportId, individualId) VALUES
 DROP TABLE IF EXISTS other_business;
 CREATE TABLE other_business (
     id serial primary key,
-    reportId int references otherReport(id),
-    businessId int references business(id)
+    reportId int,
+    businessId int
 );
 
 INSERT INTO other_business (reportId, businessId) VALUES
@@ -255,28 +255,29 @@ CREATE TABLE launderingReport (
     organized varchar(5), -- Is money from organized crime? (mafia, cartel, etc) 
     documentation boolean, -- Do you have documentation? 
     description varchar(200),
-    contactId int references contact(id), -- Optional contact info
+    contactId int, -- Optional contact info
     status int, -- Report Status
-    created timestamp
+    created timestamp,
+    updated timestamp
 );
 
-INSERT INTO launderingReport (amount, source, method, processing, location, incidentDate, approx, organized, documentation, description, contactId, status, created) VALUES
-(100000, 'Witness', 'Cash Smuggling', 'Cash Deposits', 'Border', '2023-10-23', false, 'Yes', true, 'Saw someone smuggling cash across the border.', 40, 0, CURRENT_TIMESTAMP),
-(50000, 'Victim', 'Real Estate Investment', 'Wire Transfers', 'City', '2024-01-01', true, 'No', false, 'My money was used to buy a property.', 41, 0, CURRENT_TIMESTAMP),
-(200000, 'Victim', 'Business Purchase', 'Check Deposits', 'State', '2023-05-15', false, 'Yes', true, 'My money was used to buy a business.', 42, 0, CURRENT_TIMESTAMP),
-(10000, 'Witness', 'Cryptocurrency Exchange', 'Online Transactions', 'Country', '2024-03-20', true, 'No', false, 'Saw someone using cryptocurrency to launder money.', 43, 0, CURRENT_TIMESTAMP),
-(5000, 'Victim', 'Gambling', 'Cash Payments', 'Casino', '2023-11-10', false, 'Yes', true, 'My money was lost in a casino.', 44, 0, CURRENT_TIMESTAMP),
-(300000, 'Witness', 'Invoice Fraud', 'Bank Transfers', 'City', '2024-02-25', true, 'No', false, 'Saw someone using fake invoices to launder money.', 45, 0, CURRENT_TIMESTAMP),
-(200000, 'Victim', 'Charity Donation', 'Cash Donations', 'State', '2023-08-15', false, 'Yes', true, 'My money was donated to a fake charity.', 46, 0, CURRENT_TIMESTAMP),
-(10000, 'Witness', 'Stock Manipulation', 'Stock Purchases', 'Country', '2024-04-20', true, 'No', false, 'Saw someone manipulating the stock market to launder money.', 47, 0, CURRENT_TIMESTAMP),
-(5000, 'Victim', 'Counterfeit Goods', 'Cash Sales', 'City', '2023-12-10', false, 'Yes', true, 'My money was used to buy counterfeit goods.', 48, 0, CURRENT_TIMESTAMP),
-(300000, 'Witness', 'Money Mule', 'Cash Transfers', 'State', '2024-03-25', true, 'No', false, 'Saw someone acting as a money mule.', 49, 0, CURRENT_TIMESTAMP);
+INSERT INTO launderingReport (amount, source, method, processing, location, incidentDate, approx, organized, documentation, description, contactId, status, created, updated) VALUES
+(100000, 'Witness', 'Cash Smuggling', 'Cash Deposits', 'Border', '2023-10-23', false, 'Yes', true, 'Saw someone smuggling cash across the border.', 40, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(50000, 'Victim', 'Real Estate Investment', 'Wire Transfers', 'City', '2024-01-01', true, 'No', false, 'My money was used to buy a property.', 41, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(200000, 'Victim', 'Business Purchase', 'Check Deposits', 'State', '2023-05-15', false, 'Yes', true, 'My money was used to buy a business.', 42, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(10000, 'Witness', 'Cryptocurrency Exchange', 'Online Transactions', 'Country', '2024-03-20', true, 'No', false, 'Saw someone using cryptocurrency to launder money.', 43, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5000, 'Victim', 'Gambling', 'Cash Payments', 'Casino', '2023-11-10', false, 'Yes', true, 'My money was lost in a casino.', 44, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(300000, 'Witness', 'Invoice Fraud', 'Bank Transfers', 'City', '2024-02-25', true, 'No', false, 'Saw someone using fake invoices to launder money.', 45, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(200000, 'Victim', 'Charity Donation', 'Cash Donations', 'State', '2023-08-15', false, 'Yes', true, 'My money was donated to a fake charity.', 46, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(10000, 'Witness', 'Stock Manipulation', 'Stock Purchases', 'Country', '2024-04-20', true, 'No', false, 'Saw someone manipulating the stock market to launder money.', 47, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5000, 'Victim', 'Counterfeit Goods', 'Cash Sales', 'City', '2023-12-10', false, 'Yes', true, 'My money was used to buy counterfeit goods.', 48, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(300000, 'Witness', 'Money Mule', 'Cash Transfers', 'State', '2024-03-25', true, 'No', false, 'Saw someone acting as a money mule.', 49, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 DROP TABLE IF EXISTS laundering_individual;
 CREATE TABLE laundering_individual (
     id serial primary key,
-    reportId int references launderingReport(id),
-    individualId int references individual(id)
+    reportId int,
+    individualId int
 );
 
 INSERT INTO laundering_individual (reportId, individualId) VALUES
@@ -290,8 +291,8 @@ INSERT INTO laundering_individual (reportId, individualId) VALUES
 DROP TABLE IF EXISTS laundering_business;
 CREATE TABLE laundering_business (
     id serial primary key,
-    reportId int references launderingReport(id),
-    businessId int references business(id)
+    reportId int,
+    businessId int
 );
 
 INSERT INTO laundering_business (reportId, businessId) VALUES
@@ -314,7 +315,7 @@ CREATE TABLE institutionReport (
     source varchar(200), -- How do you know about it? 
     documentation boolean, -- Do you have documentation? 
     description varchar(200),
-    contactId int references contact(id), -- Optional contact info 
+    contactId int, -- Optional contact info 
     status int, -- Report Status 
     created timestamp,
     updated timestamp
@@ -335,8 +336,8 @@ INSERT INTO institutionReport (amount, institution, incidentDate, approx, method
 DROP TABLE IF EXISTS institution_individual;
 CREATE TABLE institution_individual (
     id serial primary key,
-    reportId int references institutionReport(id),
-    individualId int references individual(id)
+    reportId int,
+    individualId int
 );
 
 INSERT INTO institution_individual (reportId, individualId) VALUES
@@ -350,8 +351,8 @@ INSERT INTO institution_individual (reportId, individualId) VALUES
 DROP TABLE IF EXISTS institution_business;
 CREATE TABLE institution_business (
     id serial primary key,
-    reportId int references institutionReport(id),
-    businessId int references business(id)
+    reportId int,
+    businessId int
 );
 
 INSERT INTO institution_business (reportId, businessId) VALUES
@@ -361,3 +362,107 @@ INSERT INTO institution_business (reportId, businessId) VALUES
 (9, 9),
 (10, 9),
 (10, 10);
+
+/*
+ Rest of tables need data
+*/
+
+DROP TABLE IF EXISTS mortgageReport;
+CREATE TABLE mortgageReport (
+    id serial primary key,
+    amount int, -- Total fraud amount
+    loan int,  -- Mortgage Loan amount
+    payments boolean,  -- Are payments still being made
+    owner varchar(80), --Property Owner
+    addressId int, -- Address of the property
+    mortgage varchar(45), -- Name of Mortgage Company
+    title varchar(45), -- Name of Title Company
+    agent varchar(45), -- Name of Closing agent
+    type varchar(45),  -- Type of mortgage fraud
+    source varchar(45), -- How do you know
+    documentation boolean, -- Do you have documentation
+    description varchar(200),
+    contactId int, -- Optional contact info 
+    status int, -- Report Status 
+    created timestamp,
+    updated timestamp
+)
+
+DROP TABLE IF EXISTS mortgage_individual;
+CREATE TABLE mortgage_individual (
+    id serial primary key,
+    reportId int,
+    individualId int
+);
+
+DROP TABLE IF EXISTS mortgage_business;
+CREATE TABLE mortgage_business (
+    id serial primary key,
+    reportId int,
+    businessId int
+);
+
+DROP TABLE IF EXISTS investmentReport;
+CREATE TABLE investmentReport (
+    id serial primary key,
+    amount int, -- Total investment amount
+    loss int,  -- Total loss amount
+    source varchar(200), -- How do you know about it? 
+    force boolean, -- Did the subject use forceful or manipulative tactics
+    promise varchar(200), -- What were you promised for the investment
+    contract boolean, -- Was there a contract
+    method varchar(45), -- How was the money transferred?
+    funds boolean,  -- Are you having trouble retreiving your funds
+    communication boolean, -- Are you able to contact the subject
+    documentation boolean, -- Do you have documentation
+    description varchar(200),
+    contactId int, -- Optional contact info 
+    status int, -- Report Status 
+    created timestamp,
+    updated timestamp
+)
+
+DROP TABLE IF EXISTS investment_individual;
+CREATE TABLE investment_individual (
+    id serial primary key,
+    reportId int,
+    individualId int
+);
+
+DROP TABLE IF EXISTS investment_business;
+CREATE TABLE investment_business (
+    id serial primary key,
+    reportId int,
+    businessId int
+);
+
+
+DROP TABLE IF EXISTS embezzlementReport;
+CREATE TABLE embezzlementReport (
+    id serial primary key,
+    amount int, -- Total embezzled amount
+    employee boolean,  -- Was the subject employed by the victim?
+    type varchar(45), -- Was money, property or information taken
+    location varchar(100), -- Where are the funds now
+    source varchar(200), -- How do you know about it? 
+    documentation boolean, -- Do you have documentation
+    description varchar(200),
+    contactId int, -- Optional contact info 
+    status int, -- Report Status 
+    created timestamp,
+    updated timestamp
+)
+
+DROP TABLE IF EXISTS embezzlement_individual;
+CREATE TABLE embezzlement_individual (
+    id serial primary key,
+    reportId int,
+    individualId int
+);
+
+DROP TABLE IF EXISTS embezzlement_business;
+CREATE TABLE embezzlement_business (
+    id serial primary key,
+    reportId int,
+    businessId int
+);
