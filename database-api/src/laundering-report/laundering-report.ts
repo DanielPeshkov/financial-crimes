@@ -64,6 +64,10 @@ export class LaunderingReport {
     @IsDate()
     created: Date;
 
+    @Column()
+    @IsDate()
+    updated: Date;
+
     @OneToOne(() => Contact, contact => contact.id)
     @JoinColumn({'name':'contactid'})
     contact: Contact;

@@ -60,6 +60,42 @@ import { InstitutionIndividualModule } from './institution-individual/institutio
 import { InstitutionIndividual } from './institution-individual/institution-individual';
 import { InstitutionIndividualController } from './institution-individual/institution-individual.controller';
 import { InstitutionIndividualService } from './institution-individual/institution-individual.service';
+import { EmbezzlementReportModule } from './embezzlement-report/embezzlement-report.module';
+import { EmbezzlementIndividualModule } from './embezzlement-individual/embezzlement-individual.module';
+import { EmbezzlementBusinessModule } from './embezzlement-business/embezzlement-business.module';
+import { InvestmentIndividualModule } from './investment-individual/investment-individual.module';
+import { InvestmentBusinessModule } from './investment-business/investment-business.module';
+import { InvestmentReportModule } from './investment-report/investment-report.module';
+import { MortgageReportModule } from './mortgage-report/mortgage-report.module';
+import { MortgageIndividualModule } from './mortgage-individual/mortgage-individual.module';
+import { MortgageBusinessModule } from './mortgage-business/mortgage-business.module';
+import { EmbezzlementReport } from './embezzlement-report/embezzlement-report';
+import { EmbezzlementBusiness } from './embezzlement-business/embezzlement-business';
+import { EmbezzlementIndividual } from './embezzlement-individual/embezzlement-individual';
+import { InvestmentReport } from './investment-report/investment-report';
+import { InvestmentBusiness } from './investment-business/investment-business';
+import { InvestmentIndividual } from './investment-individual/investment-individual';
+import { MortgageReport } from './mortgage-report/mortgage-report';
+import { MortgageBusiness } from './mortgage-business/mortgage-business';
+import { MortgageIndividual } from './mortgage-individual/mortgage-individual';
+import { EmbezzlementReportController } from './embezzlement-report/embezzlement-report.controller';
+import { EmbezzlementBusinessController } from './embezzlement-business/embezzlement-business.controller';
+import { EmbezzlementIndividualController } from './embezzlement-individual/embezzlement-individual.controller';
+import { InvestmentReportController } from './investment-report/investment-report.controller';
+import { InvestmentBusinessController } from './investment-business/investment-business.controller';
+import { InvestmentIndividualController } from './investment-individual/investment-individual.controller';
+import { MortgageReportController } from './mortgage-report/mortgage-report.controller';
+import { MortgageBusinessController } from './mortgage-business/mortgage-business.controller';
+import { MortgageIndividualController } from './mortgage-individual/mortgage-individual.controller';
+import { EmbezzlementReportService } from './embezzlement-report/embezzlement-report.service';
+import { EmbezzlementBusinessService } from './embezzlement-business/embezzlement-business.service';
+import { EmbezzlementIndividualService } from './embezzlement-individual/embezzlement-individual.service';
+import { InvestmentReportService } from './investment-report/investment-report.service';
+import { InvestmentBusinessService } from './investment-business/investment-business.service';
+import { InvestmentIndividualService } from './investment-individual/investment-individual.service';
+import { MortgageReportService } from './mortgage-report/mortgage-report.service';
+import { MortgageBusinessService } from './mortgage-business/mortgage-business.service';
+import { MortgageIndividualService } from './mortgage-individual/mortgage-individual.service';
 ConfigModule.forRoot();
 
 @Module({
@@ -74,7 +110,10 @@ ConfigModule.forRoot();
       entities: [User, Contact, Address, Business, Individual, OtherReport, 
         OtherIndividual, OtherBusiness, LaunderingReport, LaunderingBusiness, 
         LaunderingIndividual, InstitutionReport, InstitutionBusiness, 
-        InstitutionIndividual],
+        InstitutionIndividual, EmbezzlementReport, EmbezzlementBusiness, 
+        EmbezzlementIndividual, InvestmentReport, InvestmentBusiness, 
+        InvestmentIndividual, MortgageReport, MortgageBusiness, 
+        MortgageIndividual],
       synchronize: false,
     }),
     UserModule,
@@ -91,18 +130,37 @@ ConfigModule.forRoot();
     InstitutionReportModule,
     InstitutionBusinessModule,
     InstitutionIndividualModule,
+    EmbezzlementReportModule,
+    EmbezzlementIndividualModule,
+    EmbezzlementBusinessModule,
+    InvestmentIndividualModule,
+    InvestmentBusinessModule,
+    InvestmentReportModule,
+    MortgageReportModule,
+    MortgageIndividualModule,
+    MortgageBusinessModule,
   ],
   controllers: [AppController, UserController, ContactController, AddressController, 
                 BusinessController, IndividualController, OtherReportController, 
                 OtherIndividualController, OtherBusinessController, 
                 LaunderingReportController, LaunderingBusinessController, 
                 LaunderingIndividualController, InstitutionReportController, 
-                InstitutionBusinessController, InstitutionIndividualController],
+                InstitutionBusinessController, InstitutionIndividualController, 
+                EmbezzlementReportController, EmbezzlementBusinessController, 
+                EmbezzlementIndividualController, InvestmentReportController, 
+                InvestmentBusinessController, InvestmentIndividualController, 
+                MortgageReportController, MortgageBusinessController, 
+                MortgageIndividualController],
   providers: [AppService, UserService, ContactService, AddressService, BusinessService, 
               IndividualService, OtherReportService, OtherIndividualService, 
               OtherBusinessService, LaunderingReportService, LaunderingBusinessService, 
               LaunderingIndividualService, InstitutionReportService, 
-              InstitutionBusinessService, InstitutionIndividualService],
+              InstitutionBusinessService, InstitutionIndividualService, 
+              EmbezzlementReportService, EmbezzlementBusinessService, 
+              EmbezzlementIndividualService, InvestmentReportService, 
+              InvestmentBusinessService, InvestmentIndividualService, 
+              MortgageReportService, MortgageBusinessService, 
+              MortgageIndividualService],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsDate, IsBoolean } from "class-validator";
+import { IsNotEmpty, IsNumber } from "class-validator";
 import { Business } from "src/business/business";
 import { OtherReport } from "src/other-report/other-report";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
