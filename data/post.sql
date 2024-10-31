@@ -363,10 +363,6 @@ INSERT INTO institution_business (reportId, businessId) VALUES
 (10, 9),
 (10, 10);
 
-/*
- Rest of tables need data
-*/
-
 DROP TABLE IF EXISTS mortgageReport;
 CREATE TABLE mortgageReport (
     id serial primary key,
@@ -386,7 +382,20 @@ CREATE TABLE mortgageReport (
     status int, -- Report Status 
     created timestamp,
     updated timestamp
-)
+);
+
+INSERT INTO mortgageReport (amount, loan, payments, owner, addressId, mortgage, title, agent, type, source, documentation, description, contactId, status, created, updated)
+VALUES
+(10000, 200000, true, 'John Doe', 1, 'Bank of America', 'Title Company A', 'Agent X', 'Property Flipping', 'Anonymous Tip', false, 'Property was flipped multiple times in a short period.', 1, 0, NOW(), NOW()),
+(5000, 150000, false, 'Jane Smith', 2, 'Wells Fargo', 'Title Company B', 'Agent Y', 'Straw Buyer', 'Public Records', true, 'Property was purchased by a straw buyer with no income.', 2, 0, NOW(), NOW()),
+(25000, 300000, true, 'Michael Johnson', 3, 'Chase Bank', 'Title Company C', 'Agent Z', 'Equity Skimming', 'Whistleblower', true, 'Owner is not receiving mortgage payments.', 3, 0, NOW(), NOW()),
+(15000, 250000, false, 'Emily Brown', 4, 'Citibank', 'Title Company D', 'Agent A', 'Loan Modification Fraud', 'Internal Audit', false, 'Loan modification application was fraudulent.', 4, 0, NOW(), NOW()),
+(8000, 180000, true, 'David Davis', 5, 'Bank of America', 'Title Company E', 'Agent B', 'Property Flipping', 'Anonymous Tip', false, 'Property was flipped multiple times in a short period.', 5, 0, NOW(), NOW()),
+(12000, 220000, false, 'Sarah Miller', 6, 'Wells Fargo', 'Title Company F', 'Agent C', 'Straw Buyer', 'Public Records', true, 'Property was purchased by a straw buyer with no income.', 6, 0, NOW(), NOW()),
+(30000, 350000, true, 'Thomas Wilson', 7, 'Chase Bank', 'Title Company G', 'Agent D', 'Equity Skimming', 'Whistleblower', true, 'Owner is not receiving mortgage payments.', 7, 0, NOW(), NOW()),
+(20000, 280000, false, 'Olivia Taylor', 8, 'Citibank', 'Title Company H', 'Agent E', 'Loan Modification Fraud', 'Internal Audit', false, 'Loan modification application was fraudulent.', 8, 0, NOW(), NOW()),
+(18000, 260000, true, 'James Anderson', 9, 'Bank of America', 'Title Company I', 'Agent F', 'Property Flipping', 'Anonymous Tip', false, 'Property was flipped multiple times in a short period.', 9, 0, NOW(), NOW()),
+(10000, 200000, false, 'Sophia Lee', 10, 'Wells Fargo', 'Title Company J', 'Agent G', 'Straw Buyer', 'Public Records', true, 'Property was purchased by a straw buyer with no income.', 10, 0, NOW(), NOW());
 
 DROP TABLE IF EXISTS mortgage_individual;
 CREATE TABLE mortgage_individual (
@@ -395,12 +404,33 @@ CREATE TABLE mortgage_individual (
     individualId int
 );
 
+INSERT INTO mortgage_individual (reportId, individualId)
+VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6),
+(4, 7),
+(4, 8),
+(5, 9),
+(5, 10);
+
 DROP TABLE IF EXISTS mortgage_business;
 CREATE TABLE mortgage_business (
     id serial primary key,
     reportId int,
     businessId int
 );
+
+INSERT INTO mortgage_business (reportId, businessId)
+VALUES
+(6, 1),
+(7, 2),
+(8, 3),
+(9, 1),
+(10, 2);
 
 DROP TABLE IF EXISTS investmentReport;
 CREATE TABLE investmentReport (
@@ -420,7 +450,20 @@ CREATE TABLE investmentReport (
     status int, -- Report Status 
     created timestamp,
     updated timestamp
-)
+);
+
+INSERT INTO investmentReport (amount, loss, source, force, promise, contract, method, funds, communication, documentation, description, contactId, status, created, updated)
+VALUES
+(10000, 5000, 'Online Advertisement', true, 'High Returns in Short Time', false, 'Wire Transfer', true, false, true, 'Promised unrealistic returns and pressured me to invest quickly.', 10, 0, NOW(), NOW()),
+(20000, 15000, 'Social Media', false, 'Guaranteed Profit', true, 'Check', true, true, false, 'Contract was vague and difficult to enforce.', 11, 0, NOW(), NOW()),
+(5000, 3000, 'Cold Call', true, 'Risk-Free Investment', false, 'Cash', true, false, true, 'High-pressure sales tactics and unrealistic promises.', 12, 0, NOW(), NOW()),
+(15000, 10000, 'Email', false, 'Steady Income Stream', true, 'Bank Transfer', true, true, false, 'Contractual obligations not met.', 13, 0, NOW(), NOW()),
+(8000, 4000, 'Referral', true, 'Lucrative Opportunity', false, 'Cryptocurrency', true, false, true, 'Manipulative tactics and difficulty retrieving funds.', 14, 0, NOW(), NOW()),
+(25000, 20000, 'Website', false, 'Diversified Portfolio', true, 'Credit Card', true, true, false, 'Investment performance did not meet expectations.', 15, 0, NOW(), NOW()),
+(12000, 8000, 'Direct Mail', true, 'Guaranteed Wealth', false, 'Money Order', true, false, true, 'High-pressure sales tactics and unrealistic promises.', 16, 0, NOW(), NOW()),
+(30000, 25000, 'Phone Call', false, 'Passive Income', true, 'Debit Card', true, true, false, 'Investment strategy not as advertised.', 17, 0, NOW(), NOW()),
+(18000, 12000, 'Text Message', true, 'Quick Profits', false, 'Cash App', true, false, true, 'Manipulative tactics and difficulty retrieving funds.', 18, 0, NOW(), NOW()),
+(10000, 5000, 'Social Media', false, 'Stable Returns', true, 'Bank Transfer', true, true, false, 'Investment performance did not meet expectations.', 19, 0, NOW(), NOW());
 
 DROP TABLE IF EXISTS investment_individual;
 CREATE TABLE investment_individual (
@@ -429,6 +472,16 @@ CREATE TABLE investment_individual (
     individualId int
 );
 
+INSERT INTO investment_individual (reportId, individualId)
+VALUES
+(1, 11),
+(2, 12),
+(3, 13),
+(4, 14),
+(5, 15),
+(6, 16),
+(6, 17);
+
 DROP TABLE IF EXISTS investment_business;
 CREATE TABLE investment_business (
     id serial primary key,
@@ -436,6 +489,12 @@ CREATE TABLE investment_business (
     businessId int
 );
 
+INSERT INTO investment_business (reportId, businessId)
+VALUES
+(7, 1),
+(8, 2),
+(9, 3),
+(10, 1);
 
 DROP TABLE IF EXISTS embezzlementReport;
 CREATE TABLE embezzlementReport (
@@ -451,7 +510,20 @@ CREATE TABLE embezzlementReport (
     status int, -- Report Status 
     created timestamp,
     updated timestamp
-)
+);
+
+INSERT INTO embezzlementReport (amount, employee, type, location, source, documentation, description, contactId, status, created, updated)
+VALUES
+(10000, true, 'Money', 'Unknown', 'Internal Audit', true, 'Employee embezzled funds from company accounts.', 20, 0, NOW(), NOW()),
+(5000, false, 'Property', 'Sold Online', 'Anonymous Tip', false, 'Subject stole company property and sold it online.', 21, 0, NOW(), NOW()),
+(20000, true, 'Information', 'Leaked to Competitor', 'Whistleblower', true, 'Employee stole confidential company information and sold it to a competitor.', 22, 0, NOW(), NOW()),
+(8000, false, 'Money', 'Spent on Personal Expenses', 'Victim Report', true, 'Subject stole money from the victim and spent it on personal expenses.', 23, 0, NOW(), NOW()),
+(15000, true, 'Property', 'Pawned', 'Internal Investigation', true, 'Employee stole company equipment and pawned it for cash.', 24, 0, NOW(), NOW()),
+(12000, false, 'Information', 'Sold to Third Party', 'Law Enforcement', true, 'Subject stole personal information and sold it to a third party.', 25, 0, NOW(), NOW()),
+(30000, true, 'Money', 'Invested in Cryptocurrency', 'Whistleblower', true, 'Employee embezzled funds and invested them in cryptocurrency.', 26, 0, NOW(), NOW()),
+(25000, false, 'Property', 'Stored in Storage Unit', 'Victim Report', true, 'Subject stole valuable items from the victim and stored them in a storage unit.', 27, 0, NOW(), NOW()),
+(18000, true, 'Information', 'Leaked to Media', 'Internal Audit', true, 'Employee stole confidential company information and leaked it to the media.', 28, 0, NOW(), NOW()),
+(10000, false, 'Money', 'Used for Gambling', 'Anonymous Tip', false, 'Subject stole money from the victim and used it for gambling.', 29, 0, NOW(), NOW());
 
 DROP TABLE IF EXISTS embezzlement_individual;
 CREATE TABLE embezzlement_individual (
@@ -460,9 +532,27 @@ CREATE TABLE embezzlement_individual (
     individualId int
 );
 
+INSERT INTO embezzlement_individual (reportId, individualId)
+VALUES
+(1, 8),
+(1, 9),
+(2, 10),
+(3, 11),
+(3, 12),
+(4, 13);
+
 DROP TABLE IF EXISTS embezzlement_business;
 CREATE TABLE embezzlement_business (
     id serial primary key,
     reportId int,
     businessId int
 );
+
+INSERT INTO embezzlement_business (reportId, businessId)
+VALUES
+(5, 1),
+(6, 2),
+(7, 3),
+(7, 4),
+(8, 5),
+(9, 1);
