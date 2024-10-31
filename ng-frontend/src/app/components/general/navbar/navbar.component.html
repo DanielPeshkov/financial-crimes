@@ -2,7 +2,7 @@
 <nav>
     <!-- Div on left side -->
     <div>
-        <button *ngIf="!isAuthenticated"><p>Make a Report</p></button>
+        <button *ngIf="!isAuthenticated" routerLink=""><p>Make a Report</p></button>
         <button *ngIf="isAuthenticated"><p>View Reports</p></button>
     </div>
     <!-- Div on right side -->
