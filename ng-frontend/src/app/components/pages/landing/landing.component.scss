@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     width: 775px;
-    max-width: 60%;
+    max-width: 80%;
     margin: auto;
     margin-top: 40px;
     gap: 40px;
@@ -29,7 +29,13 @@
     .grid {
         grid-template-columns: repeat(2, 1fr);
     }
-  }
+}
+
+@media (max-width: 1099px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 
 // Card styling
 app-card {
