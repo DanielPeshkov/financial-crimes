@@ -30,7 +30,7 @@ export class MortgageReport {
 
     @Column()
     @IsNumber()
-	addressId: number;
+	addressid: number;
 
     @Column()
     @IsString()
@@ -62,7 +62,7 @@ export class MortgageReport {
 
     @Column()
     @IsNumber()
-    contactId: number;
+    contactid: number;
 
     @Column()
     @IsNumber()

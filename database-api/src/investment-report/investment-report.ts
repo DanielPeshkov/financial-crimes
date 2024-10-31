@@ -58,7 +58,7 @@ export class InvestmentReport {
 
     @Column()
     @IsNumber()
-    contactId: number;
+    contactid: number;
 
     @Column()
     @IsNumber()

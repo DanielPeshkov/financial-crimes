@@ -42,7 +42,7 @@ export class EmbezzlementReport {
 
     @Column()
     @IsNumber()
-    contactId: number;
+    contactid: number;
 
     @Column()
     @IsNumber()

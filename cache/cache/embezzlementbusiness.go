@@ -66,7 +66,7 @@ func ParsePutEmbezzlementBusinessRequest(msg []byte) (interface{}, string, int) 
 
 func (c *Cache) LoadEmbezzlementBusiness(conn net.Conn) {
 	buf := make([]byte, 16384)
-	conn.Write([]byte(`92#{"pattern":{"path":"get/embezzlement/business"},"data":"","id":"loadembezzlementbusiness"}`))
+	conn.Write([]byte(`90#{"pattern":{"path":"get/embezzlement/business"},"data":"","id":"loadembezzlementbusiness"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to load EmbezzlementBusiness table: %s", err))

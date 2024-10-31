@@ -66,7 +66,7 @@ func ParsePutEmbezzlementIndividualRequest(msg []byte) (interface{}, string, int
 
 func (c *Cache) LoadEmbezzlementIndividual(conn net.Conn) {
 	buf := make([]byte, 16384)
-	conn.Write([]byte(`96#{"pattern":{"path":"get/embezzlement/individual"},"data":"","id":"loadembezzlementindividual"}`))
+	conn.Write([]byte(`94#{"pattern":{"path":"get/embezzlement/individual"},"data":"","id":"loadembezzlementindividual"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to load EmbezzlementIndividual table: %s", err))
