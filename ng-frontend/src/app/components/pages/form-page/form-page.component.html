@@ -1,0 +1,46 @@
+<div class="content">
+    <div class="article-content">
+        <h1>Money Laundering Tip Form</h1>
+        <p>
+            Fill out the form below. All fields in the form are optional, but please try 
+            to provide as much information as possible. You do not need to provide any of 
+            your personal information, but may include it if you want so we can reach out 
+            to you to follow up.
+        </p>
+    </div>
+    <!-- 
+        FORM TABS
+    -->
+
+    <!-- Crime Type Form -->
+    <app-tab [shown]="true" [tabHeader]="'Crime Type'" (nextTabEvent)="nextForm(1)">
+        <app-card class="form">
+            <h1>Placeholder</h1>
+            replace with the form component once made
+        </app-card>
+    </app-tab>
+
+    <!-- Suspect Information -->
+    <app-tab [tabHeader]="'Suspect Information'" (nextTabEvent)="nextForm(2)">
+        <app-card class="form">
+            <h1>Placeholder</h1>
+            replace with the form component once made
+        </app-card>
+    </app-tab>
+
+    <!-- Crime Questions -->
+    <app-tab [tabHeader]="'Crime Questions'" (nextTabEvent)="nextForm(3)">
+        <app-card class="form">
+            <h1>Placeholder</h1>
+            replace with the form component once made
+        </app-card>
+    </app-tab>
+
+    <!-- Contact Info -->
+    <app-tab [tabHeader]="'Contact Info'" (nextTabEvent)="nextForm(4)">
+        <app-card class="form">
+            <h1>Placeholder</h1>
+            replace with the form component once made
+        </app-card>
+    </app-tab>
+</div>
