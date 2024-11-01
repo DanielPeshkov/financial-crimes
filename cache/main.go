@@ -9,6 +9,7 @@ import (
 	"time"
 	"unicode"
 
+	"github.com/ArthurHlt/go-eureka-client/eureka"
 	"github.com/joho/godotenv"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
@@ -203,6 +204,30 @@ func parseRequest(msg []byte) ([]byte, int64, []byte, int64, []byte) {
 
 func main() {
 	godotenv.Load()
+	port64, _ := strconv.ParseInt(os.Getenv("PORT")[1:], 10, 64)
+	port := int(port64)
+
+	client := eureka.NewClient([]string{
+		"http://localhost:8761/eureka",
+	})
+	instance := eureka.NewInstanceInfo("cache", "cache", "localhost", port, 30, false)
+	client.RegisterInstance("cache", instance)
+	client.SendHeartbeat(instance.App, instance.HostName)
+
+	_, err := client.GetApplication("db")
+	interval := 1
+	for err != nil {
+		fmt.Println("Waiting for Database Microservice...")
+		time.Sleep(time.Duration(interval) * time.Second)
+		if interval < 4 {
+			interval *= 2
+		}
+		_, err = client.GetApplication("db")
+	}
+
 	server := NewServer(os.Getenv("PORT"))
-	server.Start()
+	err = server.Start()
+	if err != nil {
+		fmt.Println("Error starting server:", err)
+	}
 }

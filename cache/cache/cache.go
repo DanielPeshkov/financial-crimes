@@ -96,7 +96,7 @@ func (c *Cache) Query(conn net.Conn, buf, data, req, reqId []byte, id int64) ([]
 		return Delete(c.Contacts, conn, data, reqId, id)
 
 	case "get/address":
-		return Get(c, c.Users, conn, req, reqId)
+		return Get(c, c.Addresses, conn, req, reqId)
 
 	case "getById/address":
 		return GetById(c, c.Addresses, conn, data, req, reqId, id)
