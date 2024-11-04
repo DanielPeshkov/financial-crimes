@@ -1,0 +1,10 @@
+<div [formGroup]="formGroup" class="form-container">
+    <div class="question">
+        <p>Do you have any information on the suspect who committed the crime?</p>
+        <app-radio [value]="'Yes'" [name]="'suspectYN'" formControlName="suspectYN">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'suspectYN'" formControlName="suspectYN">No</app-radio>
+    </div>
+    <div>
+        <app-contact-form [formGroup]="contactForm"></app-contact-form>
+    </div>
+</div>
