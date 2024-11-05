@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { DataPassService } from '../../../services/data-pass.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
@@ -16,25 +15,13 @@ import { TokenService } from '../../../services/token.service';
 export class NavbarComponent {
   isAuthenticated = false;
 
-  constructor(private dataPass: DataPassService, 
-              @Inject(DOCUMENT) public document: Document, 
+  constructor(@Inject(DOCUMENT) public document: Document, 
               public auth: AuthService,
               private tokenService: TokenService) {
-    this.dataPass.authenticatedObservable.subscribe(data => {
+    this.auth.isAuthenticated$.subscribe(data => {
       this.isAuthenticated = data;
     });
   }
-
-  // AUTH LOGIC TO BE IMPLEMENTED
-  login() {
-    this.dataPass.setAuthentication(true);
-    console.log("testing in progress")
-  }
-  
-  logout() {
-    this.dataPass.setAuthentication(false);
-  }
-
 
   sub = '';
   getToken() {
@@ -45,6 +32,6 @@ export class NavbarComponent {
       this.tokenService.updateToken(data?.sub ?? '');
 
     })
-          }
+  }
 
 }

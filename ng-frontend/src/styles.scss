@@ -158,7 +158,7 @@ button:active {
   input[type="text"] {
     background-color: rgb(30, 30, 30);
     color: rgb(255, 255, 255);
-    border: 2px solid rgb(68, 68, 68);
+    border: 4px solid rgb(68, 68, 68);
     border-radius: 9999px;
     padding: 15px 18px;
     transition: border-color 0.4s ease;
@@ -172,4 +172,40 @@ input[type="text"]:focus {
 input[type="text"]::placeholder {
     color: rgb(120, 120, 120);
     font-style: italic;
+}
+
+// Select input styling
+select {
+    /* Set a background color */
+    background-color: rgb(30, 30, 30);
+    
+    /* Customize border */
+    border: 2px solid rgb(68, 68, 68);
+    border-radius: 8px;
+    
+    /* Text styling */
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    padding: 8px;
+    
+    /* Remove default arrow for WebKit browsers */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    /* Add padding for custom arrow */
+    padding-right: 30px;
+    
+    /* Add background image for custom arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%225%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%200l5%205%205-5H0z%22%20fill%3D%22%23ffffff%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+
+    transition: border-color 0.4s ease;
+  }
+
+  select:focus {
+    border: 2px solid rgb(178, 178, 178);
+    outline: none;
 }

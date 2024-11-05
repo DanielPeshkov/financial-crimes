@@ -2,23 +2,19 @@
 <nav>
     <!-- Div on left side -->
     <div>
-        <button *ngIf="!isAuthenticated" routerLink=""><p>Make a Report</p></button>
+        <button routerLink=""><p>Make a Report</p></button>
         <button *ngIf="isAuthenticated"><p>View Reports</p></button>
     </div>
     <!-- Div on right side -->
-
-    <!-- View Reports will show up in the middle -->
-    <!-- Make a Report will still be available since anyone can make a report -->
-    <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-      
-        <button><p>View Reports</p></button>
+    <div>
+      <ng-container *ngIf="isAuthenticated; else loggedOut">
         <button (click)="auth.logout({ logoutParams: { returnTo: document.location.origin } })"><p>Logout</p></button>
-        
       </ng-container>
-  
+    
       <ng-template #loggedOut>
         <button (click)="auth.loginWithRedirect()"><p>Admin Login</p></button>
       </ng-template>
+    </div>
 
       <!-- <button (click)="getToken()">Token</button> -->
 </nav>
