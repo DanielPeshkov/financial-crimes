@@ -1,11 +1,12 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, inject, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TabComponent } from '../../general/tab/tab.component';
 import { CardComponent } from '../../general/card/card.component';
 import { CommonModule, Location } from '@angular/common';
 import { SuspectFormComponent } from '../../forms/suspect-form/suspect-form.component';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactFormComponent } from '../../forms/contact-form/contact-form.component';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-form-page',
@@ -14,31 +15,16 @@ import { ContactFormComponent } from '../../forms/contact-form/contact-form.comp
     TabComponent, CardComponent, SuspectFormComponent,
     ContactFormComponent, CommonModule, ReactiveFormsModule
   ],
+  providers: [FormService],
   templateUrl: './form-page.component.html',
   styleUrl: './form-page.component.scss'
 })
 export class FormPageComponent {
-  mainForm: FormGroup;
-  suspectForm: FormGroup;
-  suspectContactForm: FormGroup;
-
+  readonly form = inject(FormService).form;
   formType: string = "other";
 
-  constructor(private route: ActivatedRoute, private location: Location, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private location: Location) {
     this.formType = this.route.snapshot.params['formtype'];
-
-    this.suspectContactForm = this.fb.group({
-      contacts: this.fb.array([])
-    })
-
-    this.suspectForm = this.fb.group({
-      suspectYN: new FormControl('', [ Validators.required ]),
-      contactForm: this.suspectContactForm
-    })
-
-    this.mainForm = this.fb.group({
-      suspectForm: this.suspectForm
-    });
   }
 
   @ViewChildren(TabComponent) tabs!: QueryList<TabComponent>;
@@ -60,7 +46,9 @@ export class FormPageComponent {
   }
 
   onSubmit() {
-    console.log(this.mainForm.get('suspectForm')?.get('suspectYN')?.value);
+    console.log(this.form.get('suspectForm')?.get('suspectYN')?.value);
+    let arr = this.form.get('suspectForm')?.get('contactForm')?.get('contacts') as FormArray
+    console.log(`Phone Nuuumber: ${arr.at(0).get('phoneNumber')?.value} Email: ${arr.at(0).get('email')?.value}`);
     // Form submission logic
   }
 

@@ -1,16 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormService } from '../../../services/form.service';
+import { ContactCardComponent } from '../../general/contact-card/contact-card.component';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, ContactCardComponent],
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss'
 })
 export class ContactFormComponent implements OnInit{
-  @Input() formGroup!: FormGroup;
+  readonly form = inject(FormService).form.get('suspectForm')?.get('contactForm') as FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
@@ -19,7 +21,7 @@ export class ContactFormComponent implements OnInit{
   }
 
   get contacts(): FormArray {
-    return this.formGroup.get('contacts') as FormArray;
+    return this.form?.get('contacts') as FormArray;
   }
 
   createContactControl(): FormGroup {

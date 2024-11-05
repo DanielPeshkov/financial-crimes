@@ -1,11 +1,11 @@
-<div class="contactCard">
+<div [formGroup]="form" class="contactCard">
     <div class="question">
         <p>Phone Number</p>
-        <input type="search" placeholder="+1 (###) ###-####">
+        <input formControlName="phoneNumber" type="search" placeholder="+1 (###) ###-####">
     </div>
     <div class="question">
         <p>Email</p>
-        <input type="search" placeholder="example@email.com">
+        <input formControlName="email" type="search" placeholder="example@email.com">
     </div>
     <div>
         <button (click)="delete()"><p>Delete</p><img src="delete.png"></button>

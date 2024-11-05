@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RadioComponent } from '../../general/radio/radio.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { FormService } from '../../../services/form.service';
 
 @Component({
   selector: 'app-suspect-form',
@@ -12,10 +13,6 @@ import { ContactFormComponent } from '../contact-form/contact-form.component';
 })
 export class SuspectFormComponent {
   @Input() formGroup!: FormGroup;
+  readonly form = inject(FormService).form.get('suspectForm') as FormGroup;
 
-  constructor() {}
-
-  get contactForm() {
-    return this.formGroup.get('contactForm') as FormGroup;
-  }
 }

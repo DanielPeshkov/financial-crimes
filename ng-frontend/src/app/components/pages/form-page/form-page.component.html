@@ -1,4 +1,4 @@
-<form [formGroup]="mainForm" class="content">
+<form [formGroup]="form" class="content">
     <div class="article-content">
         <h1>Money Laundering Tip Form</h1>
         <p>
@@ -56,7 +56,7 @@
 
     <!-- Suspect Information -->
     <app-tab [shown]="true" [tabHeader]="'Suspect Information'" (nextTabEvent)="nextForm(2)">
-        <app-suspect-form [formGroup]="suspectForm" class="form"></app-suspect-form>
+        <app-suspect-form class="form"></app-suspect-form>
     </app-tab>
 
     <!-- Crime Questions -->

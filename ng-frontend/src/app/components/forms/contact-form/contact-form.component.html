@@ -1,21 +1,8 @@
-<div [formGroup]="formGroup">
+<div [formGroup]="form">
     <div formArrayName="contacts">
         @for (cc of contacts.controls; track $index) {
-            <div class="contactCard">
-                <div class="question">
-                    <p>Phone Number</p>
-                    <input type="search" placeholder="+1 (###) ###-####"
-                    formControlName="phoneNumber" id="phoneNumber">
-                </div>
-                <div class="question">
-                    <p>Email</p>
-                    <input type="search" placeholder="example@email.com"
-                    formControlName="email" id="email">
-                </div>
-                <div>
-                    <button (click)="deleteContact($index)"><p>Delete</p><img src="delete.png"></button>
-                </div>
-            </div>
+            <app-contact-card (deleteContactEvent)="deleteContact($index)"></app-contact-card>
         }
     </div>
+    <button (click)="addContact()"><p>Add Contact</p></button>
 </div>
