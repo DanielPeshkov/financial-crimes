@@ -75,34 +75,22 @@ func (c *Cache) LoadUsers(conn net.Conn) {
 	for msg[i] != '#' {
 		i += 1
 	}
-	i += 1
-	users := ParseUsersResponse(msg[i:])
+	delimiter := i + 1
+	total, _ := strconv.ParseInt(string(msg[:i]), 10, 64)
+	read := n - i
+	for read < int(total) {
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to load Address table: %s", err))
+		}
+		msg = append(msg, buf[:n]...)
+		read += n
+	}
+	users := ParseUsersResponse(msg[delimiter:])
 	for _, use := range users.Response {
 		c.Users[int64(use.Id)] = use
 	}
 }
-
-// func (c *Cache) GetUser(conn net.Conn, data, reqId []byte, id int64) ([]byte, int) {
-// 	us := []byte(`{"response":[`)
-// 	for _, use := range c.Users {
-// 		u, err := json.Marshal(use)
-// 		if err != nil {
-// 			fmt.Println("error json marshal cached Users", err)
-// 		}
-// 		us = append(us, u...)
-// 		us = append(us, byte(','))
-// 	}
-// 	if us[len(us)-1] == ',' {
-// 		us = us[:len(us)-1]
-// 	}
-// 	us = append(us, []byte(`],"isDisposed":true,"id":"`)...)
-// 	us = append(us, reqId...)
-// 	us = append(us, []byte(`"}`)...)
-// 	leng := len(us)
-// 	strlen := strconv.Itoa(leng) + "#"
-// 	buf := append([]byte(strlen), us...)
-// 	return buf, len(buf)
-// }
 
 func (c *Cache) GetUserById(conn net.Conn, data, reqId []byte, id int64) ([]byte, int) {
 	us := []byte(`{"response":`)

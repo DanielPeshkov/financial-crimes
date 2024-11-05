@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"strconv"
 )
 
 type LaunderingReport struct {
@@ -78,7 +79,7 @@ func ParsePutLaunderingReportRequest(msg []byte) (interface{}, string, int) {
 }
 
 func (c *Cache) LoadLaunderingReport(conn net.Conn) {
-	buf := make([]byte, 16384)
+	buf := make([]byte, 8192)
 	conn.Write([]byte(`83#{"pattern":{"path":"get/laundering/report"},"data":"","id":"loadlaundering/report"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
@@ -89,8 +90,19 @@ func (c *Cache) LoadLaunderingReport(conn net.Conn) {
 	for msg[i] != '#' {
 		i += 1
 	}
-	i += 1
-	launderingreports := ParseLaunderingReportsResponse(msg[i:])
+	delimiter := i + 1
+	total, _ := strconv.ParseInt(string(msg[:i]), 10, 64)
+	read := n - i
+	for read < int(total) {
+		buf := make([]byte, 8192)
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to load Address table: %s", err))
+		}
+		msg = append(msg, buf[:n]...)
+		read += n
+	}
+	launderingreports := ParseLaunderingReportsResponse(msg[delimiter:])
 	for _, ind := range launderingreports {
 		c.LaunderingReports[int64(ind.Id)] = ind
 	}

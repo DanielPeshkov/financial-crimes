@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"strconv"
 )
 
 type EmbezzlementReport struct {
@@ -75,7 +76,7 @@ func ParsePutEmbezzlementReportRequest(msg []byte) (interface{}, string, int) {
 }
 
 func (c *Cache) LoadEmbezzlementReport(conn net.Conn) {
-	buf := make([]byte, 16384)
+	buf := make([]byte, 8192)
 	conn.Write([]byte(`87#{"pattern":{"path":"get/embezzlement/report"},"data":"","id":"loadembezzlement/report"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
@@ -86,8 +87,19 @@ func (c *Cache) LoadEmbezzlementReport(conn net.Conn) {
 	for msg[i] != '#' {
 		i += 1
 	}
-	i += 1
-	embezzlementreports := ParseEmbezzlementReportsResponse(msg[i:])
+	delimiter := i + 1
+	total, _ := strconv.ParseInt(string(msg[:i]), 10, 64)
+	read := n - i
+	for read < int(total) {
+		buf := make([]byte, 8192)
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to load Address table: %s", err))
+		}
+		msg = append(msg, buf[:n]...)
+		read += n
+	}
+	embezzlementreports := ParseEmbezzlementReportsResponse(msg[delimiter:])
 	for _, ind := range embezzlementreports {
 		c.EmbezzlementReports[int64(ind.Id)] = ind
 	}

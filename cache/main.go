@@ -4,13 +4,11 @@ import (
 	"cache/cache"
 	"fmt"
 	"net"
-	"os"
 	"strconv"
 	"time"
 	"unicode"
 
 	"github.com/ArthurHlt/go-eureka-client/eureka"
-	"github.com/joho/godotenv"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -64,17 +62,21 @@ func (s *Server) Start() error {
 	s.ln = ln
 
 	// Load cache from DB
-	dbConn, err := net.Dial("tcp", os.Getenv("DB"))
-	if err != nil {
-		return fmt.Errorf("failed to connect to db: %s", err)
+	dbConn, err := net.Dial("tcp", "database-service:8000")
+	for err != nil {
+		fmt.Println("forward connection error: ", err)
+		fmt.Println("Retrying database-service connection...")
+		dbConn, err = net.Dial("tcp", "database-service:8000")
 	}
 	s.cache.Load(dbConn)
 	dbConn.Close()
 
 	// Connect to RabbitMQ
-	queue, err := amqp.Dial(os.Getenv("RABBIT"))
-	if err != nil {
-		return fmt.Errorf("failed to connect to queue: %s", err)
+	queue, err := amqp.Dial("amqp://rabbit-service:5672")
+	for err != nil {
+		fmt.Println("failed to connect to queue: ", err)
+		fmt.Println("Retrying rabbit-service connection...")
+		queue, err = amqp.Dial("amqp://rabbit-service:5672")
 	}
 	defer queue.Close()
 	qch, err := queue.Channel()
@@ -105,10 +107,11 @@ func (s *Server) acceptLoop() {
 
 func (s *Server) readLoop(conn net.Conn) {
 	// Create connection to DB microservice
-	dbConn, err := net.Dial("tcp", os.Getenv("DB"))
-	if err != nil {
+	dbConn, err := net.Dial("tcp", "database-service:8000")
+	for err != nil {
 		fmt.Println("forward connection error: ", err)
-		return
+		fmt.Println("Retrying database-service connection...")
+		dbConn, err = net.Dial("tcp", "database-service:8000")
 	}
 	defer dbConn.Close()
 
@@ -203,18 +206,21 @@ func parseRequest(msg []byte) ([]byte, int64, []byte, int64, []byte) {
 }
 
 func main() {
-	godotenv.Load()
-	port64, _ := strconv.ParseInt(os.Getenv("PORT")[1:], 10, 64)
-	port := int(port64)
-
 	client := eureka.NewClient([]string{
-		"http://localhost:8761/eureka",
+		"http://eureka-service:8761/eureka",
 	})
-	instance := eureka.NewInstanceInfo("cache", "cache", "localhost", port, 30, false)
+	instance := eureka.NewInstanceInfo("cache", "cache", "cache-service", 5000, 30, false)
 	client.RegisterInstance("cache", instance)
-	client.SendHeartbeat(instance.App, instance.HostName)
+	_, err := client.GetApplication("cache")
+	for err != nil {
+		fmt.Println("Retrying registration with Eureka...")
+		client.RegisterInstance("cache", instance)
+		_, err = client.GetApplication("db")
+	}
 
-	_, err := client.GetApplication("db")
+	go SendHeartbeat(client, instance.App, instance.HostName)
+
+	_, err = client.GetApplication("db")
 	interval := 1
 	for err != nil {
 		fmt.Println("Waiting for Database Microservice...")
@@ -225,9 +231,16 @@ func main() {
 		_, err = client.GetApplication("db")
 	}
 
-	server := NewServer(os.Getenv("PORT"))
+	server := NewServer(":5000")
 	err = server.Start()
 	if err != nil {
 		fmt.Println("Error starting server:", err)
+	}
+}
+
+func SendHeartbeat(client *eureka.Client, app, hostname string) {
+	for {
+		client.SendHeartbeat(app, hostname)
+		time.Sleep(30 * time.Second)
 	}
 }

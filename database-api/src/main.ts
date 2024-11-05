@@ -8,7 +8,7 @@ async function bootstrap() {
   let ip = await getIp();
   let client = new Eureka({
       eureka: {
-          host: 'localhost',
+          host: 'eureka-service',
           port: 8761,
           servicePath: '/eureka/apps/'
       },
@@ -37,21 +37,21 @@ async function bootstrap() {
         console.log('Connected to Eureka Service Discovery');
   });
 
-  await setTimeout(async () => {
+  // await setTimeout(async () => {
   
-    /**
-     * Set environement variables
-     */
+  //   /**
+  //    * Set environement variables
+  //    */
 
-    const app = await NestFactory.create(AppModule);  
-    await app.listen(process.env.PORT ?? 3000);
-  }, 1000);
+  //   const app = await NestFactory.create(AppModule);  
+  //   await app.listen(process.env.PORT ?? 3000);
+  // }, 1000);
 
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+  const app = await NestFactory.createMicroservice(AppModule, {
     transport: Transport.TCP,
     options: {
-      host: 'localhost',
-      port: Number(process.env.PORT),
+      host: '0.0.0.0',
+      port: 8000,
     }
   });
   await app.listen();

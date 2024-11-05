@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"strconv"
 )
 
 type OtherBusiness struct {
@@ -65,7 +66,7 @@ func ParsePutOtherBusinessRequest(msg []byte) (interface{}, string, int) {
 }
 
 func (c *Cache) LoadOtherBusiness(conn net.Conn) {
-	buf := make([]byte, 16384)
+	buf := make([]byte, 8192)
 	conn.Write([]byte(`76#{"pattern":{"path":"get/other/business"},"data":"","id":"loadotherbusiness"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
@@ -76,8 +77,19 @@ func (c *Cache) LoadOtherBusiness(conn net.Conn) {
 	for msg[i] != '#' {
 		i += 1
 	}
-	i += 1
-	otherbusinesses := ParseOtherBusinessesResponse(msg[i:])
+	delimiter := i + 1
+	total, _ := strconv.ParseInt(string(msg[:i]), 10, 64)
+	read := n - i
+	for read < int(total) {
+		buf := make([]byte, 8192)
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to load Address table: %s", err))
+		}
+		msg = append(msg, buf[:n]...)
+		read += n
+	}
+	otherbusinesses := ParseOtherBusinessesResponse(msg[delimiter:])
 	for _, ind := range otherbusinesses {
 		c.OtherBusinesses[int64(ind.Id)] = ind
 	}

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+  labels:
+    app: crimereport
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crimereport
+  template:
+    metadata:
+      labels:
+        app: crimereport
+    spec:
+      containers:
+      - name: database
+        image: 924809052459.dkr.ecr.us-east-1.amazonaws.com/database:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: PORT
+        - name: HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: HOST
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PORT
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_HOST
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DB_DATABASE

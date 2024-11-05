@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"strconv"
 )
 
 type MortgageIndividual struct {
@@ -65,7 +66,7 @@ func ParsePutMortgageIndividualRequest(msg []byte) (interface{}, string, int) {
 }
 
 func (c *Cache) LoadMortgageIndividual(conn net.Conn) {
-	buf := make([]byte, 16384)
+	buf := make([]byte, 8192)
 	conn.Write([]byte(`86#{"pattern":{"path":"get/mortgage/individual"},"data":"","id":"loadmortgageindividual"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
@@ -76,8 +77,19 @@ func (c *Cache) LoadMortgageIndividual(conn net.Conn) {
 	for msg[i] != '#' {
 		i += 1
 	}
-	i += 1
-	mortgageindividuals := ParseMortgageIndividualsResponse(msg[i:])
+	delimiter := i + 1
+	total, _ := strconv.ParseInt(string(msg[:i]), 10, 64)
+	read := n - i
+	for read < int(total) {
+		buf := make([]byte, 8192)
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to load Address table: %s", err))
+		}
+		msg = append(msg, buf[:n]...)
+		read += n
+	}
+	mortgageindividuals := ParseMortgageIndividualsResponse(msg[delimiter:])
 	for _, ind := range mortgageindividuals {
 		c.MortgageIndividuals[int64(ind.Id)] = ind
 	}

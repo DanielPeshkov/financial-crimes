@@ -11,8 +11,8 @@ import { ConfigModule } from '@nestjs/config';
       name: 'SERVICE', 
       transport: Transport.TCP,
       options: {
-        host: process.env['CACHE_HOST'],
-        port: parseInt(process.env['CACHE_PORT'], 10),
+        host: "cache-service",
+        port: 5000,
       }
     }]),
   ],

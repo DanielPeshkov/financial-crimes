@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-deployment
+  labels:
+    app: crimereport
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crimereport
+  template:
+    metadata:
+      labels:
+        app: crimereport
+    spec:
+      containers:
+      - name: eureka
+        image: 924809052459.dkr.ecr.us-east-1.amazonaws.com/eureka:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8761

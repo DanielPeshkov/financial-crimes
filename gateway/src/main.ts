@@ -7,7 +7,7 @@ async function bootstrap() {
   let ip = await getIp();
   let client = new Eureka({
       eureka: {
-          host: 'host.docker.internal',
+          host: 'eureka-service',
           port: 8761,
           servicePath: '/eureka/apps/'
       },
@@ -38,28 +38,31 @@ async function bootstrap() {
 
   await setTimeout(async () => {
     console.log('setTimeout')
-    let interval = 1000;
+    let count = 0;
+    let interval = 1;
     let instance = await client.getInstancesByAppId('cache')[0];
     while (!instance) {
       console.log('Awaiting Cache connection...')
       await sleep(interval)
-      if (interval < 4000) {
+      if (interval < 1000) {
          interval *= 2;
       }
       instance = await client.getInstancesByAppId('cache')[0];
+      count += 1;
+      if (count > 20) {
+        // console.log("Failed to load cache data, restarting...")
+        // break;
+        throw new Error("Failed to load cache data, restarting...");
+      }
     }
     console.log(`http://${instance.ipAddr}:${instance.port['$']}`)
-    // process.env['CACHE_HOST'] = 'localhost'//instance.ipAddr
-    // process.env['CACHE_PORT'] = '5000'//instance.port['$']
-    // process.env['PORT'] = String(3000)
-    console.log(`host: ${process.env['CACHE_HOST']}, port: ${process.env['CACHE_PORT']}`)
 
     /**
      * Set environement variables
      */
 
     const app = await NestFactory.create(AppModule);  
-    await app.listen(process.env.PORT ?? 3000);
+    await app.listen(3000);
   }, 1000);
 }
 bootstrap();

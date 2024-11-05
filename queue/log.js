@@ -1,6 +1,6 @@
 const amqp = require('amqplib/callback_api');
 
-amqp.connect('amqp://localhost', (err, connection) => {
+amqp.connect(process.env['RABBIT'], (err, connection) => {
     if (err) {
         throw err;
     }
@@ -22,7 +22,11 @@ amqp.connect('amqp://localhost', (err, connection) => {
             noAck: true
         });
         
-        setInterval(() => lambda(logs), 10000)
+        setInterval(() => {
+            if (logs.length) {
+                lambda(logs)
+            }
+        }, 10000)
     })
 });
 

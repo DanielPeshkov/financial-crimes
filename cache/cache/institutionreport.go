@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"strconv"
 )
 
 type InstitutionReport struct {
@@ -76,7 +77,7 @@ func ParsePutInstitutionReportRequest(msg []byte) (interface{}, string, int) {
 }
 
 func (c *Cache) LoadInstitutionReport(conn net.Conn) {
-	buf := make([]byte, 16384)
+	buf := make([]byte, 8192)
 	conn.Write([]byte(`85#{"pattern":{"path":"get/institution/report"},"data":"","id":"loadinstitution/report"}`))
 	n, err := conn.Read(buf)
 	if err != nil {
@@ -87,8 +88,19 @@ func (c *Cache) LoadInstitutionReport(conn net.Conn) {
 	for msg[i] != '#' {
 		i += 1
 	}
-	i += 1
-	institutionreports := ParseInstitutionReportsResponse(msg[i:])
+	delimiter := i + 1
+	total, _ := strconv.ParseInt(string(msg[:i]), 10, 64)
+	read := n - i
+	for read < int(total) {
+		buf := make([]byte, 8192)
+		n, err := conn.Read(buf)
+		if err != nil {
+			panic(fmt.Sprintf("Failed to load Address table: %s", err))
+		}
+		msg = append(msg, buf[:n]...)
+		read += n
+	}
+	institutionreports := ParseInstitutionReportsResponse(msg[delimiter:])
 	for _, ind := range institutionreports {
 		c.InstitutionReports[int64(ind.Id)] = ind
 	}
