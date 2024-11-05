@@ -12,7 +12,7 @@ import { ContactCardComponent } from '../../general/contact-card/contact-card.co
   styleUrl: './contact-form.component.scss'
 })
 export class ContactFormComponent implements OnInit {
-  private readonly fs = inject(FormService);
+  readonly fs = inject(FormService);
   readonly form = this.fs.form.get('suspectForm')?.get('contactForm') as FormGroup;
 
   constructor(private fb: FormBuilder) {}

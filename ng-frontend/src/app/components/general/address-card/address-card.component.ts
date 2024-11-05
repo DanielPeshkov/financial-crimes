@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormService } from '../../../services/form.service';
 
 @Component({
@@ -11,10 +11,9 @@ import { FormService } from '../../../services/form.service';
   styleUrl: './address-card.component.scss'
 })
 export class AddressCardComponent {
-  @Input() index: number = 0;
-  @Output() deleteAddressEvent = new EventEmitter<any>();
-  arr = inject(FormService).form.get('suspectForm')?.get('addressForm')?.get('addresses') as FormArray;
-  form = this.arr.at(this.index) as FormGroup;
+  @Output() deleteAddressEvent = new EventEmitter<null>();
+  readonly fs = inject(FormService);
+  @Input() form!: FormGroup;
   
   delete() {
     this.deleteAddressEvent.emit();

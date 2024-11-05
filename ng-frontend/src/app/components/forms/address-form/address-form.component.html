@@ -1,0 +1,10 @@
+<div [formGroup]="form" class="addressForm">
+    <div formArrayName="addresses">
+        @for (cc of addresses.controls; track $index) {
+            <app-address-card [form]="fs.getAddress($index)" (deleteAddressEvent)="deleteAddress($index)"></app-address-card>
+        }
+    </div>
+    <div class="article-content">
+        <button (click)="addAddress()"><p>Add Address</p><img src="address.png"></button>
+    </div>
+</div>

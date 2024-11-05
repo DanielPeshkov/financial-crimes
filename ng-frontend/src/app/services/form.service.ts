@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable()
 export class FormService {
@@ -19,15 +19,27 @@ export class FormService {
     });
   }
 
-  get contacts(): FormArray {
-    return this.form.get('suspectForm')?.get('contactForm')?.get('contacts') as FormArray;
-  }
-
   createContactControl(): FormGroup {
     return this.fb.group({
       phone: [''],
       email: ['']
     })
+  }
+
+  createAddressControl(): FormGroup {
+    return this.fb.group({
+      type: [''],
+      street: [''],
+      street2: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
+      country: ['']
+    })
+  }
+
+  get contacts(): FormArray {
+    return this.form.get('suspectForm')?.get('contactForm')?.get('contacts') as FormArray;
   }
 
   getContact(i: number): FormGroup {
@@ -40,9 +52,21 @@ export class FormService {
 
   deleteContact(i: number): void {
     this.contacts.removeAt(i);
-    this.contacts.controls?.forEach((contactControl, index) => {
-      const contactGroup = contactControl as FormGroup;
-      console.log(`Contact form at index: ${index}\nPhone: ${contactGroup.get('phone')?.value}\nEmail: ${contactGroup.get('email')?.value}\n`)
-    })
+  }
+
+  get addresses(): FormArray {
+    return this.form.get('suspectForm')?.get('addressForm')?.get('addresses') as FormArray;
+  }
+
+  getAddress(i: number): FormGroup {
+    return this.addresses.at(i) as FormGroup;
+  }
+
+  addAddress(): void {
+    this.addresses.push(this.createAddressControl());
+  }
+
+  deleteAddress(i: number): void {
+    this.addresses.removeAt(i);
   }
 }
