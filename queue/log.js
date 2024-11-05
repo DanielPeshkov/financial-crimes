@@ -1,6 +1,7 @@
+const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
 const amqp = require('amqplib/callback_api');
 
-amqp.connect(process.env['RABBIT'], (err, connection) => {
+amqp.connect("amqp://rabbit-service", (err, connection) => {
     if (err) {
         throw err;
     }
@@ -24,21 +25,20 @@ amqp.connect(process.env['RABBIT'], (err, connection) => {
         
         setInterval(() => {
             if (logs.length) {
-                lambda(logs)
+                let event = JSON.stringify({'logs':logs.map(log => log.toString())});
+                lambda(event);
+                logs = [];
             }
         }, 10000)
     })
 });
 
-function lambda(logs) {
-    console.log('lambda');
-    // Process logs and send to storage
-    // In this case log to console
-    if (logs.length) {
-        let x
-        while (x = logs.pop()) {
-            const [tim, gat, req, hit] = x.toString().split(',')
-            console.log(`Timestamp: ${tim} \tGateway Latency: ${gat}ms \tRequest Processing Latency: ${req}us \tCache Hit: ${Boolean(hit)}`)
-        }
-    }
+async function lambda(payload) {
+    const client = new LambdaClient({region: 'us-east-1'});
+    const command = new InvokeCommand({
+        FunctionName: 'legendary-logger',
+        Payload: payload
+    });
+    let resp = await client.send(command).catch(err => console.log('Lambda error: ', err));
+    console.log('Lambda sent');
 }

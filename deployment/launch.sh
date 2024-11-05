@@ -16,3 +16,4 @@ sleep 10
 kubectl apply -f cache_deployment.yaml
 sleep 5
 kubectl apply -f gateway_deployment.yaml
+kubectl apply -f logger_deployment.yaml

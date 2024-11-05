@@ -1,6 +1,11 @@
-FROM rabbitmq:4.0.3-management-alpine
+FROM node:20-alpine
 
-RUN rabbitmq-plugins enable rabbitmq_management
+WORKDIR /app
 
-EXPOSE 5432
-EXPOSE 15672
+COPY package*.json ./
+
+RUN npm install
+
+COPY log.js . 
+
+CMD ["node", "log.js"]
