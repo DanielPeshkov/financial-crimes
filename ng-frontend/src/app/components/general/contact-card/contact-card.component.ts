@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, input, Input, OnInit, Output } from '@angular/core';
 import { FormService } from '../../../services/form.service';
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,13 +10,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './contact-card.component.html',
   styleUrl: './contact-card.component.scss'
 })
-export class ContactCardComponent {
+export class ContactCardComponent implements OnInit {
   @Input() index: number = 0;
-  @Output() deleteContactEvent = new EventEmitter<any>();
-  arr = inject(FormService).form.get('suspectForm')?.get('contactForm')?.get('contacts') as FormArray;
-  form = this.arr.at(this.index) as FormGroup;
+  @Output() deleteContactEvent = new EventEmitter<number>();
+  readonly fs = inject(FormService);
+  initialInd: number = 0;
+  form!: FormGroup;
+
+  ngOnInit(): void {
+    this.initialInd = this.index;
+    this.form = this.fs.getContact(this.index);
+  }
   
   delete() {
-    this.deleteContactEvent.emit();
+    console.log(`Deleting at index ${this.index}`)
+    this.deleteContactEvent.emit(this.index);
   }
 }

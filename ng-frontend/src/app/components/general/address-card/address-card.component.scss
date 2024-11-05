@@ -1,0 +1,14 @@
+.addressCard {
+    background-color: rgb(73, 73, 73);
+    border-radius: 50px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+button {
+    display: flex;
+    gap: 15px;
+    float: right;
+}

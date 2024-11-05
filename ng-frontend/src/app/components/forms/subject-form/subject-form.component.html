@@ -1,0 +1,8 @@
+<div class="subject">
+    <div class="center flex">
+        <p>{{formType}}</p>
+        <app-toggle (toggleEvent)="onFormSwitch($event)"></app-toggle>
+    </div>
+    <app-individual-form *ngIf="toggleState"></app-individual-form>
+    <app-business-form *ngIf="!toggleState"></app-business-form>
+</div>

@@ -1,0 +1,9 @@
+<div [formGroup]="form" class="addressCard">
+    <div class="question">
+        <p>Street Address</p>
+        <input formControlName="phoneNumber" type="text" placeholder="ex: 76 Totter's Lane">
+    </div>
+    <div *ngIf="arr.length != 1">
+        <button (click)="delete()"><p>Delete</p><img src="delete.png"></button>
+    </div>
+</div>

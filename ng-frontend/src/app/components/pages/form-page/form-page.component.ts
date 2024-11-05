@@ -46,9 +46,13 @@ export class FormPageComponent {
   }
 
   onSubmit() {
-    console.log(this.form.get('suspectForm')?.get('suspectYN')?.value);
-    let arr = this.form.get('suspectForm')?.get('contactForm')?.get('contacts') as FormArray
-    console.log(`Phone Nuuumber: ${arr.at(0).get('phoneNumber')?.value} Email: ${arr.at(0).get('email')?.value}`);
+    //console.log(this.form.get('suspectForm')?.get('suspectYN')?.value);
+    let arr = this.form.get('suspectForm')?.get('contactForm')?.get('contacts') as FormArray;
+    //console.log(`Phone Nuuumber: ${arr.at(0).get('phone')?.value} Email: ${arr.at(0).get('email')?.value}`);
+    arr.controls?.forEach((contactControl, index) => {
+      const contactGroup = contactControl as FormGroup;
+      console.log(`Contact form at index: ${index}\nPhone: ${contactGroup.get('phone')?.value}\nEmail: ${contactGroup.get('email')?.value}\n`)
+    })
     // Form submission logic
   }
 

@@ -11,8 +11,9 @@ import { ContactCardComponent } from '../../general/contact-card/contact-card.co
   templateUrl: './contact-form.component.html',
   styleUrl: './contact-form.component.scss'
 })
-export class ContactFormComponent implements OnInit{
-  readonly form = inject(FormService).form.get('suspectForm')?.get('contactForm') as FormGroup;
+export class ContactFormComponent implements OnInit {
+  private readonly fs = inject(FormService);
+  readonly form = this.fs.form.get('suspectForm')?.get('contactForm') as FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
@@ -21,21 +22,14 @@ export class ContactFormComponent implements OnInit{
   }
 
   get contacts(): FormArray {
-    return this.form?.get('contacts') as FormArray;
-  }
-
-  createContactControl(): FormGroup {
-    return this.fb.group({
-      phoneNumber: [''],
-      email: ['']
-    })
+    return this.fs.contacts;
   }
 
   addContact(): void {
-    this.contacts.push(this.createContactControl());
+    this.fs.addContact();
   }
 
   deleteContact(i: number): void {
-    this.contacts.removeAt(i);
+    this.fs.deleteContact(i);
   }
 }
