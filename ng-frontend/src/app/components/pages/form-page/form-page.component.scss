@@ -11,6 +11,38 @@
     background-color: rgb(63, 63, 63);
 }
 
+// Styling for the grid of cards
+.grid {
+    display: grid; 
+    gap: 40px;
+    transition: transform 0.1s ease;
+}
+
+// Grid is 2x3 for medium+ screens
+@media (min-width: 1700px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+// Grid is 1x6 for small screens
+@media (max-width: 2000px) {
+    .grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
 app-tab {
     width: 70%;
+}
+
+// Card styling
+app-card {
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+// Card on hover styling
+app-card:hover {
+    transform: scale(1.05);
 }

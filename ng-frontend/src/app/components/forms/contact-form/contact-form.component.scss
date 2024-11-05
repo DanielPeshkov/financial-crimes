@@ -1,0 +1,24 @@
+.contactForm {
+    background-color: rgb(59, 59, 59);
+    border-radius: 50px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contactForm div {
+    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+button {
+    display: flex;
+    gap: 15px;
+}
+
+button img {
+    width: 32px;
+}

@@ -1,0 +1,18 @@
+<div [formGroup]="form" class="contactCard">
+    <p>
+        DEBUG INFO
+        INDEX: {{index}}
+        INITIAL INDEX: {{initialInd}}
+    </p>
+    <div class="question">
+        <p>Phone Number</p>
+        <input formControlName="phone" type="text" placeholder="+1 (###) ###-####">
+    </div>
+    <div class="question">
+        <p>Email</p>
+        <input formControlName="email" type="text" placeholder="example@email.com">
+    </div>
+    <div *ngIf="fs.contacts.length != 1">
+        <button (click)="delete()"><p>Delete</p><img src="delete.png"></button>
+    </div>
+</div>

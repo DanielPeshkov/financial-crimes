@@ -25,3 +25,13 @@ div p {
     overflow-y: hidden;
     text-overflow: ellipsis;
 }
+
+.active {
+    background-color: rgba(255, 255, 255, 1.0);
+    background: linear-gradient(
+        180deg,
+        rgb(82, 85, 96) 0%,
+        rgb(64.23, 67, 79.32) 100%
+    );
+    border: solid white;
+}
