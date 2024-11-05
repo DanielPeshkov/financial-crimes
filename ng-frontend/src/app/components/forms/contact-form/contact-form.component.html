@@ -1,8 +1,10 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="contactForm">
     <div formArrayName="contacts">
         @for (cc of contacts.controls; track $index) {
             <app-contact-card (deleteContactEvent)="deleteContact($index)"></app-contact-card>
         }
     </div>
-    <button (click)="addContact()"><p>Add Contact</p></button>
+    <div class="article-content">
+        <button (click)="addContact()"><p>Add Contact</p><img src="contact.png"></button>
+    </div>
 </div>

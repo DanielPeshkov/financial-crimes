@@ -1,5 +1,5 @@
-.contactCard {
-    background-color: rgb(73, 73, 73);
+.contactForm {
+    background-color: rgb(59, 59, 59);
     border-radius: 50px;
     padding: 40px;
     display: flex;
@@ -7,8 +7,18 @@
     gap: 25px;
 }
 
+.contactForm div {
+    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 button {
     display: flex;
     gap: 15px;
-    float: right;
+}
+
+button img {
+    width: 32px;
 }
