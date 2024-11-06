@@ -13,23 +13,27 @@ import { ContactCardComponent } from '../../general/contact-card/contact-card.co
 })
 export class ContactFormComponent implements OnInit {
   readonly fs = inject(FormService);
-  readonly form = this.fs.form.get('suspectForm')?.get('contactForm') as FormGroup;
+  @Input() form!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.addContact();
+    
   }
 
   get contacts(): FormArray {
-    return this.fs.contacts;
+    return this.form.get('contacts') as FormArray;
+  }
+
+  getContact(i: number): FormGroup {
+    return this.contacts.at(i) as FormGroup;
   }
 
   addContact(): void {
-    this.fs.addContact();
+    this.contacts.push(this.fs.createContactControl());
   }
 
   deleteContact(i: number): void {
-    this.fs.deleteContact(i);
+    this.contacts.removeAt(i);
   }
 }

@@ -1,3 +1,14 @@
-<div class="businessForm">
-    <p>business-form works!</p>
+<div [formGroup]="form" class="form-container">
+    <div class="question">
+        <p>Business Name</p>
+        <input type="text" placeholder="Enter Business Name..." formControlName="businessName"/>
+    </div>
+    <div class="question">
+        <p>Contact Info</p>
+        <app-contact-form [form]="form"></app-contact-form>
+    </div>
+    <div class="question">
+        <p>Addresses</p>
+        <app-address-form [form]="form"></app-address-form>
+    </div>
 </div>

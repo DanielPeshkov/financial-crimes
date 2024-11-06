@@ -1,7 +1,7 @@
 <div [formGroup]="form" class="contactForm">
     <div formArrayName="contacts">
         @for (cc of contacts.controls; track $index) {
-            <app-contact-card [form]="fs.getContact($index)" (deleteContactEvent)="deleteContact($index)"></app-contact-card>
+            <app-contact-card [form]="getContact($index)" (deleteContactEvent)="deleteContact($index)"></app-contact-card>
         }
     </div>
     <div class="article-content">

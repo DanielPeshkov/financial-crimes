@@ -4,7 +4,14 @@
         <app-radio [value]="'Yes'" [name]="'suspectYN'" formControlName="suspectYN">Yes</app-radio>
         <app-radio [value]="'No'" [name]="'suspectYN'" formControlName="suspectYN">No</app-radio>
     </div>
-    <div class="subjects">
-        <app-subject-form></app-subject-form>
+    <div *ngIf="isYesSelected()" class="form-container subjects">
+        <div formArrayName="subjects" class="form-container">
+            @for (cc of subjects.controls; track $index) {
+                <app-subject-form [form]="fs.getAsFG(fs.getSubject($index))" (deleteSubjectEvent)="deleteSubject($index)"></app-subject-form>
+            }
+        </div>
+        <div class="article-content">
+            <button (click)="addSubject()"><p>Add Subject</p><img src="add_subject.png"></button>
+        </div>
     </div>
 </div>
