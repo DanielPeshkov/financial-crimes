@@ -1,0 +1,37 @@
+<main>
+    <div class="header">
+        <h1>Money Laundering Reports</h1>
+    </div>
+    
+    <div class="content">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Source</th>
+                    <th>Date</th>
+                    <th>Approximate</th>
+                    <th>Documentation</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (report of reports; track $index) {
+                    <tr class="clickable" (click)="rowClick(report)">
+                        <td>{{report.amount}}</td>
+                        <td>{{report.source}}</td>
+                        <td>{{report.incidentDate}}</td>
+                        <td>{{report.approx}}</td>
+                        <td>{{report.documentation}}</td>
+                        <td>{{report.status}}</td>
+                        <td>{{report.created}}</td>
+                        <td>{{report.updated}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</main>

@@ -1,0 +1,108 @@
+<main>
+    <!-- <div class="sidebar-wrapper">
+        <app-sidebar></app-sidebar>
+    </div> -->
+
+    <div class="content">
+
+        <div class="form-container">
+            <h1>Report Details</h1>
+        <form>
+            <div class="form-element">
+                <label>ID</label><br>
+                <input type="number" placeholder="ID" [formControl]="idField">
+            </div>
+
+            <div class="form-element">
+                <label>Amount</label><br>
+                <input type="number" placeholder="Amount" [formControl]="amountField">
+            </div>
+
+            <div class="form-element">
+                <label>Source</label><br>
+                <input type="text" placeholder="Source" [formControl]="sourceField">
+            </div>
+
+            <div class="form-element">
+                <label>Method</label><br>
+                <input type="text" placeholder="Method" [formControl]="methodField">
+            </div>
+
+            <div class="form-element">
+                <label>Processing</label><br>
+                <input type="text" placeholder="Processing" [formControl]="processingField">
+            </div>
+
+            <div class="form-element">
+                <label>Location</label><br>
+                <input type="text" placeholder="Location" [formControl]="locationField">
+            </div>
+
+            <div class="form-element">
+                <label>Incident Date</label><br>
+                <input type="text" placeholder="Date" [formControl]="incidentDateField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Approximate Date</label><br>
+                <input type="text" placeholder="Approx" [formControl]="approxField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Organized</label><br>
+                <input type="text" placeholder="Organized" [formControl]="organizedField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Documentation</label><br>
+                <input type="text" placeholder="Documentation" [formControl]="documentationField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Description</label><br>
+                <input type="text" placeholder="Description" [formControl]="descriptionField">
+            </div>
+
+            <div class="form-element">
+                <label>Contact ID</label><br>
+                <input type="number" placeholder="ID" [formControl]="contactIdField">
+            </div>
+
+            <div class="form-element">
+                <label>Status</label><br>
+                <input type="number" placeholder="Status" [formControl]="statusField">
+            </div>
+
+            <div class="form-element">
+                <label>Created</label><br>
+                <input type="text" placeholder="Date" [formControl]="createdField">
+            </div>
+
+            <div class="form-element">
+                <label>Updated</label><br>
+                <input type="text" placeholder="Date" [formControl]="updatedField">
+            </div>
+
+            <div class="form-element">
+                <label>Contact Email</label><br>
+                <input type="text" placeholder="Email" [formControl]="emailField">
+            </div>
+
+            <div class="form-element">
+                <label>Contact Phone</label><br>
+                <input type="text" placeholder="Phone" [formControl]="phoneField">
+            </div>
+        </form>
+    </div>
+    <div class="buttons">
+        <button type="button" (click)="submitTeam()">Save Changes</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+        <button type="button" (click)="delete()">Delete</button>
+    </div>
+
+    </div>
+</main>
