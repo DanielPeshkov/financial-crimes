@@ -13,6 +13,7 @@ import { InvestmentsComponent } from './investments/investments.component';
 import { InvestmentComponent } from './investment/investment.component';
 import { InstitutionsComponent } from './institutions/institutions.component';
 import { InstitutionComponent } from './institution/institution.component';
+import { ReportsComponent } from './reports/reports.component';
 
 export const routes: Routes = [
     {
@@ -70,5 +71,9 @@ export const routes: Routes = [
     {
         path: 'institution/report',
         component: InstitutionComponent,
+    },
+    {
+        path: 'reports',
+        component: ReportsComponent,
     },
 ];
