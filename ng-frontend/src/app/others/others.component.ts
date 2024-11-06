@@ -28,7 +28,7 @@ export class OthersComponent implements OnInit{
       for (let report of resp) {
         let {
           id, type, source, incidentDate, approx, location, documentation,
-          description, contactid, status, created, updated, contact, 
+          description, contactId, status, created, updated, contact, 
           otherbusiness, otherindividual
         } = report;
         if (incidentDate) {
@@ -51,7 +51,7 @@ export class OthersComponent implements OnInit{
 
         let other = new OtherReport(id, type, source, 
           incidentDate, approx, location, documentation, 
-          description, contactid, status, created, 
+          description, contactId, status, created, 
           updated, contact, business, 
           individual)
         

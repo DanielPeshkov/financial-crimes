@@ -13,7 +13,7 @@ export class OtherReport {
     location: string | null;
     documentation: boolean | null;
     description: string | null;
-    contactid: number | null;
+    contactId: number | null;
     status: number | null;
     created: string | null;
     updated: string | null;
@@ -24,7 +24,7 @@ export class OtherReport {
 
     constructor(id: number | null, type: string | null, source: string | null, 
         incidentDate: string | null, approx: boolean | null, location: string | null, documentation: boolean | null, 
-        description: string | null, contactid: number | null, status: number | null, created: string | null, 
+        description: string | null, contactId: number | null, status: number | null, created: string | null, 
         updated: string | null, contact: Contact | null, business: Business[], 
         individual: Individual[]
     ) {
@@ -38,7 +38,7 @@ export class OtherReport {
         this.source = source;
         this.documentation = documentation;
         this.description = description;
-        this.contactid = contactid;
+        this.contactId = contactId;
         this.status = status;
         this.created = created;
         this.updated = updated;
