@@ -5,6 +5,8 @@ import { OthersComponent } from './others/others.component';
 import { OtherComponent } from './other/other.component';
 import { MortgagesComponent } from './mortgages/mortgages.component';
 import { MortgageComponent } from './mortgage/mortgage.component';
+import { LaunderingsComponent } from './launderings/launderings.component';
+import { LaunderingComponent } from './laundering/laundering.component';
 
 export const routes: Routes = [
     {
@@ -22,6 +24,14 @@ export const routes: Routes = [
     {
         path: 'other/report',
         component: OtherComponent,
+    },
+    {
+        path: 'laundering',
+        component: LaunderingsComponent,
+    },
+    {
+        path: 'laundering/report',
+        component: LaunderingComponent,
     },
     {
         path: 'mortgage',
