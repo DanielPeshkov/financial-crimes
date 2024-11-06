@@ -1,26 +1,27 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EmbezzlementReport } from '../models/embezzlementreport';
+import { InstitutionReport } from '../models/institutionreport';
 import { BackendService } from '../services/backend.service';
 import { Business } from '../models/business';
 import { Individual } from '../models/individual';
 
 @Component({
-  selector: 'app-embezzlement',
+  selector: 'app-institution',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './embezzlement.component.html',
-  styleUrl: './embezzlement.component.scss'
+  templateUrl: './institution.component.html',
+  styleUrl: './institution.component.scss'
 })
-export class EmbezzlementComponent {
-  @Input() report: EmbezzlementReport = new EmbezzlementReport(null, null, null, null, null, null, null, 
-    null, null, null, null, null, null, [], [])
+export class InstitutionComponent {
+  @Input() report: InstitutionReport = new InstitutionReport(null, null, null, null, null, null, null, 
+    null, null, null, null, null, null, null, null, [], [])
     idField = new FormControl('idField');
-    amountField = new FormControl('amountField');
+    institutionField = new FormControl('institutionField');
+    incidentDateField = new FormControl('incidentDateField');
+    approxField = new FormControl('approxField');
+    methodField = new FormControl('methodField');
     employeeField = new FormControl('employeeField');
-    typeField = new FormControl('typeField');
-    locationField = new FormControl('locationField');
     sourceField = new FormControl('sourceField');
     documentationField = new FormControl('documentationField');
     descriptionField = new FormControl('descriptionField');
@@ -37,13 +38,14 @@ export class EmbezzlementComponent {
 
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
-      this.report = JSON.parse(localStorage.getItem('embezzlementReport')!);
+      this.report = JSON.parse(localStorage.getItem('institutionReport')!);
       this.idField.setValue(this.report.id ? this.report.id.toString() : '');
       this.idField.disable();
-      this.amountField.setValue(this.report.amount? this.report.amount.toString() : '');
+      this.institutionField.setValue(this.report.institution? this.report.institution : '');
+      this.incidentDateField.setValue(this.report.incidentDate ? this.report.incidentDate : '');
+      this.approxField.setValue(this.report.approx ? 'true' : 'false');
+      this.methodField.setValue(this.report.method? this.report.method : '');
       this.employeeField.setValue(this.report.employee? 'true' : '');
-      this.typeField.setValue(this.report.type ? this.report.type : '');
-      this.locationField.setValue(this.report.location ? this.report.location : 'false');
       this.sourceField.setValue(this.report.source ? this.report.source : '');
       this.documentationField.setValue(this.report.documentation ? 'true' : 'false');
       this.descriptionField.setValue(this.report.description);
@@ -58,17 +60,17 @@ export class EmbezzlementComponent {
         this.phoneField.setValue(this.report.contact.phone ? this.report.contact.phone : '');
       }
 
-      for (let b of this.report.embezzlementbusiness) {
+      for (let b of this.report.institutionbusiness) {
         this.business.push(b)
       }
-      for (let i of this.report.embezzlementindividual) {
+      for (let i of this.report.institutionindividual) {
         this.individual.push(i)
       }
     }
 
     checkForReport() {
-      if (!localStorage.getItem('embezzlementReport')) {
-        this.router.navigate(['/embezzlement'])
+      if (!localStorage.getItem('institutionReport')) {
+        this.router.navigate(['/institution'])
       }
     }
     
@@ -80,10 +82,11 @@ export class EmbezzlementComponent {
       this.client.put(`contact/${this.contactIdField.getRawValue()}`, contact)
       let data = {
         "id": Number(this.idField.getRawValue()),
-        "amount": this.amountField.getRawValue(),
+        "institution": this.institutionField.getRawValue(),
+        "incidentDate": this.incidentDateField.getRawValue(),
+        "approx": Boolean(this.approxField.getRawValue()),
+        "method": this.methodField.getRawValue(),
         "employee": this.employeeField.getRawValue(),
-        "type": this.typeField.getRawValue(),
-        "location": Boolean(this.locationField.getRawValue()),
         "source": this.sourceField.getRawValue(),
         "documentation": Boolean(this.documentationField.getRawValue()),
         "description": this.descriptionField.getRawValue(),
@@ -92,21 +95,22 @@ export class EmbezzlementComponent {
         "created": this.createdField.getRawValue(),
         "updated": Date.now(),
       }
-      let resp = await this.client.put(`embezzlement/report/${this.idField.getRawValue()}`, data).then(data => data.json());
+      let resp = await this.client.put(`institution/report/${this.idField.getRawValue()}`, data).then(data => data.json());
       console.log(resp)
-      this.router.navigate(['/embezzlement']);
+      this.router.navigate(['/institution']);
     }
 
     cancel() {
-      this.router.navigate(['/embezzlement']);
+      this.router.navigate(['/institution']);
     }
 
     delete() {
       const id = this.idField.getRawValue();
       if (id) {
-        this.client.delete(`embezzlement/report/${id}`)
+        this.client.delete(`institution/report/${id}`)
       }
-      this.router.navigate(['/embezzlement']);
+      this.router.navigate(['/institution']);
     }
 }
+
 

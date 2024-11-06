@@ -9,6 +9,10 @@ import { LaunderingsComponent } from './launderings/launderings.component';
 import { LaunderingComponent } from './laundering/laundering.component';
 import { EmbezzlementsComponent } from './embezzlements/embezzlements.component';
 import { EmbezzlementComponent } from './embezzlement/embezzlement.component';
+import { InvestmentsComponent } from './investments/investments.component';
+import { InvestmentComponent } from './investment/investment.component';
+import { InstitutionsComponent } from './institutions/institutions.component';
+import { InstitutionComponent } from './institution/institution.component';
 
 export const routes: Routes = [
     {
@@ -50,5 +54,21 @@ export const routes: Routes = [
     {
         path: 'embezzlement/report',
         component: EmbezzlementComponent,
+    },
+    {
+        path: 'investment',
+        component: InvestmentsComponent,
+    },
+    {
+        path: 'investment/report',
+        component: InvestmentComponent,
+    },
+    {
+        path: 'institution',
+        component: InstitutionsComponent,
+    },
+    {
+        path: 'institution/report',
+        component: InstitutionComponent,
     },
 ];

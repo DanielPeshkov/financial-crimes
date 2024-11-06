@@ -1,36 +1,36 @@
+import { Business } from "./business";
 import { Contact } from "./contact";
-import { InvestmentBusiness } from "./investmentbusiness";
-import { InvestmentIndividual } from "./investmentindividual";
+import { Individual } from "./individual";
 
 export class InvestmentReport {
-    id: number;
-    amount: number;
-    loss: number;
-	force: boolean;
-	promise: string;
-	contract: boolean;
-	method: string;
-	funds: boolean;
-	communication: boolean;
-	source: string;
-	documentation: boolean;
-	description: string;
-    contactid: number;
-    status: number;
-    created: Date;
-    updated: Date;
+    id: number | null;
+    amount: number | null;
+    loss: number | null;
+	force: boolean | null;
+	promise: string | null;
+	contract: boolean | null;
+	method: string | null;
+	funds: boolean | null;
+	communication: boolean | null;
+	source: string | null;
+	documentation: boolean | null;
+	description: string | null;
+    contactid: number | null;
+    status: number | null;
+    created: string | null;
+    updated: string | null;
 
-    contact: Contact;
-    investmentbusiness: InvestmentBusiness[];
-    investmentindividual: InvestmentIndividual[];
+    contact: Contact | null;
+    investmentbusiness: Business[];
+    investmentindividual: Individual[];
 
-    constructor(id: number, amount: number, loss: number, 
-        force: boolean, promise: string, contract: boolean, method: string,
-        funds: boolean, communication: boolean,
-        source: string, documentation: boolean, description: string, 
-        contactid: number, status: number, created: Date, updated: Date, 
-        contact: Contact, business: InvestmentBusiness[], 
-        individual: InvestmentIndividual[]
+    constructor(id: number | null, amount: number | null, loss: number | null, 
+        force: boolean | null, promise: string | null, contract: boolean | null, method: string | null,
+        funds: boolean | null, communication: boolean | null,
+        source: string | null, documentation: boolean | null, description: string | null, 
+        contactid: number | null, status: number | null, created: string | null, updated: string | null, 
+        contact: Contact | null, business: Business[], 
+        individual: Individual[]
     ) {
         this.id = id;
         this.amount = amount;

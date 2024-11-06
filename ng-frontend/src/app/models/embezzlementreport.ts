@@ -1,30 +1,32 @@
+import { Business } from "./business";
 import { Contact } from "./contact";
 import { EmbezzlementBusiness } from "./embezzlementbusiness";
 import { EmbezzlementIndividual } from "./embezzlementindividual";
+import { Individual } from "./individual";
 
 export class EmbezzlementReport {
-    id: number;
-    amount: number;
-	employee: boolean;
-	type: string;
-	location: string;
-	source: string;
-	documentation: boolean;
-	description: string;
-    contactid: number;
-    status: number;
-    created: Date;
-    updated: Date;
+    id: number | null;
+    amount: number | null;
+	employee: boolean| null;
+	type: string | null;
+	location: string | null;
+	source: string | null;
+	documentation: boolean| null;
+	description: string| null;
+    contactid: number | null;
+    status: number | null;
+    created: string | null;
+    updated: string | null;
 
-    contact: Contact;
-    embezzlementbusiness: EmbezzlementBusiness[];
-    embezzlementindividual: EmbezzlementIndividual[];
+    contact: Contact | null;
+    embezzlementbusiness: Business[];
+    embezzlementindividual: Individual[];
 
-    constructor(id: number, amount: number, emloyee: boolean, type: string, 
-        location: string, source: string, documentation: boolean, 
-        description: string, contactid: number, status: number, created: Date, 
-        updated: Date, contact: Contact, business: EmbezzlementBusiness[], 
-        individual: EmbezzlementIndividual[]
+    constructor(id: number | null, amount: number | null, emloyee: boolean| null, type: string| null, 
+        location: string| null, source: string| null, documentation: boolean| null, 
+        description: string| null, contactid: number | null, status: number | null, created: string | null, 
+        updated: string | null, contact: Contact | null, business: Business[], 
+        individual: Individual[]
     ) {
         this.id = id;
         this.amount = amount;

@@ -1,38 +1,38 @@
+import { Business } from "./business";
 import { Contact } from "./contact";
-import { InstitutionBusiness } from "./institutionbusiness";
-import { InstitutionIndividual } from "./institutionindividual";
+import { Individual } from "./individual";
 
 export class InstitutionReport {
-    id: number;
-    amount: number;
-    institution: string;
-    incidentdate: Date;
-    approx: boolean;
-    method: string;
-    employee: boolean;
-    source: string;
-    documentation: boolean;
-    description: string;
-    contactid: number;
-    status: number;
-    created: Date;
-    updated: Date;
+    id: number | null;
+    amount: number | null;
+    institution: string | null;
+    incidentDate: string | null;
+    approx: boolean | null;
+    method: string | null;
+    employee: boolean | null;
+    source: string | null;
+    documentation: boolean | null;
+    description: string | null;
+    contactid: number | null;
+    status: number | null;
+    created: string | null;
+    updated: string | null;
 
-    contact: Contact;
-    institutionbusiness: InstitutionBusiness[];
-    institutionindividual: InstitutionIndividual[];
+    contact: Contact | null;
+    institutionbusiness: Business[];
+    institutionindividual: Individual[];
 
-    constructor(id: number, amount: number, institution: string, 
-        incidentdate: Date, approx: boolean, method: string, employee: boolean,
-        source: string, documentation: boolean, description: string, 
-        contactid: number, status: number, created: Date, updated: Date, 
-        contact: Contact, business: InstitutionBusiness[], 
-        individual: InstitutionIndividual[]
+    constructor(id: number | null, amount: number | null, institution: string | null, 
+        incidentDate: string | null, approx: boolean | null, method: string | null, employee: boolean | null,
+        source: string | null, documentation: boolean | null, description: string | null, 
+        contactid: number | null, status: number | null, created: string | null, updated: string | null, 
+        contact: Contact | null, business: Business[], 
+        individual: Individual[]
     ) {
         this.id = id;
         this.amount = amount;
         this.institution = institution;
-        this.incidentdate = incidentdate;
+        this.incidentDate = incidentDate;
         this.approx = approx;
         this.method = method;
         this.employee = employee;

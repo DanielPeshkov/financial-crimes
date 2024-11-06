@@ -1,6 +1,6 @@
 <main>
     <div class="header">
-        <h1>Embezzlement Reports</h1>
+        <h1>Investment Reports</h1>
     </div>
     
     <div class="content">
@@ -8,9 +8,11 @@
             <thead>
                 <tr>
                     <th>Amount</th>
-                    <th>Employee</th>
-                    <th>Type</th>
-                    <th>Location</th>
+                    <th>Loss</th>
+                    <th>Force</th>
+                    <th>Promise</th>
+                    <th>Contract</th>
+                    <th>Method</th>
                     <th>Source</th>
                     <th>Status</th>
                     <th>Created</th>
@@ -20,9 +22,11 @@
                 @for (report of reports; track $index) {
                     <tr class="clickable" (click)="rowClick(report)">
                         <td>{{report.amount}}</td>
-                        <td>{{report.employee}}</td>
-                        <td>{{report.type}}</td>
-                        <td>{{report.location}}</td>
+                        <td>{{report.loss}}</td>
+                        <td>{{report.force}}</td>
+                        <td>{{report.promise}}</td>
+                        <td>{{report.contract}}</td>
+                        <td>{{report.method}}</td>
                         <td>{{report.source}}</td>
                         <td>{{report.status}}</td>
                         <td>{{report.created}}</td>
