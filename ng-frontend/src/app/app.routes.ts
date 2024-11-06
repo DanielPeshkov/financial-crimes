@@ -7,6 +7,8 @@ import { MortgagesComponent } from './mortgages/mortgages.component';
 import { MortgageComponent } from './mortgage/mortgage.component';
 import { LaunderingsComponent } from './launderings/launderings.component';
 import { LaunderingComponent } from './laundering/laundering.component';
+import { EmbezzlementsComponent } from './embezzlements/embezzlements.component';
+import { EmbezzlementComponent } from './embezzlement/embezzlement.component';
 
 export const routes: Routes = [
     {
@@ -40,5 +42,13 @@ export const routes: Routes = [
     {
         path: 'mortgage/report',
         component: MortgageComponent,
+    },,
+    {
+        path: 'embezzlement',
+        component: EmbezzlementsComponent,
+    },
+    {
+        path: 'embezzlement/report',
+        component: EmbezzlementComponent,
     },
 ];
