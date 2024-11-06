@@ -3,6 +3,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OtherReport } from '../models/otherreport';
 import { BackendService } from '../services/backend.service';
+import { Business } from '../models/business';
+import { Individual } from '../models/individual';
 
 @Component({
   selector: 'app-other',
@@ -30,18 +32,23 @@ export class OtherComponent {
   emailField = new FormControl('email');
   phoneField = new FormControl('phone');
 
+  business: Business[] = [];
+  individual: Individual[] = [];
+
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
       this.report = JSON.parse(localStorage.getItem('otherReport')!);
       this.idField.setValue(this.report.id ? this.report.id.toString() : '');
+      this.idField.disable();
       this.typeField.setValue(this.report.type);
       this.sourceField.setValue(this.report.source);
       this.incidentdateField.setValue(this.report.incidentDate);
-      this.approxField.setValue(this.report.approx ? this.report.approx.toString() : '');
+      this.approxField.setValue(this.report.approx ? 'true' : 'false');
       this.locationField.setValue(this.report.location);
-      this.documentationField.setValue(this.report.documentation ? this.report.documentation.toString() : '');
+      this.documentationField.setValue(this.report.documentation ? 'true' : 'false');
       this.descriptionField.setValue(this.report.description);
       this.contactIdField.setValue(this.report.contactId ? this.report.contactId.toString() : '');
+      this.contactIdField.disable();
       this.statusField.setValue(this.report.status ? this.report.status.toString() : '0');
       this.createdField.setValue(this.report.created);
       this.updatedField.setValue(this.report.updated);
@@ -49,6 +56,14 @@ export class OtherComponent {
       if (this.report.contact) {
         this.emailField.setValue(this.report.contact.email ? this.report.contact.email : '');
         this.phoneField.setValue(this.report.contact.phone ? this.report.contact.phone : '');
+      }
+
+      for (let b of this.report.otherbusiness) {
+        this.business.push(b)
+      }
+      for (let i of this.report.otherindividual) {
+        this.individual.push(i)
+        console.log(i)
       }
   }
 
@@ -59,14 +74,19 @@ export class OtherComponent {
   }
 
   async submitTeam() {
+    let contact = {
+      "email": this.emailField.getRawValue(),
+      "phone": this.phoneField.getRawValue(),
+    }
+    this.client.put(`contact/${this.contactIdField.getRawValue()}`, contact)
     let data = {
       "id": Number(this.idField.getRawValue()),
       "type": this.typeField.getRawValue(),
       "source": this.sourceField.getRawValue(),
       "incidentDate": this.incidentdateField.getRawValue(),
-      "approx": this.approxField.getRawValue(),
+      "approx": Boolean(this.approxField.getRawValue()),
       "location": this.locationField.getRawValue(),
-      "documentation": this.documentationField.getRawValue(),
+      "documentation": Boolean(this.documentationField.getRawValue()),
       "description": this.descriptionField.getRawValue(),
       "contactId": this.contactIdField.getRawValue(),
       "status": this.statusField.getRawValue(),
@@ -75,8 +95,6 @@ export class OtherComponent {
     }
     let resp = await this.client.put(`other/report/${this.idField.getRawValue()}`, data).then(data => data.json());
     console.log(resp)
-    resp = await this.client.get(`other/report/${this.idField.getRawValue()}`).then(data => data.json())
-    console.log('Data: ', resp)
     this.router.navigate(['/other']);
   }
 

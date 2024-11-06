@@ -1,8 +1,4 @@
 <main>
-    <!-- <div class="sidebar-wrapper">
-        <app-sidebar></app-sidebar>
-    </div> -->
-
     <div class="content">
 
         <div class="form-container">
@@ -53,11 +49,6 @@
             </div>
 
             <div class="form-element">
-                <label>Contact ID</label><br>
-                <input type="number" placeholder="ID" [formControl]="contactIdField">
-            </div>
-
-            <div class="form-element">
                 <label>Status</label><br>
                 <input type="number" placeholder="Status" [formControl]="statusField">
             </div>
@@ -67,9 +58,11 @@
                 <input type="text" placeholder="Date" [formControl]="createdField">
             </div>
 
+            <br>
+            <h1>Contact</h1>
             <div class="form-element">
-                <label>Updated</label><br>
-                <input type="text" placeholder="Date" [formControl]="updatedField">
+                <label>Contact ID</label><br>
+                <input type="number" placeholder="ID" [formControl]="contactIdField">
             </div>
 
             <div class="form-element">
@@ -81,13 +74,87 @@
                 <label>Contact Phone</label><br>
                 <input type="text" placeholder="Phone" [formControl]="phoneField">
             </div>
+
+            <br>
+            @if (business.length) {
+                <h1>Businesses</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Street</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (b of business; track $index) {
+                            <tr>
+                                <td>{{b.id}}</td>
+                                <td>{{b.name}}</td>
+                                <td>{{b.contact ? b.contact.phone : ""}}</td>
+                                <td>{{b.contact ? b.contact.email : ""}}</td>
+                                <td>{{b.address ? b.address.street : ""}}</td>
+                                <td>{{b.address ? b.address.city : ""}}</td>
+                                <td>{{b.address ? b.address.state : ""}}</td>
+                                <td>{{b.address ? b.address.zip : ""}}</td>
+                                <td>{{b.address ? b.address.type : ""}}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            <br>
+            @if (individual.length) {
+                <h1>Individuals</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                            <th>Age</th>
+                            <th>Approximate</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Street</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (i of individual; track $index) {
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.firstname}} {{i.middlename}} {{i.lastname}}</td>
+                                <td>{{i.birth}}</td>
+                                <td>{{i.age}}</td>
+                                <td>{{i.approx}}</td>
+                                <td>{{i.contact ? i.contact.phone : ""}}</td>
+                                <td>{{i.contact ? i.contact.email : ""}}</td>
+                                <td>{{i.address ? i.address.street : ""}}</td>
+                                <td>{{i.address ? i.address.city : ""}}</td>
+                                <td>{{i.address ? i.address.state : ""}}</td>
+                                <td>{{i.address ? i.address.zip : ""}}</td>
+                                <td>{{i.address ? i.address.type : ""}}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
         </form>
     </div>
     <div class="buttons">
         <button type="button" (click)="submitTeam()">Save Changes</button>
         <button type="button" (click)="cancel()">Cancel</button>
-    </div>
-    <div class="buttons">
         <button type="button" (click)="delete()">Delete</button>
     </div>
     </div>

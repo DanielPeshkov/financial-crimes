@@ -34,6 +34,12 @@ export class OthersComponent implements OnInit{
         if (incidentDate) {
           incidentDate = incidentDate.substring(0,10);
         }
+        if (created) {
+          created = created.substring(0, 10);
+        }
+        if (updated) {
+          updated = updated.substring(0, 10);
+        }
 
         contact = createContact(contact)
 
