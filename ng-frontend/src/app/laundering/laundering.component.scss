@@ -37,18 +37,22 @@ input, select {
     padding: 10px;
 }
 
+input {
+    border-radius: 1em;
+}
+
 input:hover, select:hover {
-    border-radius: .5em;
-    border-width: 2px;
+    border-radius: 1em;
+    border-width: .5px;
     background-color: #aaa;
     color: white;
 }
 
-input:focus, select:focus{
-    color: #000;
-    border-radius: .5em;
-    background-color: white;
-}
+// input:focus, select:focus{
+//     color: #000;
+//     border-radius: .5em;
+//     background-color: white;
+// }
 
 .form-container {
     width: 100%;
