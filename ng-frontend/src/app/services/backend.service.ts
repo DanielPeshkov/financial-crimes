@@ -16,6 +16,7 @@ export class BackendService {
     return await fetch(`${this.backendPath}/${path}`);
   }
 
+
   async post(path: string, body: any) {
     return await fetch(`${this.backendPath}/${path}`, {
       method: 'POST',
