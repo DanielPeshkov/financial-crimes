@@ -42,7 +42,7 @@ export const routes: Routes = [
     {
         path: 'mortgage/report',
         component: MortgageComponent,
-    },,
+    },
     {
         path: 'embezzlement',
         component: EmbezzlementsComponent,
