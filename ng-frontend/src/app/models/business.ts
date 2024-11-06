@@ -1,17 +1,17 @@
-import { Address } from "./address";
-import { Contact } from "./contact";
+import { Address, createAddress } from "./address";
+import { Contact, createContact } from "./contact";
 
 export class Business {
-    id: number;
-    name: string;
-    contactid: number;
-    addressid: number;
+    id: number | null;
+    name: string | null;
+    contactid: number | null;
+    addressid: number | null;
 
-    contact: Contact;
-    address: Address;
+    contact: Contact | null;
+    address: Address | null;
 
-    constructor(id: number, name: string, contactid: number, addressid: number, 
-        contact: Contact, address: Address) {
+    constructor(id: number | null, name: string, contactid: number, addressid: number, 
+        contact: Contact | null, address: Address | null) {
         this.id = id;
         this.name = name;
         this.contactid = contactid;
@@ -20,4 +20,13 @@ export class Business {
         this.contact = contact;
         this.address = address;
     }
+}
+
+export function createBusiness(data: any): Business {
+    let {id, name, contactid, addressid, contact, address, ...etc} = data;
+    contact = createContact(contact);
+    address = createAddress(address);
+
+    const business = new Business(id, name, contactid, addressid, contact, address);
+    return business;
 }

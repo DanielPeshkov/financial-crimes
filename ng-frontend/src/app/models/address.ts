@@ -1,15 +1,15 @@
 export class Address {
-    id: number;
-    type: string;
-    street: string;
-    street2: string;
-    city: string;
-    state: string;
-    zip: string;
-    country: string;
+    id: number | null;
+    type: string | null;
+    street: string | null;
+    street2: string | null;
+    city: string | null;
+    state: string | null;
+    zip: string | null;
+    country: string | null;
 
-    constructor(id: number, type: string, street: string, street2: string, 
-                city: string, state: string, zip: string, country: string
+    constructor(id: number | null, type: string | null, street: string | null, street2: string | null, 
+                city: string | null, state: string | null, zip: string | null, country: string | null
     ) {
         this.id = id;
         this.type = type;
@@ -20,4 +20,11 @@ export class Address {
         this.zip = zip;
         this.country = country;
     }
+}
+
+export function createAddress(data: any): Address {
+    const {id, type, street, street2, city, state, zip, country, ...ect} = data;
+
+    const address = new Address(id, type, street, street2, city, state, zip, country);
+    return address;
 }

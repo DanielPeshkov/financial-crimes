@@ -1,24 +1,24 @@
-import { Address } from "./address";
-import { Contact } from "./contact";
+import { Address, createAddress } from "./address";
+import { Contact, createContact } from "./contact";
 
 export class Individual {
-    id: number;
-    firstname: string;
-    middlename: string;
-    lastname: string;
-    birth: Date;
-    approx: boolean;
-    age: number;
-    contactid: number;
-    addressid: number;
+    id: number | null;
+    firstname: string | null;
+    middlename: string | null;
+    lastname: string | null;
+    birth: string | null;
+    approx: boolean | null;
+    age: number | null;
+    contactid: number | null;
+    addressid: number | null;
 
-    contact: Contact;
-    address: Address;
+    contact: Contact | null;
+    address: Address | null;
 
-    constructor(id: number, firstName: string, middleName: string, 
-                lastName: string, birth: Date, approx: boolean, 
-                age: number, contactId: number, addressId: number,
-                contact: Contact, address: Address
+    constructor(id: number | null, firstName: string | null, middleName: string | null, 
+                lastName: string | null, birth: string | null, approx: boolean | null, 
+                age: number | null, contactId: number | null, addressId: number | null,
+                contact: Contact | null, address: Address | null
     ) {
         this.id = id;
         this.firstname = firstName;
@@ -33,4 +33,14 @@ export class Individual {
         this.contact = contact;
         this.address = address;
     }
+}
+
+export function createIndividual(data: any): Individual {
+    let {id, firstname, middlename, lastname, birth, approx, age, contactid, 
+        addressid, contact, address} = data;
+    contact = createContact(contact);
+    address = createAddress(address);
+
+    return new Individual(id, firstname, middlename, lastname, birth, approx, age, contactid, 
+        addressid, contact, address);
 }

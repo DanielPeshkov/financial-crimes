@@ -1,10 +1,11 @@
+import { Business } from "./business";
 import { Contact } from "./contact";
+import { Individual } from "./individual";
 import { OtherBusiness } from "./otherbusiness";
 import { OtherIndividual } from "./otherindividual";
 
 export class OtherReport {
     id: number;
-    amount: number;
     type: string;
     source: string;
     incidentdate: Date;
@@ -14,21 +15,20 @@ export class OtherReport {
     description: string;
     contactid: number;
     status: number;
-    created: Date;
+    created: string;
     updated: Date;
 
-    contact: Contact;
-    otherbusiness: OtherBusiness[];
-    otherindividual: OtherIndividual[];
+    contact: Contact | null;
+    otherbusiness: Business[];
+    otherindividual: Individual[];
 
-    constructor(id: number, amount: number, type: string, source: string, 
+    constructor(id: number, type: string, source: string, 
         incidentdate: Date, approx: boolean, location: string, documentation: boolean, 
-        description: string, contactid: number, status: number, created: Date, 
-        updated: Date, contact: Contact, business: OtherBusiness[], 
-        individual: OtherIndividual[]
+        description: string, contactid: number, status: number, created: string, 
+        updated: Date, contact: Contact | null, business: Business[], 
+        individual: Individual[]
     ) {
         this.id = id;
-        this.amount = amount;
         this.type = type;
         this.source = source;
         this.incidentdate = incidentdate;

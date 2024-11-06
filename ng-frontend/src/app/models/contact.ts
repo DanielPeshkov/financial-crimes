@@ -1,11 +1,21 @@
 export class Contact {
-    id: number;
-    phone: string;
-    email: string;
+    id: number | null;
+    phone: string | null;
+    email: string | null;
 
-    constructor(id: number, phone: string, email: string) {
+    constructor(id: number | null, phone: string | null, email: string | null) {
         this.id = id;
         this.phone = phone;
         this.email = email;
+    }    
+}
+
+export function createContact(data: any): Contact | null {
+    const {id, phone, email, ...etc} = data;
+    if (id || phone || email) {
+        const contact = new Contact(id, phone, email);
+        return contact;
     }
+
+    return null;
 }
