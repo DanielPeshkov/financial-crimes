@@ -20,15 +20,15 @@ export class BackendService {
   async post(path: string, body: any) {
     return await fetch(`${this.backendPath}/${path}`, {
       method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json', }),
       body: JSON.stringify(body),
     });
   }
 
   async put(path: string, body: any) {
-    console.log('path: ', path)
-    console.log('body: ', JSON.stringify(body))
     return await fetch(`${this.backendPath}/${path}`, {
       method: 'PUT',
+      headers: new Headers({ 'Content-Type': 'application/json', }),
       body: JSON.stringify(body),
     });
   }
