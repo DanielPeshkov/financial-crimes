@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { OtherReport } from '../models/otherreport';
 import { BackendService } from '../services/backend.service';
-import { Contact, createContact } from '../models/contact';
+import { createContact } from '../models/contact';
 import { Business, createBusiness } from '../models/business';
-import { Address } from '../models/address';
 import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
 

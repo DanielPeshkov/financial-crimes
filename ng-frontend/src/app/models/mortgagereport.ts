@@ -1,36 +1,38 @@
+import { Business } from "./business";
 import { Contact } from "./contact";
+import { Individual } from "./individual";
 import { MortgageBusiness } from "./mortgagebusiness";
 import { MortgageIndividual } from "./mortgageindividual";
 
 export class MortgageReport {
-    id: number;
-    amount: number;
-	loan: number;
-	payments: boolean;
-	owner: string;
-	addressid: number;
-	mortgage: string;
-	title: string;
-	agent: string;
-	type: string;
-	source: string;
-	documentation: boolean;
-	description: string;
-    contactid: number;
-    status: number;
-    created: Date;
-    updated: Date;
+    id: number | null;
+    amount: number | null;
+	loan: number | null;
+	payments: boolean | null;
+	owner: string | null;
+	addressid: number | null;
+	mortgage: string | null;
+	title: string | null;
+	agent: string | null;
+	type: string | null;
+	source: string | null;
+	documentation: boolean | null;
+	description: string | null;
+    contactid: number | null;
+    status: number | null;
+    created: string | null;
+    updated: string | null;
 
-    contact: Contact;
-    mortgagebusiness: MortgageBusiness[];
-    mortgageindividual: MortgageIndividual[];
+    contact: Contact | null;
+    mortgagebusiness: Business[];
+    mortgageindividual: Individual[];
 
-    constructor(id: number, amount: number, loan: number, payments: boolean, 
-        owner: string, addressid: number, mortgage: string, title: string, 
-        agent: string, type: string, source: string, documentation: boolean, 
-        description: string, contactid: number, status: number, created: Date, 
-        updated: Date, contact: Contact, business: MortgageBusiness[], 
-        individual: MortgageIndividual[]
+    constructor(id: number | null, amount: number | null, loan: number | null, payments: boolean | null, 
+        owner: string | null, addressid: number | null, mortgage: string | null, title: string | null, 
+        agent: string | null, type: string | null, source: string | null, documentation: boolean | null, 
+        description: string | null, contactid: number | null, status: number | null, created: string | null, 
+        updated: string | null, contact: Contact | null, business: Business[], 
+        individual: Individual[]
     ) {
         this.id = id;
         this.amount = amount;

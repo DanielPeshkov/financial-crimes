@@ -63,7 +63,6 @@ export class OtherComponent {
       }
       for (let i of this.report.otherindividual) {
         this.individual.push(i)
-        console.log(i)
       }
   }
 

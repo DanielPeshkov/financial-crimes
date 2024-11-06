@@ -1,1 +1,191 @@
-<p>mortgage works!</p>
+<main>
+    <div class="content">
+
+        <div class="form-container">
+            <h1>Report Details</h1>
+        <form>
+            <div class="form-element">
+                <label>ID</label><br>
+                <input type="number" placeholder="ID" [formControl]="idField">
+            </div>
+
+            <div class="form-element">
+                <label>Amount</label><br>
+                <input type="number" placeholder="Amount" [formControl]="amountField">
+            </div>
+
+            <div class="form-element">
+                <label>Loan</label><br>
+                <input type="number" placeholder="Loan" [formControl]="loanField">
+            </div>
+
+            <div class="form-element">
+                <label>Payments</label><br>
+                <input type="text" placeholder="payments" [formControl]="paymentsField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Owner</label><br>
+                <input type="text" placeholder="owner" [formControl]="ownerField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Address ID</label><br>
+                <input type="number" placeholder="addressId" [formControl]="addressidField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Mortgage</label><br>
+                <input type="text" placeholder="mortgage" [formControl]="mortgageField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Title</label><br>
+                <input type="text" placeholder="title" [formControl]="titleField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Agent</label><br>
+                <input type="text" placeholder="agent" [formControl]="agentField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Type</label><br>
+                <input type="text" placeholder="type" [formControl]="typeField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Source</label><br>
+                <input type="text" placeholder="source" [formControl]="sourceField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Documentation</label><br>
+                <input type="text" placeholder="Documentation" [formControl]="documentationField">
+            </div>
+
+            <div class="form-element">
+
+                <label>Description</label><br>
+                <input type="text" placeholder="Description" [formControl]="descriptionField">
+            </div>
+
+            <div class="form-element">
+                <label>Status</label><br>
+                <input type="number" placeholder="Status" [formControl]="statusField">
+            </div>
+
+            <div class="form-element">
+                <label>Created</label><br>
+                <input type="text" placeholder="Date" [formControl]="createdField">
+            </div>
+
+            <br>
+            <h1>Contact</h1>
+            <div class="form-element">
+                <label>Contact ID</label><br>
+                <input type="number" placeholder="ID" [formControl]="contactIdField">
+            </div>
+
+            <div class="form-element">
+                <label>Contact Email</label><br>
+                <input type="text" placeholder="Email" [formControl]="emailField">
+            </div>
+
+            <div class="form-element">
+                <label>Contact Phone</label><br>
+                <input type="text" placeholder="Phone" [formControl]="phoneField">
+            </div>
+
+            <br>
+            @if (business.length) {
+                <h1>Businesses</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Street</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (b of business; track $index) {
+                            <tr>
+                                <td>{{b.id}}</td>
+                                <td>{{b.name}}</td>
+                                <td>{{b.contact ? b.contact.phone : ""}}</td>
+                                <td>{{b.contact ? b.contact.email : ""}}</td>
+                                <td>{{b.address ? b.address.street : ""}}</td>
+                                <td>{{b.address ? b.address.city : ""}}</td>
+                                <td>{{b.address ? b.address.state : ""}}</td>
+                                <td>{{b.address ? b.address.zip : ""}}</td>
+                                <td>{{b.address ? b.address.type : ""}}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            <br>
+            @if (individual.length) {
+                <h1>Individuals</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                            <th>Age</th>
+                            <th>Approximate</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Street</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (i of individual; track $index) {
+                            <tr>
+                                <td>{{i.id}}</td>
+                                <td>{{i.firstname}} {{i.middlename}} {{i.lastname}}</td>
+                                <td>{{i.birth}}</td>
+                                <td>{{i.age}}</td>
+                                <td>{{i.approx}}</td>
+                                <td>{{i.contact ? i.contact.phone : ""}}</td>
+                                <td>{{i.contact ? i.contact.email : ""}}</td>
+                                <td>{{i.address ? i.address.street : ""}}</td>
+                                <td>{{i.address ? i.address.city : ""}}</td>
+                                <td>{{i.address ? i.address.state : ""}}</td>
+                                <td>{{i.address ? i.address.zip : ""}}</td>
+                                <td>{{i.address ? i.address.type : ""}}</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+        </form>
+    </div>
+    <div class="buttons">
+        <button type="button" (click)="submitTeam()">Save Changes</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+        <button type="button" (click)="delete()">Delete</button>
+    </div>
+    </div>
+</main>
