@@ -1,34 +1,36 @@
+import { Business } from "./business";
 import { Contact } from "./contact";
+import { Individual } from "./individual";
 import { LaunderingBusiness } from "./launderingbusiness";
 import { LaunderingIndividual } from "./launderingindividual";
 
 export class LaunderingReport {
-    id: number;
-    amount: number;
-    source: string;
-    method: string;
-    processing: string;
-    location: string;
-    incidentdate: Date;
-    approx: boolean;
-    organized: string;
-    documentation: boolean;
-    description: string;
-    contactid: number;
-    status: number;
-    created: Date;
-    updated: Date;
+    id: number | null;
+    amount: number | null;
+    source: string | null;
+    method: string | null;
+    processing: string | null;
+    location: string | null;
+    incidentDate: string | null;
+    approx: boolean | null;
+    organized: string | null;
+    documentation: boolean | null;
+    description: string | null;
+    contactId: number | null;
+    status: number | null;
+    created: string | null;
+    updated: string | null;
 
-    contact: Contact;
-    launderingbusiness: LaunderingBusiness[];
-    launderingindividual: LaunderingIndividual[];
+    contact: Contact | null;
+    launderingbusiness: Business[];
+    launderingindividual: Individual[];
 
-    constructor(id: number, amount: number, source: string, 
-        method: string, processing: string, location: string, incidentdate: Date,
-        approx: boolean, organized: string, documentation: boolean, 
-        description: string, contactid: number, status: number, created: Date, 
-        updated: Date, contact: Contact, business: LaunderingBusiness[], 
-        individual: LaunderingIndividual[]
+    constructor(id: number | null, amount: number | null, source: string | null, 
+        method: string | null, processing: string | null, location: string | null, incidentDate: string | null,
+        approx: boolean | null, organized: string | null, documentation: boolean | null, 
+        description: string | null, contactId: number | null, status: number | null, created: string | null, 
+        updated: string | null, contact: Contact | null, business: Business[], 
+        individual: Individual[]
     ) {
         this.id = id;
         this.amount = amount;
@@ -36,13 +38,13 @@ export class LaunderingReport {
         this.method = method;
         this.processing = processing;
         this.location = location;
-        this.incidentdate = incidentdate;
+        this.incidentDate = incidentDate;
         this.approx = approx;
         this.organized = organized;
         this.source = source;
         this.documentation = documentation;
         this.description = description;
-        this.contactid = contactid;
+        this.contactId = contactId;
         this.status = status;
         this.created = created;
         this.updated = updated;
