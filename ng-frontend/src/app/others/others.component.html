@@ -20,10 +20,10 @@
             </thead>
             <tbody>
                 @for (report of reports; track $index) {
-                    <tr class="clickable">
+                    <tr class="clickable" (click)="rowClick(report)">
                         <td>{{report.type}}</td>
                         <td>{{report.source}}</td>
-                        <td>{{report.incidentdate}}</td>
+                        <td>{{report.incidentDate}}</td>
                         <td>{{report.approx}}</td>
                         <td>{{report.documentation}}</td>
                         <td>{{report.status}}</td>

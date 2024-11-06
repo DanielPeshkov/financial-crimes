@@ -6,6 +6,7 @@ import { Contact, createContact } from '../models/contact';
 import { Business, createBusiness } from '../models/business';
 import { Address } from '../models/address';
 import { createIndividual, Individual } from '../models/individual';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-others',
@@ -18,9 +19,7 @@ export class OthersComponent implements OnInit{
   reports: OtherReport[] = [];
   tableReports: OtherReport[] = [];
 
-  constructor(private client: BackendService) {
-
-  }
+  constructor(private client: BackendService, private router: Router) {}
 
   async ngOnInit() {
     let resp = await this.client.get('other/report').then(data => data.json())
@@ -28,10 +27,13 @@ export class OthersComponent implements OnInit{
     if (resp) {
       for (let report of resp) {
         let {
-          id, type, source, incidentdate, approx, location, documentation,
+          id, type, source, incidentDate, approx, location, documentation,
           description, contactid, status, created, updated, contact, 
           otherbusiness, otherindividual
         } = report;
+        if (incidentDate) {
+          incidentDate = incidentDate.substring(0,10);
+        }
 
         contact = createContact(contact)
 
@@ -48,7 +50,7 @@ export class OthersComponent implements OnInit{
         }
 
         let other = new OtherReport(id, type, source, 
-          incidentdate, approx, location, documentation, 
+          incidentDate, approx, location, documentation, 
           description, contactid, status, created, 
           updated, contact, business, 
           individual)
@@ -61,6 +63,6 @@ export class OthersComponent implements OnInit{
 
   rowClick(report: OtherReport) {
     localStorage.setItem('otherReport', JSON.stringify(report))
-    
+    this.router.navigate(['/other/report'])
   }
 }

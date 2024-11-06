@@ -5,33 +5,33 @@ import { OtherBusiness } from "./otherbusiness";
 import { OtherIndividual } from "./otherindividual";
 
 export class OtherReport {
-    id: number;
-    type: string;
-    source: string;
-    incidentdate: Date;
-    approx: boolean;
-    location: string;
-    documentation: boolean;
-    description: string;
-    contactid: number;
-    status: number;
-    created: string;
-    updated: Date;
+    id: number | null;
+    type: string | null;
+    source: string | null;
+    incidentDate: string | null;
+    approx: boolean | null;
+    location: string | null;
+    documentation: boolean | null;
+    description: string | null;
+    contactid: number | null;
+    status: number | null;
+    created: string | null;
+    updated: string | null;
 
     contact: Contact | null;
     otherbusiness: Business[];
     otherindividual: Individual[];
 
-    constructor(id: number, type: string, source: string, 
-        incidentdate: Date, approx: boolean, location: string, documentation: boolean, 
-        description: string, contactid: number, status: number, created: string, 
-        updated: Date, contact: Contact | null, business: Business[], 
+    constructor(id: number | null, type: string | null, source: string | null, 
+        incidentDate: string | null, approx: boolean | null, location: string | null, documentation: boolean | null, 
+        description: string | null, contactid: number | null, status: number | null, created: string | null, 
+        updated: string | null, contact: Contact | null, business: Business[], 
         individual: Individual[]
     ) {
         this.id = id;
         this.type = type;
         this.source = source;
-        this.incidentdate = incidentdate;
+        this.incidentDate = incidentDate;
         this.approx = approx;
         this.location = location;
         this.type = type;

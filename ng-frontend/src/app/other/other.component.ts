@@ -11,7 +11,7 @@ import { OtherReport } from '../models/otherreport';
   styleUrl: './other.component.scss'
 })
 export class OtherComponent {
-  // @Input() report: OtherReport = new OtherReport(0, '', '', )
+  // @Input() report: OtherReport = new OtherReport()
   idField = new FormControl('idField');
   typeField = new FormControl('typeField');
   sourceField = new FormControl('sourceField');
