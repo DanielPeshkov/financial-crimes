@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OtherReport } from '../models/otherreport';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-other',
@@ -26,7 +27,10 @@ export class OtherComponent {
   createdField = new FormControl('createdField');
   updatedField = new FormControl('updatedField');
 
-    constructor(private router: Router) {
+  emailField = new FormControl('email');
+  phoneField = new FormControl('phone');
+
+    constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
       this.report = JSON.parse(localStorage.getItem('otherReport')!);
       this.idField.setValue(this.report.id ? this.report.id.toString() : '');
@@ -41,11 +45,50 @@ export class OtherComponent {
       this.statusField.setValue(this.report.status ? this.report.status.toString() : '0');
       this.createdField.setValue(this.report.created);
       this.updatedField.setValue(this.report.updated);
+
+      if (this.report.contact) {
+        this.emailField.setValue(this.report.contact.email ? this.report.contact.email : '');
+        this.phoneField.setValue(this.report.contact.phone ? this.report.contact.phone : '');
+      }
   }
 
   checkForReport() {
     if (!localStorage.getItem('otherReport')) {
-      this.router.navigate(['/others'])
+      this.router.navigate(['/other'])
     }
+  }
+
+  async submitTeam() {
+    let data = {
+      "id": Number(this.idField.getRawValue()),
+      "type": this.typeField.getRawValue(),
+      "source": this.sourceField.getRawValue(),
+      "incidentDate": this.incidentdateField.getRawValue(),
+      "approx": this.approxField.getRawValue(),
+      "location": this.locationField.getRawValue(),
+      "documentation": this.documentationField.getRawValue(),
+      "description": this.descriptionField.getRawValue(),
+      "contactId": this.contactIdField.getRawValue(),
+      "status": this.statusField.getRawValue(),
+      "created": this.createdField.getRawValue(),
+      "updated": Date.now(),
+    }
+    let resp = await this.client.put(`other/report/${this.idField.getRawValue()}`, data).then(data => data.json());
+    console.log(resp)
+    resp = await this.client.get(`other/report/${this.idField.getRawValue()}`).then(data => data.json())
+    console.log('Data: ', resp)
+    this.router.navigate(['/other']);
+  }
+
+  cancel() {
+    this.router.navigate(['/other']);
+  }
+
+  delete() {
+    const id = this.idField.getRawValue();
+    if (id) {
+      this.client.delete(`other/report/${id}`)
+    }
+    this.router.navigate(['/other']);
   }
 }

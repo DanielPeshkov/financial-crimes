@@ -10,7 +10,7 @@
         <form>
             <div class="form-element">
                 <label>ID</label><br>
-                <input type="text" placeholder="ID" [formControl]="idField">
+                <input type="number" placeholder="ID" [formControl]="idField">
             </div>
 
             <div class="form-element">
@@ -54,12 +54,12 @@
 
             <div class="form-element">
                 <label>Contact ID</label><br>
-                <input type="text" placeholder="ID" [formControl]="contactIdField">
+                <input type="number" placeholder="ID" [formControl]="contactIdField">
             </div>
 
             <div class="form-element">
                 <label>Status</label><br>
-                <input type="text" placeholder="Status" [formControl]="statusField">
+                <input type="number" placeholder="Status" [formControl]="statusField">
             </div>
 
             <div class="form-element">
@@ -71,14 +71,24 @@
                 <label>Updated</label><br>
                 <input type="text" placeholder="Date" [formControl]="updatedField">
             </div>
+
+            <div class="form-element">
+                <label>Contact Email</label><br>
+                <input type="text" placeholder="Email" [formControl]="emailField">
+            </div>
+
+            <div class="form-element">
+                <label>Contact Phone</label><br>
+                <input type="text" placeholder="Phone" [formControl]="phoneField">
+            </div>
         </form>
     </div>
-    <!-- <div class="buttons">
+    <div class="buttons">
         <button type="button" (click)="submitTeam()">Save Changes</button>
         <button type="button" (click)="cancel()">Cancel</button>
     </div>
     <div class="buttons">
         <button type="button" (click)="delete()">Delete</button>
-    </div> -->
+    </div>
     </div>
 </main>

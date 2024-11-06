@@ -25,6 +25,8 @@ export class BackendService {
   }
 
   async put(path: string, body: any) {
+    console.log('path: ', path)
+    console.log('body: ', JSON.stringify(body))
     return await fetch(`${this.backendPath}/${path}`, {
       method: 'PUT',
       body: JSON.stringify(body),
