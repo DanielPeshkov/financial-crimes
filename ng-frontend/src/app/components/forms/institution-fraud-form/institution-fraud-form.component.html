@@ -1,0 +1,36 @@
+<div [formGroup]="form" class="form-container">
+    <div class="question">
+        <p>How much was lost?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="amount"/>
+    </div>
+    <div class="question">
+        <p>How do you know institution fraud is occurring?</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="source"></textarea>
+    </div>
+    <div class="question">
+        <p>Enter the type of institution:</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="institution"></textarea>
+    </div>
+    <div class="question">
+        <p>When did the fraud occur?</p>
+        <input type="text" placeholder="MM-DD-YY" formControlName="incidentDate"/>
+    </div>
+    <div class="question">
+        <p>Was the subject employed by the institution defrauded?</p>
+        <app-radio [value]="'Yes'" [name]="'employee'" formControlName="employee">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'employee'" formControlName="employee">No</app-radio>
+    </div>
+    <div class="question">
+        <p>What method was used in this fraud? (e.g. Phishing, fraudulent claim, check fraud, etc.)</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="method"></textarea>
+    </div>
+    <div class="question">
+        <p>Do you have documentation of the activity</p>
+        <app-radio [value]="'Yes'" [name]="'documentation'" formControlName="documentation">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'documentation'" formControlName="documentation">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Provide a brief description of the incident</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="description"></textarea>
+    </div>
+</div>

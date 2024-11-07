@@ -65,6 +65,9 @@
             <app-money-laundering-form *ngIf="formType === 'moneyLaundering'" [form]="fs.moneyLaundering"></app-money-laundering-form>
             <app-mortgage-fraud-form *ngIf="formType === 'mortgageFraud'" [form]="fs.mortgageFraud"></app-mortgage-fraud-form>
             <app-investment-fraud-form *ngIf="formType === 'investmentFraud'" [form]="fs.investmentFraud"></app-investment-fraud-form>
+            <app-embezzlement-form *ngIf="formType === 'embezzlement'" [form]="fs.embezzlement"></app-embezzlement-form>
+            <app-institution-fraud-form *ngIf="formType === 'institutionFraud'" [form]="fs.institutionFraud"></app-institution-fraud-form>
+            <app-other-form *ngIf="formType === 'other'" [form]="fs.other"></app-other-form>
         </div>
     </app-tab>
 

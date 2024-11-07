@@ -62,6 +62,7 @@ export class FormService {
         }),
         institutionFraudForm: this.fb.group({
           amount: [''],
+          institution: [''],
           incidentDate: [''],
           approx: [''],
           method: [''],
