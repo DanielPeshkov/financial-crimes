@@ -1,0 +1,53 @@
+<div [formGroup]="form" class="form-container">
+    <div class="question">
+        <p>What was the total amount of the mortgage loan?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="amount"/>
+    </div>
+    <div class="question">
+        <p>How much of the loan was fraudulent?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="loan"/>
+    </div>
+    <div class="question">
+        <p>Are payments still being made?</p>
+        <app-radio [value]="'Yes'" [name]="'payments'" formControlName="payments"></app-radio>
+        <app-radio [value]="'No'" [name]="'payments'" formControlName="payments"></app-radio>
+        <app-radio [value]="'Unknown'" [name]="'payments'" formControlName="payments"></app-radio>
+    </div>
+    <div class="question">
+        <p>How do you know mortgage fraud is occurring? (e.g. Whistle-blower, Internal Audit, etc.)</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="source"></textarea>
+    </div>
+    <div class="question">
+        <p>What type of mortgage fraud is it? (e.g. Straw Buyer, Property Flipping, Equity Skimming, etc.)</p>
+        <input type="text" placeholder="Enter here..." formControlName="type"/>
+    </div>
+    <div class="question">
+        <p>Name of the property owner:</p>
+        <input type="text" placeholder="Enter here..." formControlName="owner"/>
+    </div>
+    <div class="question">
+        <p>Name of the mortgage company:</p>
+        <input type="text" placeholder="Enter here..." formControlName="mortgage"/>
+    </div>
+    <div class="question">
+        <p>Name of the title company:</p>
+        <input type="text" placeholder="Enter here..." formControlName="title"/>
+    </div>
+    <div class="question">
+        <p>Name of the closing agent:</p>
+        <input type="text" placeholder="Enter here..." formControlName="agent"/>
+    </div>
+    <div class="question">
+        <p>Enter the physical address associated with the mortgage:</p>
+        <app-address-form [form]="form"></app-address-form>
+    </div>
+    <div class="question">
+        <p>Do you have documentation of the activity</p>
+        <app-radio [value]="'Yes'" [name]="'documentation'" formControlName="documentation">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'documentation'" formControlName="documentation">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Provide a brief description of the incident</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="description"></textarea>
+    </div>
+</div>

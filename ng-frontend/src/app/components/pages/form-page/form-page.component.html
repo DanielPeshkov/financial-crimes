@@ -1,6 +1,6 @@
 <form [formGroup]="form" class="content">
     <div class="article-content">
-        <h1>Money Laundering Tip Form</h1>
+        <h1>Financial Crimes Tip Form</h1>
         <p>
             Fill out the form below. All fields in the form are optional, but please try 
             to provide as much information as possible. You do not need to provide any of 
@@ -13,7 +13,7 @@
     -->
 
     <!-- Crime Type Form -->
-    <app-tab [shown]="false" [tabHeader]="'Crime Type'" (nextTabEvent)="nextForm(1)">
+    <app-tab [shown]="true" [tabHeader]="'Crime Type'" (nextTabEvent)="nextForm(1)">
         <!-- Grid of cards that link to each of the forms -->
         <div class="grid form">
             <!-- MONEY LAUNDERING FORM -->
@@ -60,18 +60,19 @@
     </app-tab>
 
     <!-- Crime Questions -->
-    <app-tab [shown]="true" [tabHeader]="'Crime Questions'" (nextTabEvent)="nextForm(3)">
+    <app-tab [tabHeader]="'Crime Questions'" (nextTabEvent)="nextForm(3)">
         <div class="form">
-            <app-money-laundering-form [form]="fs.moneyLaundering"></app-money-laundering-form>
+            <app-money-laundering-form *ngIf="formType === 'moneyLaundering'" [form]="fs.moneyLaundering"></app-money-laundering-form>
+            <app-mortgage-fraud-form *ngIf="formType === 'mortgageFraud'" [form]="fs.mortgageFraud"></app-mortgage-fraud-form>
         </div>
     </app-tab>
 
     <!-- Contact Info -->
     <app-tab [tabHeader]="'Contact Info'" (nextTabEvent)="nextForm(4)">
-        <app-card class="form">
-            <h1>Placeholder</h1>
-            replace with the form component once made
-        </app-card>
+        <div class="form form-container">
+            <p>Optionally, you may provide your own contact info so we can get in touch to follow up on this report.</p>
+            <app-contact-form [form]="fs.contactInfo"></app-contact-form>
+        </div>
     </app-tab>
 
     <p class="article-content">

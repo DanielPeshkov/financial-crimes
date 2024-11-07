@@ -11,17 +11,48 @@ export class FormService {
         suspectYN: ['', [ Validators.required ]],
         subjects: this.fb.array([])
       }),
-      moneyLaunderingForm: this.fb.group({
-        amount: [''],
-        source: [''],
-        method: [''],
-        processing: [''],
-        location: [''],
-        incidentDate: [''],
-        approx: [''],
-        organized: [''],
-        documentation: [''],
-        description: ['']
+      crimeQuestions: this.fb.group({
+        moneyLaunderingForm: this.fb.group({
+          amount: [''],
+          source: [''],
+          method: [''],
+          processing: [''],
+          location: [''],
+          incidentDate: [''],
+          approx: [''],
+          organized: [''],
+          documentation: [''],
+          description: ['']
+        }),
+        mortgageFraudForm: this.fb.group({
+          amount: [''],
+          loan: [''],
+          payments: [''],
+          owner: [''],
+          addresses: this.fb.array([]),
+          mortgage: [''],
+          title: [''],
+          agent: [''],
+          type: [''],
+          source: [''],
+          documentation: [''],
+          description: ['']
+        }),
+        investmentFraudForm: this.fb.group({
+
+        }),
+        embezzlementForm: this.fb.group({
+
+        }),
+        institutionFraudForm: this.fb.group({
+
+        }),
+        otherForm: this.fb.group({
+
+        })
+      }),
+      contactInfo: this.fb.group({
+        contacts: this.fb.array([])
       })
     });
   }
@@ -69,8 +100,16 @@ export class FormService {
     return this.form.get('suspectForm')?.get('subjects') as FormArray;
   }
 
+  get contactInfo(): FormGroup {
+    return this.form.get('contactInfo') as FormGroup;
+  }
+
   get moneyLaundering(): FormGroup {
-    return this.form.get('moneyLaunderingForm') as FormGroup;
+    return this.form.get('crimeQuestions')?.get('moneyLaunderingForm') as FormGroup;
+  }
+
+  get mortgageFraud(): FormGroup {
+    return this.form.get('crimeQuestions')?.get('mortgageFraudForm') as FormGroup;
   }
 
   getAsFG(control: any): FormGroup {

@@ -8,6 +8,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Va
 import { ContactFormComponent } from '../../forms/contact-form/contact-form.component';
 import { FormService } from '../../../services/form.service';
 import { MoneyLaunderingFormComponent } from '../../forms/money-laundering-form/money-laundering-form.component';
+import { MortgageFraudFormComponent } from '../../forms/mortgage-fraud-form/mortgage-fraud-form.component';
 
 @Component({
   selector: 'app-form-page',
@@ -15,7 +16,7 @@ import { MoneyLaunderingFormComponent } from '../../forms/money-laundering-form/
   imports: [
     TabComponent, CardComponent, SuspectFormComponent,
     ContactFormComponent, CommonModule, ReactiveFormsModule,
-    MoneyLaunderingFormComponent
+    MoneyLaunderingFormComponent, MortgageFraudFormComponent
   ],
   providers: [FormService],
   templateUrl: './form-page.component.html',
