@@ -61,10 +61,10 @@ export class EmbezzlementComponent {
       }
 
       for (let b of this.report.embezzlementbusiness) {
-        this.business.push(b)
+        this.business.push(b.business)
       }
       for (let i of this.report.embezzlementindividual) {
-        this.individual.push(i)
+        this.individual.push(i.individual)
       }
 
     const storedRole = localStorage.getItem('role');

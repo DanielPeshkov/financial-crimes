@@ -59,10 +59,10 @@ export class OtherComponent {
       }
 
       for (let b of this.report.otherbusiness) {
-        this.business.push(b)
+        this.business.push(b.business)
       }
       for (let i of this.report.otherindividual) {
-        this.individual.push(i)
+        this.individual.push(i.individual)
       }
   }
 

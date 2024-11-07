@@ -9,6 +9,8 @@ import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
 import { TokenService } from '../services/token.service';
 import { AuthService } from '@auth0/auth0-angular';
+import { LaunderingBusiness } from '../models/launderingbusiness';
+import { LaunderingIndividual } from '../models/launderingindividual';
 
 @Component({
   selector: 'app-launderings',
@@ -56,16 +58,16 @@ export class LaunderingsComponent implements OnInit {
 
         contact = createContact(contact)
 
-        let business: Business[] = [];
+        let business: LaunderingBusiness[] = [];
         for (let b of launderingbusiness) {
           const newbus = createBusiness(b.business);
-          business.push(newbus);
+          business.push(new LaunderingBusiness(null, null, null, null, newbus));
         }
 
-        let individual: Individual[] = []
+        let individual: LaunderingIndividual[] = []
         for (let i of launderingindividual) {
           const newind = createIndividual(i.individual);
-          individual.push(newind);
+          individual.push(new LaunderingIndividual(null, null, null, null, newind));
         }
 
         let other = new LaunderingReport(id, amount, source, 

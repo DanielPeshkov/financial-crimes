@@ -2,15 +2,15 @@ import { LaunderingReport } from "./launderingreport";
 import { Individual } from "./individual";
 
 export class LaunderingIndividual {
-    id: number;
-    reportid: number;
-    individualid: number;
+    id: number | null;
+    reportid: number | null;
+    individualid: number | null;
 
-    report: LaunderingReport;
+    report: LaunderingReport | null;
     individual: Individual;
 
-    constructor(id: number, reportid: number, individualid: number, 
-        report: LaunderingReport, individual: Individual
+    constructor(id: number | null, reportid: number | null, individualid: number | null, 
+        report: LaunderingReport | null, individual: Individual
     ) {
         this.id = id;
         this.reportid = reportid;

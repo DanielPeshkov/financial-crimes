@@ -71,10 +71,10 @@ export class MortgageComponent {
       }
 
       for (let b of this.report.mortgagebusiness) {
-        this.business.push(b)
+        this.business.push(b.business)
       }
       for (let i of this.report.mortgageindividual) {
-        this.individual.push(i)
+        this.individual.push(i.individual)
       }
 
       const storedRole = localStorage.getItem('role');

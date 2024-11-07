@@ -63,10 +63,10 @@ export class InstitutionComponent {
       }
 
       for (let b of this.report.institutionbusiness) {
-        this.business.push(b)
+        this.business.push(b.business)
       }
       for (let i of this.report.institutionindividual) {
-        this.individual.push(i)
+        this.individual.push(i.individual)
       }
 
       const storedRole = localStorage.getItem('role');

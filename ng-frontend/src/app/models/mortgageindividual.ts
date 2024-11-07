@@ -2,15 +2,15 @@ import { Individual } from "./individual";
 import { MortgageReport } from "./mortgagereport";
 
 export class MortgageIndividual {
-    id: number;
-    reportid: number;
-    individualid: number;
+    id: number | null;
+    reportid: number | null;
+    individualid: number | null;
 
-    report: MortgageReport;
+    report: MortgageReport | null;
     individual: Individual;
 
-    constructor(id: number, reportid: number, individualid: number, 
-        report: MortgageReport, individual: Individual
+    constructor(id: number | null, reportid: number | null, individualid: number | null, 
+        report: MortgageReport | null, individual: Individual
     ) {
         this.id = id;
         this.reportid = reportid;

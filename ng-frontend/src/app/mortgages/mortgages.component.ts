@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { MortgageReport } from '../models/mortgagereport';
 import { AuthService } from '@auth0/auth0-angular';
 import { TokenService } from '../services/token.service';
+import { MortgageBusiness } from '../models/mortgagebusiness';
+import { MortgageIndividual } from '../models/mortgageindividual';
 
 @Component({
   selector: 'app-mortgages',
@@ -57,16 +59,16 @@ export class MortgagesComponent {
 
         contact = createContact(contact)
 
-        let business: Business[] = [];
+        let business: MortgageBusiness[] = [];
         for (let b of mortgagebusiness) {
           const newbus = createBusiness(b.business);
-          business.push(newbus);
+          business.push(new MortgageBusiness(null, null, null, null, newbus));
         }
 
-        let individual: Individual[] = []
+        let individual: MortgageIndividual[] = []
         for (let i of mortgageindividual) {
           const newind = createIndividual(i.individual);
-          individual.push(newind);
+          individual.push(new MortgageIndividual(null, null, null, null, newind));
         }
 
         let mortgagereport = new MortgageReport(id, amount, loan, payments, 

@@ -6,6 +6,8 @@ import { createContact } from '../models/contact';
 import { Business, createBusiness } from '../models/business';
 import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
+import { OtherIndividual } from '../models/otherindividual';
+import { OtherBusiness } from '../models/otherbusiness';
 
 @Component({
   selector: 'app-others',
@@ -42,16 +44,16 @@ export class OthersComponent implements OnInit{
 
         contact = createContact(contact)
 
-        let business: Business[] = [];
+        let business: OtherBusiness[] = [];
         for (let b of otherbusiness) {
           const newbus = createBusiness(b.business);
-          business.push(newbus);
+          business.push(new OtherBusiness(null, null, null, null, newbus));
         }
 
-        let individual: Individual[] = []
+        let individual: OtherIndividual[] = []
         for (let i of otherindividual) {
           const newind = createIndividual(i.individual);
-          individual.push(newind);
+          individual.push(new OtherIndividual(null, null, null, null, newind));
         }
 
         let other = new OtherReport(id, type, source, 

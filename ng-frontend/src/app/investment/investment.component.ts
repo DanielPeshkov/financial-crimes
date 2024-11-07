@@ -71,7 +71,7 @@ export class InvestmentComponent {
 
       for (let b of this.report.investmentbusiness) {
         console.log(b)
-        this.business.push(b)
+        this.business.push(b.business)
       }
       for (let i of this.report.investmentindividual) {
         console.log('i', i)
