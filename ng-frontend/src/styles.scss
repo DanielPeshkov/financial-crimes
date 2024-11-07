@@ -154,7 +154,7 @@ button:active {
   }
 
   // Text input styling
-  input[type="text"] {
+  input[type="text"], textarea[type="text"] {
     background-color: rgb(30, 30, 30);
     color: rgb(255, 255, 255);
     border: 4px solid rgb(68, 68, 68);
@@ -163,12 +163,12 @@ button:active {
     transition: border-color 0.4s ease;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, textarea:focus[type="text"] {
     border: 4px solid rgb(178, 178, 178);
     outline: none;
 }
 
-input[type="text"]::placeholder {
+input[type="text"]::placeholder, textarea::placeholder[type="text"] {
     color: rgb(120, 120, 120);
     font-style: italic;
 }
@@ -202,9 +202,16 @@ select {
     background-size: 10px;
 
     transition: border-color 0.4s ease;
-  }
+}
 
   select:focus {
     border: 2px solid rgb(178, 178, 178);
     outline: none;
+}
+
+.response {
+    height: 120px;
+    border-radius: 25px !important;
+    overflow: hidden;
+    resize: none;
 }

@@ -1,0 +1,41 @@
+<div [formGroup]="form" class="form-container">
+    <div class="question">
+        <p>How much money was laundered?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="amount"/>
+    </div>
+    <div class="question">
+        <p>How do you know money laundering is occurring?</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="source"></textarea>
+    </div>
+    <div class="question">
+        <p>How is the money being laundered?</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="method"></textarea>
+    </div>
+    <div class="question">
+        <p>How are the transactions being processed? (e.g., cashier’s checks, money orders, non-bank wire transfers, prepaid cards, traveler’s checks)?</p>
+        <input type="text" placeholder="Response here..." formControlName="processing"/>
+    </div>
+    <div class="question">
+        <p>Where is the money being laundered?</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="location"></textarea>
+    </div>
+    <div class="question">
+        <p>Enter the date of the incident</p>
+        <input type="text" placeholder="Response here..." formControlName="incidentDate" />
+    </div>
+    <div class="question">
+        <p>Is the money connected to organized crime (e.g., mafia, street gang, cartel)?</p>
+        <app-radio [value]="'Yes'" [name]="'organized'" formControlName="organized">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'organized'" formControlName="organized">No</app-radio>
+        <app-radio [value]="'Unknown'" [name]="'organized'" formControlName="organized">Unknown</app-radio>
+    </div>
+    <div class="question">
+        <p>Do you have documentation of the activity</p>
+        <app-radio [value]="'Yes'" [name]="'documentation'" formControlName="documentation">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'documentation'" formControlName="documentation">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Provide a brief description of the incident</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="description"></textarea>
+    </div>
+</div>

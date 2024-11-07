@@ -7,20 +7,23 @@ import { SuspectFormComponent } from '../../forms/suspect-form/suspect-form.comp
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactFormComponent } from '../../forms/contact-form/contact-form.component';
 import { FormService } from '../../../services/form.service';
+import { MoneyLaunderingFormComponent } from '../../forms/money-laundering-form/money-laundering-form.component';
 
 @Component({
   selector: 'app-form-page',
   standalone: true,
   imports: [
     TabComponent, CardComponent, SuspectFormComponent,
-    ContactFormComponent, CommonModule, ReactiveFormsModule
+    ContactFormComponent, CommonModule, ReactiveFormsModule,
+    MoneyLaunderingFormComponent
   ],
   providers: [FormService],
   templateUrl: './form-page.component.html',
   styleUrl: './form-page.component.scss'
 })
 export class FormPageComponent {
-  readonly form = inject(FormService).form;
+  readonly fs = inject(FormService);
+  readonly form = this.fs.form;
   formType: string = "other";
 
   constructor(private route: ActivatedRoute, private location: Location) {

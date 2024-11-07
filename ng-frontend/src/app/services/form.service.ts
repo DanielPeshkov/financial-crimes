@@ -10,6 +10,18 @@ export class FormService {
       suspectForm: this.fb.group({
         suspectYN: ['', [ Validators.required ]],
         subjects: this.fb.array([])
+      }),
+      moneyLaunderingForm: this.fb.group({
+        amount: [''],
+        source: [''],
+        method: [''],
+        processing: [''],
+        location: [''],
+        incidentDate: [''],
+        approx: [''],
+        organized: [''],
+        documentation: [''],
+        description: ['']
       })
     });
   }
@@ -55,6 +67,10 @@ export class FormService {
 
   get subjects(): FormArray {
     return this.form.get('suspectForm')?.get('subjects') as FormArray;
+  }
+
+  get moneyLaundering(): FormGroup {
+    return this.form.get('moneyLaunderingForm') as FormGroup;
   }
 
   getAsFG(control: any): FormGroup {

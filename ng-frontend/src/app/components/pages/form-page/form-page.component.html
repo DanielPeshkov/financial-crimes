@@ -55,16 +55,15 @@
     </app-tab>
 
     <!-- Suspect Information -->
-    <app-tab [shown]="true" [tabHeader]="'Suspect Information'" (nextTabEvent)="nextForm(2)">
+    <app-tab [tabHeader]="'Suspect Information'" (nextTabEvent)="nextForm(2)">
         <app-suspect-form class="form form-container"></app-suspect-form>
     </app-tab>
 
     <!-- Crime Questions -->
-    <app-tab [tabHeader]="'Crime Questions'" (nextTabEvent)="nextForm(3)">
-        <app-card class="form">
-            <h1>Placeholder</h1>
-            replace with the form component once made
-        </app-card>
+    <app-tab [shown]="true" [tabHeader]="'Crime Questions'" (nextTabEvent)="nextForm(3)">
+        <div class="form">
+            <app-money-laundering-form [form]="fs.moneyLaundering"></app-money-laundering-form>
+        </div>
     </app-tab>
 
     <!-- Contact Info -->
