@@ -8,6 +8,8 @@ import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
 import { OtherIndividual } from '../models/otherindividual';
 import { OtherBusiness } from '../models/otherbusiness';
+import { AuthService } from '@auth0/auth0-angular';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-others',
@@ -19,8 +21,21 @@ import { OtherBusiness } from '../models/otherbusiness';
 export class OthersComponent implements OnInit{
   reports: OtherReport[] = [];
   tableReports: OtherReport[] = [];
+  currentRole: string = 'guest';
+  isAuthenticated = false;
 
-  constructor(private client: BackendService, private router: Router) {}
+
+  constructor(private client: BackendService, private router: Router,
+    private tokenService: TokenService,
+    public auth: AuthService) {
+      this.auth.isAuthenticated$.subscribe(data => {
+        this.isAuthenticated = data;
+  
+        if (this.isAuthenticated) {
+          this.getRole();
+        }
+      });
+ }
 
   async ngOnInit() {
     let resp = await this.client.get('other/report').then(data => data.json())
@@ -69,7 +84,15 @@ export class OthersComponent implements OnInit{
   }
 
   rowClick(report: OtherReport) {
-    localStorage.setItem('otherReport', JSON.stringify(report))
+    localStorage.setItem('otherReport', JSON.stringify(report));
+    localStorage.setItem('role', this.currentRole);
     this.router.navigate(['/other/report'])
+  }
+
+  getRole() {
+    this.tokenService.role.subscribe(roleValue => {
+      this.currentRole = roleValue;
+      console.log('Current Role:', this.currentRole);
+    });
   }
 }
