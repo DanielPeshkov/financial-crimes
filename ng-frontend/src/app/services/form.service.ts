@@ -39,16 +39,46 @@ export class FormService {
           description: ['']
         }),
         investmentFraudForm: this.fb.group({
-
+          amount: [''],
+          loss: [''],
+          source: [''],
+          force: [''],
+          promise: [''],
+          contract: [''],
+          method: [''],
+          funds: [''],
+          communication: [''],
+          documentation: [''],
+          description: ['']
         }),
         embezzlementForm: this.fb.group({
-
+          amount: [''],
+          employee: [''],
+          type: [''],
+          location: [''],
+          source: [''],
+          documentation: [''],
+          description: ['']
         }),
         institutionFraudForm: this.fb.group({
-
+          amount: [''],
+          incidentDate: [''],
+          approx: [''],
+          method: [''],
+          employee: [''],
+          source: [''],
+          documentation: [''],
+          description: ['']
         }),
         otherForm: this.fb.group({
-
+          amount: [''],
+          type: [''],
+          source: [''],
+          incidentDate: [''],
+          approx: [''],
+          location: [''],
+          documentation: [''],
+          description: ['']
         })
       }),
       contactInfo: this.fb.group({
@@ -110,6 +140,22 @@ export class FormService {
 
   get mortgageFraud(): FormGroup {
     return this.form.get('crimeQuestions')?.get('mortgageFraudForm') as FormGroup;
+  }
+
+  get investmentFraud(): FormGroup {
+    return this.form.get('crimeQuestions')?.get('investmentFraudForm') as FormGroup;
+  }
+
+  get embezzlement(): FormGroup {
+    return this.form.get('crimeQuestions')?.get('embezzlementForm') as FormGroup;
+  }
+
+  get institutionFraud(): FormGroup {
+    return this.form.get('crimeQuestions')?.get('institutionFraudForm') as FormGroup;
+  }
+
+  get other(): FormGroup {
+    return this.form.get('crimeQuestions')?.get('otherForm') as FormGroup;
   }
 
   getAsFG(control: any): FormGroup {
