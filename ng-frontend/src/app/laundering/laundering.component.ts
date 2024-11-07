@@ -34,9 +34,17 @@ export class LaunderingComponent {
   emailField = new FormControl('email');
   phoneField = new FormControl('phone');
 
+  currentRole: string = 'guest';
+
   constructor(private router: Router, private client: BackendService) {
     this.checkForReport();
     this.report = JSON.parse(localStorage.getItem('launderingReport')!);
+
+    const storedRole = localStorage.getItem('role');
+    if (storedRole) {
+      this.currentRole = storedRole;
+      console.log(this.currentRole)
+    }
 
     // Set initial values to match field names
     this.idField.setValue(this.report.id ? this.report.id.toString() : '');

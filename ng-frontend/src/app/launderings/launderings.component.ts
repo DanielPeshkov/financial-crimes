@@ -82,7 +82,8 @@ export class LaunderingsComponent implements OnInit {
   }
 
   rowClick(report: LaunderingReport) {
-    localStorage.setItem('launderingReport', JSON.stringify(report))
+    localStorage.setItem('launderingReport', JSON.stringify(report));
+    localStorage.setItem('role', this.currentRole);
     this.router.navigate(['/laundering/report'])
   }
 
