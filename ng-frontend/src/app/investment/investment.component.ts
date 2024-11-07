@@ -69,9 +69,11 @@ export class InvestmentComponent {
       }
 
       for (let b of this.report.investmentbusiness) {
+        console.log(b)
         this.business.push(b)
       }
       for (let i of this.report.investmentindividual) {
+        console.log(i)
         this.individual.push(i)
       }
 
@@ -121,10 +123,10 @@ export class InvestmentComponent {
       this.router.navigate(['/investment']);
     }
 
-    delete() {
+    async delete() {
       const id = this.idField.getRawValue();
       if (id) {
-        this.client.delete(`investment/report/${id}`)
+        await this.client.delete(`investment/report/${id}`)
       }
       this.router.navigate(['/investment']);
     }
