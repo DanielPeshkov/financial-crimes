@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TabComponent } from '../../general/tab/tab.component';
 import { CardComponent } from '../../general/card/card.component';
 import { CommonModule, Location } from '@angular/common';
@@ -38,9 +38,12 @@ export class FormPageComponent {
   readonly fs = inject(FormService);
   readonly form = this.fs.form;
   formType: string = "other";
+  router: Router;
 
-  constructor(private route: ActivatedRoute, private location: Location, private client: BackendService) {
+  constructor(private route: ActivatedRoute, private location: Location, 
+    private client: BackendService, private r: Router) {
     this.formType = this.route.snapshot.params['formtype'];
+    this.router = r;
   }
 
   @ViewChildren(TabComponent) tabs!: QueryList<TabComponent>;
@@ -63,7 +66,6 @@ export class FormPageComponent {
 
   async onSubmit() {
     let arr = this.form.get('suspectForm')//?.get('contactForm')?.get('contacts') as FormArray;
-    // console.log(`Phone Nuuumber: ${arr.at(0).get('phone')?.value} Email: ${arr.at(0).get('email')?.value}`);
 
     let individuals: Individual[] = [];
     let businesses: Business[] = [];
@@ -177,8 +179,8 @@ export class FormPageComponent {
     }
     console.log('businesses: ', businesses);
     console.log('individuals: ', individuals);
-    let inds = [];
-    let buss = [];
+    let inds: Individual[] = [];
+    let buss: Business[] = [];
     for (let i = 0; i < individuals.length; i++) {
       let resp = await this.client.post('individual', individuals[i]);
       console.log(individuals[i]);
@@ -186,30 +188,30 @@ export class FormPageComponent {
       
     }
     for (let i = 0; i < businesses.length; i++) {
-      // buss.push(await this.client.post('business', businesses[i]).then(data => data.json()));
+      buss.push(await this.client.post('business', businesses[i]).then(data => data.json()));
     }
 
 
 
     // Form submission logic
-    // let questions = this.form.get('crimeQuestions')
-    // let ml = questions?.get('moneyLaunderingForm')?.value;
-    // let reportid;
-    // if (ml) {
-    //   let report = await this.processLaundering(ml);
-    //   for (let ind of inds) {
-    //     // let res = ind.id;
-    //     // let li = new LaunderingIndividual(0, report.id, res.id, report, res)
-    //     console.log(ind);
-    //   }
-    //   for (let bus of buss) {
-    //     // let res = await bus;
-    //     console.log(bus)
-    //     // let bi = new LaunderingBusiness(0, report.id, res.id, report, res)
-    //     // console.log(bi);
-    //   }
-    // }
-    // console.log('id', reportid)
+    let questions = this.form.get('crimeQuestions')
+    let ml = questions?.get('moneyLaunderingForm')?.value;
+    let reportid;
+    if (ml) {
+      let report = await this.processLaundering(ml);
+      for (let ind of inds) {
+        // let res = ind.id;
+        // let li = new LaunderingIndividual(0, report.id, res.id, report, res)
+        console.log(ind);
+      }
+      for (let bus of buss) {
+        // let res = await bus;
+        console.log(bus)
+        // let bi = new LaunderingBusiness(0, report.id, res.id, report, res)
+        // console.log(bi);
+      }
+    }
+    console.log('id', reportid)
   }
 
   async processLaundering(f: any) {
