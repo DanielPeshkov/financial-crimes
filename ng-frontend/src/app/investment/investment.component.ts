@@ -44,6 +44,7 @@ export class InvestmentComponent {
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
       this.report = JSON.parse(localStorage.getItem('investmentReport')!);
+      console.log('report individuals: ', this.report.investmentindividual)
       this.idField.setValue(this.report.id ? this.report.id.toString() : '');
       this.idField.disable();
       this.amountField.setValue(this.report.amount? this.report.amount.toString() : '');
@@ -73,8 +74,8 @@ export class InvestmentComponent {
         this.business.push(b)
       }
       for (let i of this.report.investmentindividual) {
-        console.log(i)
-        this.individual.push(i)
+        console.log('i', i)
+        this.individual.push(i.individual)
       }
 
       const storedRole = localStorage.getItem('role');

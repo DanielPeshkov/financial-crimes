@@ -1,6 +1,7 @@
 import { Business } from "./business";
 import { Contact } from "./contact";
 import { Individual } from "./individual";
+import { InvestmentIndividual } from "./investmentindividual";
 
 export class InvestmentReport {
     id: number | null;
@@ -22,7 +23,7 @@ export class InvestmentReport {
 
     contact: Contact | null;
     investmentbusiness: Business[];
-    investmentindividual: Individual[];
+    investmentindividual: InvestmentIndividual[];
 
     constructor(id: number | null, amount: number | null, loss: number | null, 
         force: boolean | null, promise: string | null, contract: boolean | null, method: string | null,
@@ -30,7 +31,7 @@ export class InvestmentReport {
         source: string | null, documentation: boolean | null, description: string | null, 
         contactid: number | null, status: number | null, created: string | null, updated: string | null, 
         contact: Contact | null, business: Business[], 
-        individual: Individual[]
+        individual: InvestmentIndividual[]
     ) {
         this.id = id;
         this.amount = amount;
