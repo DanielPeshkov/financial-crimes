@@ -6,6 +6,8 @@ import { Business, createBusiness } from '../models/business';
 import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
 import { InvestmentReport } from '../models/investmentreport';
+import { AuthService } from '@auth0/auth0-angular';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-investments',
@@ -17,8 +19,20 @@ import { InvestmentReport } from '../models/investmentreport';
 export class InvestmentsComponent {
   reports: InvestmentReport[] = [];
   tableReports: InvestmentReport[] = [];
+  currentRole: string = 'guest';
+  isAuthenticated = false;
 
-  constructor(private client: BackendService, private router: Router) {}
+  constructor(private client: BackendService, private router: Router,
+              private tokenService: TokenService,
+              public auth: AuthService) {
+                this.auth.isAuthenticated$.subscribe(data => {
+                  this.isAuthenticated = data;
+            
+                  if (this.isAuthenticated) {
+                    this.getRole();
+                  }
+                });
+ }
 
   async ngOnInit() {
     let resp = await this.client.get('investment/report').then(data => data.json())
@@ -71,7 +85,15 @@ export class InvestmentsComponent {
   }
 
   rowClick(report: InvestmentReport) {
-    localStorage.setItem('investmentReport', JSON.stringify(report))
+    localStorage.setItem('investmentReport', JSON.stringify(report));
+    localStorage.setItem('role', this.currentRole);
     this.router.navigate(['/investment/report'])
+  }
+
+  getRole() {
+    this.tokenService.role.subscribe(roleValue => {
+      this.currentRole = roleValue;
+      console.log('Current Role:', this.currentRole);
+    });
   }
 }
