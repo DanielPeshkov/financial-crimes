@@ -111,8 +111,10 @@ export class LaunderingComponent {
         "created": this.createdField.getRawValue(),
         "updated": Date.now(),
       }
-      let resp = await this.client.put(`laundering/report/${this.idField.getRawValue()}`, data).then(data => data.json());
-      console.log(resp)
+      let resp = await this.client.put(`laundering/report/${this.idField.getRawValue()}`, data)
+      // console.log(resp)
+      // let json = resp.json()//.then(data => data.json());
+      // console.log(json)
       resp = await this.client.get(`laundering/report/${this.idField.getRawValue()}`).then(data => data.json())
       console.log('Data: ', resp)
       this.router.navigate(['/laundering']);

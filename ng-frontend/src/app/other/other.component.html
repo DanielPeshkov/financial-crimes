@@ -1,4 +1,5 @@
 <main>
+    @if (currentRole === 'admin' || currentRole === 'client') {
     <div class="content">
 
         <div class="form-container">
@@ -153,9 +154,12 @@
         </form>
     </div>
     <div class="buttons">
-        <button type="button" (click)="submitTeam()">Save Changes</button>
-        <button type="button" (click)="cancel()">Cancel</button>
-        <button type="button" (click)="delete()">Delete</button>
+            <button type="button" (click)="submitTeam()">Save Changes</button>
+            <button type="button" (click)="cancel()">Cancel</button>
+            @if(currentRole === 'admin'){<button type="button" (click)="delete()">Delete</button>}
+        </div>
     </div>
-    </div>
+} @else {
+    <h1>You currently have {{currentRole}} level access, and do not have the proper permission to access this route.</h1>
+}
 </main>

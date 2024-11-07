@@ -100,8 +100,8 @@ export class EmbezzlementComponent {
         "created": this.createdField.getRawValue(),
         "updated": Date.now(),
       }
-      let resp = await this.client.put(`embezzlement/report/${this.idField.getRawValue()}`, data).then(data => data.json());
-      console.log(resp)
+      // let resp = await this.client.put(`embezzlement/report/${this.idField.getRawValue()}`, data).then(data => data.json());
+      // console.log(resp)
       this.router.navigate(['/embezzlement']);
     }
 

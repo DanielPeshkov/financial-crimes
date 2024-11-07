@@ -35,6 +35,8 @@ export class OtherComponent {
   business: Business[] = [];
   individual: Individual[] = [];
 
+  currentRole: string = 'guest';
+
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
       this.report = JSON.parse(localStorage.getItem('otherReport')!);
@@ -64,6 +66,12 @@ export class OtherComponent {
       for (let i of this.report.otherindividual) {
         this.individual.push(i.individual)
       }
+
+      const storedRole = localStorage.getItem('role');
+      if (storedRole) {
+        this.currentRole = storedRole;
+        console.log(this.currentRole)
+      }
   }
 
   checkForReport() {
@@ -92,8 +100,8 @@ export class OtherComponent {
       "created": this.createdField.getRawValue(),
       "updated": Date.now(),
     }
-    let resp = await this.client.put(`other/report/${this.idField.getRawValue()}`, data).then(data => data.json());
-    console.log(resp)
+    // let resp = await this.client.put(`other/report/${this.idField.getRawValue()}`, data).then(data => data.json());
+    // console.log(resp)
     this.router.navigate(['/other']);
   }
 

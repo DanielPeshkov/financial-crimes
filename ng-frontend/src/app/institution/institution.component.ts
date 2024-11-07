@@ -103,8 +103,8 @@ export class InstitutionComponent {
         "created": this.createdField.getRawValue(),
         "updated": Date.now(),
       }
-      let resp = await this.client.put(`institution/report/${this.idField.getRawValue()}`, data).then(data => data.json());
-      console.log(resp)
+      // let resp = await this.client.put(`institution/report/${this.idField.getRawValue()}`, data).then(data => data.json());
+      // console.log(resp)
       this.router.navigate(['/institution']);
     }
 
