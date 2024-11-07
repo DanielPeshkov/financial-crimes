@@ -31,6 +31,9 @@ export class NavbarComponent {
       if (this.isAuthenticated) {
         this.getToken();
       }
+      else {
+        localStorage.setItem('role', 'guest')
+      }
     });
   }
  
