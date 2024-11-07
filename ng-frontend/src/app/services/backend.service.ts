@@ -20,9 +20,8 @@ export class BackendService {
   async post(path: string, body: any) {
     return await fetch(`${this.backendPath}/${path}`, {
       method: 'POST',
-      headers: new Headers({ 'Content-Type': 'application/json', }),
       body: JSON.stringify(body),
-    });
+    }).then(async data => data.json()).then(json => json);
   }
 
   async put(path: string, body: any) {

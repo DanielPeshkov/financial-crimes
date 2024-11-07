@@ -46,13 +46,13 @@ export class InvestmentsComponent {
 
         let business: Business[] = [];
         for (let b of investmentbusiness) {
-          const newbus = createBusiness(b);
+          const newbus = createBusiness(b.business);
           business.push(newbus);
         }
 
         let individual: Individual[] = []
         for (let i of investmentindividual) {
-          const newind = createIndividual(i);
+          const newind = createIndividual(i.individual);
           individual.push(newind);
         }
 

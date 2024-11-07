@@ -44,13 +44,13 @@ export class OthersComponent implements OnInit{
 
         let business: Business[] = [];
         for (let b of otherbusiness) {
-          const newbus = createBusiness(b);
+          const newbus = createBusiness(b.business);
           business.push(newbus);
         }
 
         let individual: Individual[] = []
         for (let i of otherindividual) {
-          const newind = createIndividual(i);
+          const newind = createIndividual(i.individual);
           individual.push(newind);
         }
 

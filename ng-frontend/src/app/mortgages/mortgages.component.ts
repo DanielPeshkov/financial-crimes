@@ -45,13 +45,13 @@ export class MortgagesComponent {
 
         let business: Business[] = [];
         for (let b of mortgagebusiness) {
-          const newbus = createBusiness(b);
+          const newbus = createBusiness(b.business);
           business.push(newbus);
         }
 
         let individual: Individual[] = []
         for (let i of mortgageindividual) {
-          const newind = createIndividual(i);
+          const newind = createIndividual(i.individual);
           individual.push(newind);
         }
 

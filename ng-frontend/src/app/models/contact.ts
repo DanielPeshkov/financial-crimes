@@ -11,7 +11,7 @@ export class Contact {
 }
 
 export function createContact(data: any): Contact | null {
-    const {id, phone, email, ...etc} = data;
+    let {id, phone, email, ...etc} = data;
     if (id || phone || email) {
         const contact = new Contact(id, phone, email);
         return contact;

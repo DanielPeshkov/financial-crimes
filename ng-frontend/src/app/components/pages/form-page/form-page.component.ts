@@ -176,11 +176,10 @@ export class FormPageComponent {
     let inds = [];
     let buss = [];
     for (let i = 0; i < individuals.length; i++) {
-      // let resp = await this.client.post('individual', individuals[i])//.then(data => data.json());
-      // console.log('resp: ', resp)
-      // // inds.push(resp.json())
-      // console.log('json: ', resp.json());
-      console.log(individuals[i])
+      let resp = await this.client.post('individual', individuals[i]);
+      console.log(individuals[i]);
+      console.log('resp: ', resp);
+      
     }
     for (let i = 0; i < businesses.length; i++) {
       // buss.push(await this.client.post('business', businesses[i]).then(data => data.json()));
