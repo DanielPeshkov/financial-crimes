@@ -68,9 +68,11 @@ export class LaunderingComponent {
       }
 
       for (let b of this.report.launderingbusiness) {
+        console.log(b)
         this.business.push(b)
       }
       for (let i of this.report.launderingindividual) {
+        console.log(i)
         this.individual.push(i)
       }
 
