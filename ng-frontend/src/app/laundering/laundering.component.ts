@@ -122,10 +122,10 @@ export class LaunderingComponent {
       this.router.navigate(['/laundering']);
     }
 
-    delete() {
+    async delete() {
       const id = this.idField.getRawValue();
       if (id) {
-        this.client.delete(`laundering/report/${id}`)
+        await this.client.delete(`laundering/report/${id}`)
       }
       this.router.navigate(['/laundering']);
     }

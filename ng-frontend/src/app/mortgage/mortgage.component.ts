@@ -124,10 +124,10 @@ export class MortgageComponent {
       this.router.navigate(['/mortgage']);
     }
 
-    delete() {
+    async delete() {
       const id = this.idField.getRawValue();
       if (id) {
-        this.client.delete(`mortgage/report/${id}`)
+        await this.client.delete(`mortgage/report/${id}`)
       }
       this.router.navigate(['/mortgage']);
     }

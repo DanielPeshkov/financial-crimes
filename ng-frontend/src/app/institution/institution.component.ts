@@ -112,10 +112,10 @@ export class InstitutionComponent {
       this.router.navigate(['/institution']);
     }
 
-    delete() {
+    async delete() {
       const id = this.idField.getRawValue();
       if (id) {
-        this.client.delete(`institution/report/${id}`)
+        await this.client.delete(`institution/report/${id}`)
       }
       this.router.navigate(['/institution']);
     }

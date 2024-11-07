@@ -101,10 +101,10 @@ export class OtherComponent {
     this.router.navigate(['/other']);
   }
 
-  delete() {
+  async delete() {
     const id = this.idField.getRawValue();
     if (id) {
-      this.client.delete(`other/report/${id}`)
+      await this.client.delete(`other/report/${id}`)
     }
     this.router.navigate(['/other']);
   }

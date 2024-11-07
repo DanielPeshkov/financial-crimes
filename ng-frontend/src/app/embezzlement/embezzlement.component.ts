@@ -109,10 +109,10 @@ export class EmbezzlementComponent {
       this.router.navigate(['/embezzlement']);
     }
 
-    delete() {
+    async delete() {
       const id = this.idField.getRawValue();
       if (id) {
-        this.client.delete(`embezzlement/report/${id}`)
+        await this.client.delete(`embezzlement/report/${id}`)
       }
       this.router.navigate(['/embezzlement']);
     }
