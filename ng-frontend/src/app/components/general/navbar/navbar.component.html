@@ -3,7 +3,8 @@
     <!-- Div on left side -->
     <div>
         <button routerLink=""><p>Make a Report</p></button>
-        <button *ngIf="isAuthenticated"><p>View Reports</p></button>
+        @if(userRole === 'admin' || userRole === 'client') {<button *ngIf="isAuthenticated" routerLink="/reports"><p>View Reports</p></button>}
+        <!-- <button *ngIf="isAuthenticated" routerLink="/reports"><p>View Reports</p></button> -->
     </div>
     <!-- Div on right side -->
     <div>
@@ -16,5 +17,5 @@
       </ng-template>
     </div>
 
-      <button (click)="getToken()">Token</button>
+      <!-- <button (click)="getToken()">Token</button> -->
 </nav>

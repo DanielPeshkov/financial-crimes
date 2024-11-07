@@ -7,6 +7,8 @@ import { Business, createBusiness } from '../models/business';
 import { Address } from '../models/address';
 import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
+import { TokenService } from '../services/token.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-launderings',
@@ -18,10 +20,25 @@ import { Router } from '@angular/router';
 export class LaunderingsComponent implements OnInit {
   reports: LaunderingReport[] = [];
   tableReports: LaunderingReport[] = [];
+  currentRole: string = 'guest';
+  isAuthenticated = false;
 
-  constructor(private client: BackendService, private router: Router) {}
-
+  constructor(private client: BackendService, 
+              private router: Router,
+              private tokenService: TokenService,
+              public auth: AuthService) {
+                this.auth.isAuthenticated$.subscribe(data => {
+                  this.isAuthenticated = data;
+            
+                  if (this.isAuthenticated) {
+                    this.getRole();
+                  }
+                });
+              }
+  
+  
   async ngOnInit() {
+    // this.getRole();
     let resp = await this.client.get('laundering/report').then(data => data.json())
     let tempReports: LaunderingReport[] = [];
     if (resp) {
@@ -67,6 +84,13 @@ export class LaunderingsComponent implements OnInit {
   rowClick(report: LaunderingReport) {
     localStorage.setItem('launderingReport', JSON.stringify(report))
     this.router.navigate(['/laundering/report'])
+  }
+
+  getRole() {
+    this.tokenService.role.subscribe(roleValue => {
+      this.currentRole = roleValue;
+      console.log('Current Role:', this.currentRole);
+    });
   }
 }
 
