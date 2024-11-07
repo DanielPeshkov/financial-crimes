@@ -40,12 +40,7 @@ export class MortgageComponent {
     business: Business[] = [];
     individual: Individual[] = [];
 
-    // id, amount, loan, payments, 
-    // owner, addressid, mortgage, title, 
-    // agent, type, source, documentation, 
-    // description, contactid, status, created, 
-    // updated, contact, mortgagebusiness, 
-    // mortgageindividual
+    currentRole: string = 'guest';
 
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
@@ -80,6 +75,12 @@ export class MortgageComponent {
       }
       for (let i of this.report.mortgageindividual) {
         this.individual.push(i)
+      }
+
+      const storedRole = localStorage.getItem('role');
+      if (storedRole) {
+        this.currentRole = storedRole;
+        console.log(this.currentRole)
       }
     }
 
