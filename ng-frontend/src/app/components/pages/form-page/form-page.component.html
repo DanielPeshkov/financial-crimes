@@ -64,6 +64,7 @@
         <div class="form">
             <app-money-laundering-form *ngIf="formType === 'moneyLaundering'" [form]="fs.moneyLaundering"></app-money-laundering-form>
             <app-mortgage-fraud-form *ngIf="formType === 'mortgageFraud'" [form]="fs.mortgageFraud"></app-mortgage-fraud-form>
+            <app-investment-fraud-form *ngIf="formType === 'investmentFraud'" [form]="fs.investmentFraud"></app-investment-fraud-form>
         </div>
     </app-tab>
 

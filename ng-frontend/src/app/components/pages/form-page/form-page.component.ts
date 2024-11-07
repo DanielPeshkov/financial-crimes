@@ -9,6 +9,7 @@ import { ContactFormComponent } from '../../forms/contact-form/contact-form.comp
 import { FormService } from '../../../services/form.service';
 import { MoneyLaunderingFormComponent } from '../../forms/money-laundering-form/money-laundering-form.component';
 import { MortgageFraudFormComponent } from '../../forms/mortgage-fraud-form/mortgage-fraud-form.component';
+import { InvestmentFraudFormComponent } from '../../forms/investment-fraud-form/investment-fraud-form.component';
 
 @Component({
   selector: 'app-form-page',
@@ -16,7 +17,8 @@ import { MortgageFraudFormComponent } from '../../forms/mortgage-fraud-form/mort
   imports: [
     TabComponent, CardComponent, SuspectFormComponent,
     ContactFormComponent, CommonModule, ReactiveFormsModule,
-    MoneyLaunderingFormComponent, MortgageFraudFormComponent
+    MoneyLaunderingFormComponent, MortgageFraudFormComponent,
+    InvestmentFraudFormComponent
   ],
   providers: [FormService],
   templateUrl: './form-page.component.html',
@@ -41,7 +43,7 @@ export class FormPageComponent {
     });
 
     if (nextIndex < this.tabs.length)
-      document.querySelectorAll('app-tab')[nextIndex].scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('app-tab')[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   formTypeSelect(type: string) {

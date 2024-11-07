@@ -1,0 +1,51 @@
+<div [formGroup]="form" class="form-container">
+    <div class="question">
+        <p>How much total money was invested?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="amount"/>
+    </div>
+    <div class="question">
+        <p>How much money was lost in the investment?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="loss"/>
+    </div>
+    <div class="question">
+        <p>How did you hear about the investment opportunity?</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="source"></textarea>
+    </div>
+    <div class="question">
+        <p>What were you promised for the investment? (e.g. Guaranteed Profit, Stable Returns, Guaranteed Wealth, etc.)</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="promise"></textarea>
+    </div>
+    <div class="question">
+        <p>How was the money transferred? (e.g. Wire Transfer, Money Order, Cash, etc.)</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="method"></textarea>
+    </div>
+    <div class="question">
+        <p>Did the subject use forceful or manipulative tactics?</p>
+        <app-radio [value]="'Yes'" [name]="'force'" formControlName="force">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'force'" formControlName="force">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Was there a contract?</p>
+        <app-radio [value]="'Yes'" [name]="'contract'" formControlName="contract">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'contract'" formControlName="contract">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Are you having trouble retrieving your funds?</p>
+        <app-radio [value]="'Yes'" [name]="'funds'" formControlName="funds">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'funds'" formControlName="funds">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Are you having trouble contacting the subject?</p>
+        <app-radio [value]="'Yes'" [name]="'communication'" formControlName="communication">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'communication'" formControlName="communication">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Do you have documentation of the activity?</p>
+        <app-radio [value]="'Yes'" [name]="'documentation'" formControlName="documentation">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'documentation'" formControlName="documentation">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Provide a brief description of the incident</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="description"></textarea>
+    </div>
+</div>
