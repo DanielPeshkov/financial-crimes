@@ -2,6 +2,10 @@
     margin-left: 0px;
     padding: 0px;
     border: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     
 }
 
@@ -9,9 +13,11 @@
     cursor: pointer;
 }
 
-.main {
+main {
     border: 0px;
     padding: 0px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 label {
@@ -48,15 +54,9 @@ input:hover, select:hover {
     color: white;
 }
 
-// input:focus, select:focus{
-//     color: #000;
-//     border-radius: .5em;
-//     background-color: white;
-// }
-
 .form-container {
     width: 100%;
-    display: inline-block;
+    display: block;
     text-align: center;
 }
 
@@ -66,7 +66,28 @@ input:hover, select:hover {
 }
 
 .buttons {
-    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
+.button-container {
+    background-color: rgba(255, 255, 255, 1.0);
+    background: linear-gradient(
+        180deg,
+        rgb(56, 56, 56) 0%,
+        rgb(41, 41, 41) 25%,
+        rgb(41, 41, 41) 50%,
+        rgb(41, 41, 41) 75%,
+        rgb(56, 56, 56) 100%
+    );
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0px 3px 8px #365174;
+    display: inline-block;
+    gap: 10px; 
+    margin-top: 20px; 
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
 }
 
@@ -76,13 +97,27 @@ button {
     background-color: #ffffff;
     padding: 0.5em;
     border-radius: 1em;
-    border-color: #c0c4c9;
     border-style: solid;
+    border-width: 1px;
 }
 
-button:hover {
-    border-color: #000;
-    border-width: 2px;
-    background-color: #555;
+.saveButton:hover {
+    border-color: #00000057;
+    border-width: 1px;
+    background-color: #365174;
+    color: white;
+}
+
+.cancelButton:hover {
+    border-color: #00000057;
+    border-width: 1px;
+    background-color: #777777;
+    color: white;
+}
+
+.deleteButton:hover {
+    border-color: #00000057;
+    border-width: 1px;
+    background-color: #aa0e03;
     color: white;
 }

@@ -1,4 +1,5 @@
 <main>
+    @if (currentRole === 'admin' || currentRole === 'client') {
     <div class="header">
         <h1>Embezzlement Reports</h1>
     </div>
@@ -31,4 +32,7 @@
             </tbody>
         </table>
     </div>
+} @else {
+    <h1>You currently have {{currentRole}} level access, and do not have the proper permission to access this route.</h1>
+}
 </main>

@@ -35,6 +35,8 @@ export class EmbezzlementComponent {
     business: Business[] = [];
     individual: Individual[] = [];
 
+    currentRole: string = 'guest';
+
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
       this.report = JSON.parse(localStorage.getItem('embezzlementReport')!);
@@ -64,6 +66,12 @@ export class EmbezzlementComponent {
       for (let i of this.report.embezzlementindividual) {
         this.individual.push(i)
       }
+
+    const storedRole = localStorage.getItem('role');
+    if (storedRole) {
+      this.currentRole = storedRole;
+      console.log(this.currentRole)
+    }
     }
 
     checkForReport() {
