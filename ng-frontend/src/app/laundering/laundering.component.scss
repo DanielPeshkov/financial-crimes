@@ -7,28 +7,30 @@
     align-items: center;
     width: 100%;
     
-}
-
-.clickable {
+  }
+  
+  .clickable {
     cursor: pointer;
-}
-
-main {
+  }
+  
+  main {
     border: 0px;
     padding: 0px;
     text-align: center;
     margin-bottom: 30px;
-}
-
-label {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  label {
     font-size: 1.2em;
-}
-
-h1 {
+  }
+  
+  h1 {
     margin-bottom: 20px;
-}
-
-input, select {
+  }
+  
+  input, select {
     font-size: 1em;
     margin-top: 0.5em;
     margin-bottom: 2em;
@@ -41,36 +43,36 @@ input, select {
     background-color: #ffffff;
     text-align: center;
     padding: 10px;
-}
-
-input {
+  }
+  
+  input {
     border-radius: 1em;
-}
-
-input:hover, select:hover {
+  }
+  
+  input:hover, select:hover {
     border-radius: 1em;
     border-width: .5px;
     background-color: #aaa;
     color: white;
-}
-
-.form-container {
+  }
+  
+  .form-container {
     width: 100%;
     display: block;
     text-align: center;
-}
-
-.form-element {
+  }
+  
+  .form-element {
     display: inline-table;
     margin-right: 10px;
-}
-
-.buttons {
+  }
+  
+  .buttons {
     text-align: center;
     display: inline-block;
-}
-
-.button-container {
+  }
+  
+  .button-container {
     background-color: rgba(255, 255, 255, 1.0);
     background: linear-gradient(
         180deg,
@@ -89,9 +91,9 @@ input:hover, select:hover {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-}
-
-button {
+  }
+  
+  button {
     margin: 1em;
     font-size: 1em;
     background-color: #ffffff;
@@ -99,30 +101,30 @@ button {
     border-radius: 1em;
     border-style: solid;
     border-width: 1px;
-}
-
-.saveButton:hover {
+  }
+  
+  .saveButton:hover {
     border-color: #00000057;
     border-width: 1px;
     background-color: #365174;
     color: white;
-}
-
-.cancelButton:hover {
+  }
+  
+  .cancelButton:hover {
     border-color: #00000057;
     border-width: 1px;
     background-color: #777777;
     color: white;
-}
-
-.deleteButton:hover {
+  }
+  
+  .deleteButton:hover {
     border-color: #00000057;
     border-width: 1px;
     background-color: #aa0e03;
     color: white;
-}
-
-table {
+  }
+  
+  table {
     border-spacing: 1;
     border-collapse: collapse;
     background: white;
