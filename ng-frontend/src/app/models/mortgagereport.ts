@@ -24,15 +24,15 @@ export class MortgageReport {
     updated: string | null;
 
     contact: Contact | null;
-    mortgagebusiness: Business[];
-    mortgageindividual: Individual[];
+    mortgagebusiness: MortgageBusiness[];
+    mortgageindividual: MortgageIndividual[];
 
     constructor(id: number | null, amount: number | null, loan: number | null, payments: boolean | null, 
         owner: string | null, addressid: number | null, mortgage: string | null, title: string | null, 
         agent: string | null, type: string | null, source: string | null, documentation: boolean | null, 
         description: string | null, contactid: number | null, status: number | null, created: string | null, 
-        updated: string | null, contact: Contact | null, business: Business[], 
-        individual: Individual[]
+        updated: string | null, contact: Contact | null, business: MortgageBusiness[], 
+        individual: MortgageIndividual[]
     ) {
         this.id = id;
         this.amount = amount;

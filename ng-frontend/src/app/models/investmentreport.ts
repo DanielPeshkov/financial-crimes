@@ -1,6 +1,7 @@
 import { Business } from "./business";
 import { Contact } from "./contact";
 import { Individual } from "./individual";
+import { InvestmentBusiness } from "./investmentbusiness";
 import { InvestmentIndividual } from "./investmentindividual";
 
 export class InvestmentReport {
@@ -22,7 +23,7 @@ export class InvestmentReport {
     updated: string | null;
 
     contact: Contact | null;
-    investmentbusiness: Business[];
+    investmentbusiness: InvestmentBusiness[];
     investmentindividual: InvestmentIndividual[];
 
     constructor(id: number | null, amount: number | null, loss: number | null, 
@@ -30,7 +31,7 @@ export class InvestmentReport {
         funds: boolean | null, communication: boolean | null,
         source: string | null, documentation: boolean | null, description: string | null, 
         contactid: number | null, status: number | null, created: string | null, updated: string | null, 
-        contact: Contact | null, business: Business[], 
+        contact: Contact | null, business: InvestmentBusiness[], 
         individual: InvestmentIndividual[]
     ) {
         this.id = id;

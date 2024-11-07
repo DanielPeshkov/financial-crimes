@@ -19,14 +19,14 @@ export class EmbezzlementReport {
     updated: string | null;
 
     contact: Contact | null;
-    embezzlementbusiness: Business[];
-    embezzlementindividual: Individual[];
+    embezzlementbusiness: EmbezzlementBusiness[];
+    embezzlementindividual: EmbezzlementIndividual[];
 
     constructor(id: number | null, amount: number | null, emloyee: boolean| null, type: string| null, 
         location: string| null, source: string| null, documentation: boolean| null, 
         description: string| null, contactid: number | null, status: number | null, created: string | null, 
-        updated: string | null, contact: Contact | null, business: Business[], 
-        individual: Individual[]
+        updated: string | null, contact: Contact | null, business: EmbezzlementBusiness[], 
+        individual: EmbezzlementIndividual[]
     ) {
         this.id = id;
         this.amount = amount;

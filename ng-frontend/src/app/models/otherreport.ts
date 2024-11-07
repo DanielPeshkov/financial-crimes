@@ -19,14 +19,14 @@ export class OtherReport {
     updated: string | null;
 
     contact: Contact | null;
-    otherbusiness: Business[];
-    otherindividual: Individual[];
+    otherbusiness: OtherBusiness[];
+    otherindividual: OtherIndividual[];
 
     constructor(id: number | null, type: string | null, source: string | null, 
         incidentDate: string | null, approx: boolean | null, location: string | null, documentation: boolean | null, 
         description: string | null, contactId: number | null, status: number | null, created: string | null, 
-        updated: string | null, contact: Contact | null, business: Business[], 
-        individual: Individual[]
+        updated: string | null, contact: Contact | null, business: OtherBusiness[], 
+        individual: OtherIndividual[]
     ) {
         this.id = id;
         this.type = type;

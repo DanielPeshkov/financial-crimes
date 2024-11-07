@@ -22,15 +22,15 @@ export class LaunderingReport {
     updated: string | null;
 
     contact: Contact | null;
-    launderingbusiness: Business[];
-    launderingindividual: Individual[];
+    launderingbusiness: LaunderingBusiness[];
+    launderingindividual: LaunderingIndividual[];
 
     constructor(id: number | null, amount: number | null, source: string | null, 
         method: string | null, processing: string | null, location: string | null, incidentDate: string | null,
         approx: boolean | null, organized: string | null, documentation: boolean | null, 
         description: string | null, contactId: number | null, status: number | null, created: string | null, 
-        updated: string | null, contact: Contact | null, business: Business[], 
-        individual: Individual[]
+        updated: string | null, contact: Contact | null, business: LaunderingBusiness[], 
+        individual: LaunderingIndividual[]
     ) {
         this.id = id;
         this.amount = amount;
