@@ -6,6 +6,8 @@ import { Business, createBusiness } from '../models/business';
 import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
 import { EmbezzlementReport } from '../models/embezzlementreport';
+import { TokenService } from '../services/token.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-embezzlements',
@@ -17,8 +19,20 @@ import { EmbezzlementReport } from '../models/embezzlementreport';
 export class EmbezzlementsComponent {
   reports: EmbezzlementReport[] = [];
   tableReports: EmbezzlementReport[] = [];
+  currentRole: string = 'guest';
+  isAuthenticated = false;
 
-  constructor(private client: BackendService, private router: Router) {}
+  constructor(private client: BackendService, private router: Router,
+    private tokenService: TokenService,
+    public auth: AuthService) {
+      this.auth.isAuthenticated$.subscribe(data => {
+        this.isAuthenticated = data;
+  
+        if (this.isAuthenticated) {
+          this.getRole();
+        }
+      });
+   }
 
   async ngOnInit() {
     let resp = await this.client.get('embezzlement/report').then(data => data.json())
@@ -64,7 +78,15 @@ export class EmbezzlementsComponent {
   }
 
   rowClick(report: EmbezzlementReport) {
-    localStorage.setItem('embezzlementReport', JSON.stringify(report))
+    localStorage.setItem('embezzlementReport', JSON.stringify(report));
+    localStorage.setItem('role', this.currentRole);
     this.router.navigate(['/embezzlement/report'])
+  }
+
+  getRole() {
+    this.tokenService.role.subscribe(roleValue => {
+      this.currentRole = roleValue;
+      console.log('Current Role:', this.currentRole);
+    });
   }
 }
