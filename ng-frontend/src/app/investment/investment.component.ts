@@ -39,6 +39,8 @@ export class InvestmentComponent {
     business: Business[] = [];
     individual: Individual[] = [];
 
+    currentRole: string = 'guest';
+
     constructor(private router: Router, private client: BackendService) {
       this.checkForReport();
       this.report = JSON.parse(localStorage.getItem('investmentReport')!);
@@ -71,6 +73,12 @@ export class InvestmentComponent {
       }
       for (let i of this.report.investmentindividual) {
         this.individual.push(i)
+      }
+
+      const storedRole = localStorage.getItem('role');
+      if (storedRole) {
+        this.currentRole = storedRole;
+        console.log(this.currentRole)
       }
     }
 

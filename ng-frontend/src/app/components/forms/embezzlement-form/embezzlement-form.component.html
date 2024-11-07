@@ -1,0 +1,35 @@
+<div [formGroup]="form" class="form-container">
+    <div class="question">
+        <p>What was the monetary value of what was taken?</p>
+        <input type="text" placeholder="Enter amount in $" formControlName="amount"/>
+    </div>
+    <div class="question">
+        <p>How did you find out about this?</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="source"></textarea>
+    </div>
+    <div class="question">
+        <p>Is the subject an employee of the victim?</p>
+        <app-radio [value]="'Yes'" [name]="'employee'" formControlName="employee">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'employee'" formControlName="employee">No</app-radio>
+        <app-radio [value]="'Unknown'" [name]="'employee'" formControlName="employee">Unknown</app-radio>
+    </div>
+    <div class="question">
+        <p>What was taken?</p>
+        <app-radio [value]="'Money'" [name]="'type'" formControlName="type">Money</app-radio>
+        <app-radio [value]="'Property'" [name]="'type'" formControlName="type">Property</app-radio>
+        <app-radio [value]="'Information'" [name]="'type'" formControlName="type">Information</app-radio>
+    </div>
+    <div class="question">
+        <p>What happened to the money/property/information? (e.g. Sold to third party, invested the money, unknown, etc)</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="location"></textarea>
+    </div>
+    <div class="question">
+        <p>Do you have documentation of the activity?</p>
+        <app-radio [value]="'Yes'" [name]="'documentation'" formControlName="documentation">Yes</app-radio>
+        <app-radio [value]="'No'" [name]="'documentation'" formControlName="documentation">No</app-radio>
+    </div>
+    <div class="question">
+        <p>Provide a brief description of the incident</p>
+        <textarea type="text" class="response" placeholder="Response here..." formControlName="description"></textarea>
+    </div>
+</div>

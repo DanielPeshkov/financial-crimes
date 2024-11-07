@@ -6,6 +6,8 @@ import { Business, createBusiness } from '../models/business';
 import { createIndividual, Individual } from '../models/individual';
 import { Router } from '@angular/router';
 import { MortgageReport } from '../models/mortgagereport';
+import { AuthService } from '@auth0/auth0-angular';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-mortgages',
@@ -17,8 +19,20 @@ import { MortgageReport } from '../models/mortgagereport';
 export class MortgagesComponent {
   reports: MortgageReport[] = [];
   tableReports: MortgageReport[] = [];
+  currentRole: string = 'guest';
+  isAuthenticated = false;
 
-  constructor(private client: BackendService, private router: Router) {}
+  constructor(private client: BackendService, private router: Router,
+              private tokenService: TokenService,
+              public auth: AuthService) {
+                this.auth.isAuthenticated$.subscribe(data => {
+                  this.isAuthenticated = data;
+            
+                  if (this.isAuthenticated) {
+                    this.getRole();
+                  }
+                });
+            }
 
   async ngOnInit() {
     let resp = await this.client.get('mortgage/report').then(data => data.json())
@@ -69,7 +83,15 @@ export class MortgagesComponent {
   }
 
   rowClick(report: MortgageReport) {
-    localStorage.setItem('mortgageReport', JSON.stringify(report))
+    localStorage.setItem('mortgageReport', JSON.stringify(report));
+    localStorage.setItem('role', this.currentRole);
     this.router.navigate(['/mortgage/report'])
+  }
+
+  getRole() {
+    this.tokenService.role.subscribe(roleValue => {
+      this.currentRole = roleValue;
+      console.log('Current Role:', this.currentRole);
+    });
   }
 }

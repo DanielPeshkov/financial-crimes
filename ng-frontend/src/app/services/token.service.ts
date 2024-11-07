@@ -16,11 +16,11 @@ export class TokenService {
 
   updateToken(tokenValue: string) {
     this.tokenSubject.next(tokenValue);
-    console.log(tokenValue)
+    // console.log(tokenValue)
   }
 
   updateRole(roleValue: string) {
     this.userRole.next(roleValue);
-    console.log(roleValue)
+    // console.log(roleValue)
   }
 }

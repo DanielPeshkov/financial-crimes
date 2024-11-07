@@ -16,6 +16,9 @@ import { MortgageFraudFormComponent } from '../../forms/mortgage-fraud-form/mort
 import { LaunderingIndividual } from '../../../models/launderingindividual';
 import { LaunderingBusiness } from '../../../models/launderingbusiness';
 import { InvestmentFraudFormComponent } from '../../forms/investment-fraud-form/investment-fraud-form.component';
+import { InstitutionFraudFormComponent } from '../../forms/institution-fraud-form/institution-fraud-form.component';
+import { EmbezzlementFormComponent } from '../../forms/embezzlement-form/embezzlement-form.component';
+import { OtherFormComponent } from '../../forms/other-form/other-form.component';
 
 @Component({
   selector: 'app-form-page',
@@ -24,7 +27,8 @@ import { InvestmentFraudFormComponent } from '../../forms/investment-fraud-form/
     TabComponent, CardComponent, SuspectFormComponent,
     ContactFormComponent, CommonModule, ReactiveFormsModule,
     MoneyLaunderingFormComponent, MortgageFraudFormComponent,
-    InvestmentFraudFormComponent
+    InvestmentFraudFormComponent, EmbezzlementFormComponent,
+    InstitutionFraudFormComponent, OtherFormComponent
   ],
   providers: [FormService],
   templateUrl: './form-page.component.html',
