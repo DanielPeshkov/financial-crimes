@@ -28,8 +28,8 @@
                         <td>{{report.approx}}</td>
                         <td>{{report.documentation}}</td>
                         <td>{{report.status}}</td>
-                        <td>{{report.created}}</td>
-                        <td>{{report.updated}}</td>
+                        <td>{{report.created?.substring(0, 10)}}</td>
+                        <td>{{report.updated?.substring(0, 10)}}</td>
                     </tr>
                 }
             </tbody>
