@@ -75,6 +75,7 @@ export class MortgageComponent {
       }
       for (let i of this.report.mortgageindividual) {
         this.individual.push(i.individual)
+        console.log(i.individual)
       }
 
       const storedRole = localStorage.getItem('role');

@@ -68,6 +68,7 @@ export class InvestmentsComponent {
         for (let i of investmentindividual) {
           const newind = createIndividual(i.individual);
           individual.push(newind);
+          console.log(newind)
         }
 
         let investmentreport = new InvestmentReport(id, amount, loss, 

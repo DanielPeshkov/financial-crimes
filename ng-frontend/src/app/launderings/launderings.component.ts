@@ -47,13 +47,13 @@ export class LaunderingsComponent implements OnInit {
       for (let report of resp) {
         let {
           id, amount, source, 
-          method, processing, location, incidentDate, 
+          method, processing, location, incidentdate, 
           approx, organized, documentation, description, 
           contactid, status, created, updated, contact, 
           launderingbusiness, launderingindividual
         } = report;
-        if (incidentDate) {
-          incidentDate = incidentDate.substring(0,10);
+        if (incidentdate) {
+          incidentdate = incidentdate.substring(0,10);
         }
 
         contact = createContact(contact)
@@ -71,7 +71,7 @@ export class LaunderingsComponent implements OnInit {
         }
 
         let other = new LaunderingReport(id, amount, source, 
-          method, processing, location, incidentDate, 
+          method, processing, location, incidentdate, 
           approx, organized, documentation, description, 
           contactid, status, created, updated,
           contact, business, individual

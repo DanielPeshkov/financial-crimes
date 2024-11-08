@@ -155,7 +155,7 @@
                             <tr>
                                 <td>{{i.id}}</td>
                                 <td>{{i.firstname}} {{i.middlename}} {{i.lastname}}</td>
-                                <td>{{i.birth}}</td>
+                                <td>{{i.birth?.substring(0, 10)}}</td>
                                 <td>{{i.age}}</td>
                                 <td>{{i.approx}}</td>
                                 <td>{{i.contact ? i.contact.phone : ""}}</td>

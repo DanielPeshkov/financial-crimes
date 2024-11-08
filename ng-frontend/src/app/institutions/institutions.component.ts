@@ -41,7 +41,7 @@ export class InstitutionsComponent {
       for (let report of resp) {
         let {
         id, amount, institution, 
-        incidentDate, approx, method, employee,
+        incidentdate, approx, method, employee,
         source, documentation, description, 
         contactid, status, created, updated, 
         contact, institutionbusiness, institutionindividual
@@ -53,8 +53,8 @@ export class InstitutionsComponent {
         if (updated) {
           updated = updated.substring(0, 10);
         }
-        if (incidentDate) {
-          incidentDate = incidentDate.substring(0, 10);
+        if (incidentdate) {
+          incidentdate = incidentdate.substring(0, 10);
         }
 
         contact = createContact(contact)
@@ -72,7 +72,7 @@ export class InstitutionsComponent {
         }
 
         let institutionreport = new InstitutionReport(id, amount, institution, 
-          incidentDate, approx, method, employee,
+          incidentdate, approx, method, employee,
           source, documentation, description, 
           contactid, status, created, updated, 
           contact, institutionbusiness, institutionindividual)

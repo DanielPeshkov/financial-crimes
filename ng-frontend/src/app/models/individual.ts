@@ -36,7 +36,7 @@ export class Individual {
 }
 
 export function createIndividual(data: any): Individual {
-    let {id, firstName, middleName, lastName, birth, approx, age, contactId, 
+    let {id, firstname, middlename, lastname, birth, approx, age, contactId, 
         addressId, contact, address} = data;
     if (birth) {
         birth = birth.substring(0, 10);
@@ -44,6 +44,6 @@ export function createIndividual(data: any): Individual {
     contact = createContact(contact);
     address = createAddress(address);
 
-    return new Individual(id, firstName, middleName, lastName, birth, approx, age, contactId, 
+    return new Individual(id, firstname, middlename, lastname, birth, approx, age, contactId, 
         addressId, contact, address);
 }

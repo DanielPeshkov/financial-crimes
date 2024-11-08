@@ -43,12 +43,12 @@ export class OthersComponent implements OnInit{
     if (resp) {
       for (let report of resp) {
         let {
-          id, type, source, incidentDate, approx, location, documentation,
+          id, type, source, incidentdate, approx, location, documentation,
           description, contactId, status, created, updated, contact, 
           otherbusiness, otherindividual
         } = report;
-        if (incidentDate) {
-          incidentDate = incidentDate.substring(0,10);
+        if (incidentdate) {
+          incidentdate = incidentdate.substring(0,10);
         }
         if (created) {
           created = created.substring(0, 10);
@@ -72,7 +72,7 @@ export class OthersComponent implements OnInit{
         }
 
         let other = new OtherReport(id, type, source, 
-          incidentDate, approx, location, documentation, 
+          incidentdate, approx, location, documentation, 
           description, contactId, status, created, 
           updated, contact, business, 
           individual)
